@@ -9,6 +9,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDialogModule } from '@angular/material/dialog';
 import { UserDialog } from './services/notification.service';
 import { MatButtonModule } from '@angular/material/button';
+import { InterceptorModule } from './middleware/interceptor.module';
 
 
 @NgModule({
@@ -23,8 +24,8 @@ import { MatButtonModule } from '@angular/material/button';
     HttpClientModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatButtonModule
-    
+    MatButtonModule,
+    InterceptorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

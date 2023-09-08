@@ -42,6 +42,16 @@ export class AuthenticationService {
 			lastName: user.lastName
 		};
 		this.currentUser.setUserValues(currentUser);
+
+		this.setToken('ABCDEF');
+	}
+
+	setToken(token: string){
+		sessionStorage.setItem('token', token);
+	}
+
+	getToken(){
+		return sessionStorage.getItem('token');
 	}
 
 }
