@@ -1,0 +1,93 @@
+.container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    background: linear-gradient(
+        to bottom,
+        #20BEC6 0%,
+        #20BEC6 50%,
+        #ececec 50%,
+        #ececec 100%
+    );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    width: 25rem;
+    height: 25rem;
+
+    background-color: #FFFFFF;
+
+    border-radius: 10px;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.login-header{
+    width: 100%;
+    height: 3.5rem;
+
+    border-radius: 10px 10px 0 0;
+
+    background-color: #0c4c80;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    
+    padding-top: 1rem;
+
+}
+
+h1{
+    font-family: 'Anton', sans-serif;
+
+    font-size: 35px;
+}
+
+.login-form {
+    height: 65%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 1.5rem;
+}
+
+.enter-button {
+    width: 7rem;
+    height: 2.5rem;
+
+    margin-top: 1rem;
+}
+
+.line{
+    width: 90%;
+}
+
+.footer {
+    height: 4rem;
+    border-radius: 0 0 10px 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 0.5rem;
+}
+
+.footer .create-button {
+    margin-bottom: 1rem;
+}

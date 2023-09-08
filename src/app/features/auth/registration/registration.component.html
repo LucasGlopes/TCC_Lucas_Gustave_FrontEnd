@@ -1,0 +1,188 @@
+<div class="container">
+    <div class="registration-box">
+        <div class="registration-header">
+            <h1>PlaSO</h1>
+        </div>
+        <div class="title">
+            <p>Cadastro de Usuário</p>
+        </div>
+        <hr class="line"/>
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="registration-form">
+            <div class="field-row">
+                <mat-form-field 
+                    [hideRequiredMarker]="true"  
+                    appearance="outline"  
+                    style="width:40% !important;"
+                >
+                    <mat-label>Nome</mat-label>
+                        <input 
+                            type="text" 
+                            matInput 
+                            formControlName="name"
+                        >
+                        <mat-error *ngIf="registrationForm.controls['name'].invalid">Nome inválido</mat-error>
+                </mat-form-field>
+                <mat-form-field 
+                    [hideRequiredMarker]="true"  
+                    appearance="outline"  
+                    style="width:55% !important;"
+                >
+                    <mat-label>Sobrenome</mat-label>
+                        <input 
+                            type="text" 
+                            matInput 
+                            formControlName="lastName"
+                        >
+                        <mat-error *ngIf="registrationForm.controls['lastName'].invalid">Nome inválido</mat-error>
+                </mat-form-field>
+
+            </div>
+            <div class="field-row">
+                <mat-form-field 
+                    [hideRequiredMarker]="true"
+                    appearance="outline"
+                    style="width:65% !important;"
+                >
+                    <mat-label>E-mail</mat-label>
+                    <input 
+                        type="email" 
+                        matInput 
+                        formControlName="email"
+                    >
+                    <mat-error *ngIf="registrationForm.controls['email'].invalid">E-mail inválido</mat-error>
+                </mat-form-field>
+
+                <mat-form-field 
+                    [hideRequiredMarker]="true"  
+                    appearance="outline"  
+                >
+                    <mat-label>Telefone</mat-label>
+                    <input 
+                        type="text" 
+                        matInput 
+                        formControlName="phone"
+                    >
+                    <mat-error *ngIf="registrationForm.controls['phone'].invalid">Este campo é obrigatório</mat-error>
+
+                </mat-form-field>
+
+            </div>
+            <div class="field-row">
+                <mat-form-field 
+                    [hideRequiredMarker]="true"  
+                    appearance="outline"  
+                    style="width:48% !important;"
+                >
+                    <mat-label>Senha</mat-label>
+                    <input 
+                        matInput 
+                        formControlName="password"
+                        [type]="hidePassword ? 'password' : 'text'"
+                    >
+                    <button
+                        type="button"
+                        mat-icon-button
+                        matSuffix
+                        (click)="changePasswordVisibility()"
+                        [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hidePassword"
+                    >
+                        <mat-icon>{{ hidePassword ? "visibility" : "visibility_off" }}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="registrationForm.controls['password'].invalid">Este campo é obrigatório</mat-error>
+                </mat-form-field>
+                <mat-form-field 
+                    [hideRequiredMarker]="true"  
+                    appearance="outline"  
+                    style="width:48% !important;"
+                >
+                    <mat-label>Confirmar senha</mat-label>
+                    <input 
+                        matInput 
+                        formControlName="confirmPassword"
+                        [type]="hidePassword ? 'password' : 'text'"
+                    >
+                    <button
+                        type="button"
+                        mat-icon-button
+                        matSuffix
+                        (click)="changePasswordVisibility()"
+                        [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hidePassword"
+                    >
+                        <mat-icon>{{ hidePassword ? "visibility" : "visibility_off" }}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="registrationForm.controls['confirmPassword'].invalid">Este campo é obrigatório</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="field-row">
+                
+                <mat-form-field
+                    [hideRequiredMarker]="true"  
+                    appearance="outline" 
+                >
+                    <mat-label>Sexo</mat-label>
+                    <mat-select
+                        formControlName="sex"
+                    >
+                      <mat-option *ngFor="let sex of sexOptions" [value]="sex.value">
+                        {{sex.label}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="registrationForm.controls['sex'].invalid">Este campo é obrigatório</mat-error>
+                </mat-form-field>
+
+                <mat-form-field 
+                    [hideRequiredMarker]="true"  
+                    appearance="outline"
+                >
+                    <mat-label>Data de nascimento</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dateBirth">
+                    <mat-error *ngIf="registrationForm.controls['dateBirth'].invalid">Este campo é obrigatório</mat-error>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field 
+                    [hideRequiredMarker]="true"  
+                    appearance="outline"  
+                >
+                    <mat-label>CPF</mat-label>
+                    <input 
+                        type="text" 
+                        matInput 
+                        formControlName="cpf"
+                    >
+                    <mat-error *ngIf="registrationForm.controls['cpf'].invalid">Este campo é obrigatório</mat-error>
+                    
+                </mat-form-field>
+            </div>
+
+            <hr class="line"/>
+
+            <div class="footer">
+                <button 
+                    mat-raised-button 
+                    color="warn" 
+                    class="left-button"
+                    type="button"
+                    (click)="cancel()"
+                >
+                    Cancelar
+                </button>
+
+                <button 
+                    type="submit"
+                    mat-raised-button 
+                    color="primary" 
+                    class="right-button"
+                    [disabled]="registrationForm.invalid"
+                >
+                    Criar conta
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+

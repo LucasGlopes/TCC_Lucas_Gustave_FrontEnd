@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="login-box">
+        <div class="login-header">
+            <h1>PlaSO</h1>
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+            <mat-form-field 
+                style="width:90% !important;" 
+                [hideRequiredMarker]="true"
+                appearance="outline"
+            >
+                <mat-label>E-mail</mat-label>
+                <input 
+                    type="email" 
+                    matInput 
+                    formControlName="email"
+                >
+                <mat-error *ngIf="loginForm.controls['email'].invalid">E-mail inválido</mat-error>
+            </mat-form-field>
+            <mat-form-field 
+                style="width:90% !important; margin-top: 1rem !important;"
+                [hideRequiredMarker]="true"  
+                appearance="outline"  
+            >
+                <mat-label>Senha</mat-label>
+                <input 
+                    matInput 
+                    formControlName="password"
+                    [type]="hidePassword ? 'password' : 'text'"
+                >
+                <button
+                    type="button"
+                    mat-icon-button
+                    matSuffix
+                    (click)="changePasswordVisibility()"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hidePassword"
+                >
+                    <mat-icon>{{ hidePassword ? "visibility" : "visibility_off" }}</mat-icon>
+                </button>
+                <mat-error *ngIf="loginForm.controls['password'].invalid">Este campo é obrigatório</mat-error>
+            </mat-form-field>
+            <button 
+                mat-raised-button 
+                type="submit" 
+                color="primary" 
+                [disabled]="loginForm.invalid"
+                class="enter-button"   
+            >
+                Entrar
+            </button>
+        </form>
+
+        <hr class="line"/>
+        <div class="footer">
+            <button 
+                mat-raised-button 
+                color="primary" 
+                class="create-button"  
+                (click)="createAccount()"  
+            >
+                Criar conta
+            </button>
+        </div>
+    </div>
+</div>
+    
