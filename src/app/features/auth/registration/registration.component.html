@@ -18,9 +18,9 @@
                         <input 
                             type="text" 
                             matInput 
-                            formControlName="name"
+                            formControlName="firstName"
                         >
-                        <mat-error *ngIf="registrationForm.controls['name'].invalid">Nome inválido</mat-error>
+                        <mat-error *ngIf="registrationForm.controls['firstName'].invalid">Nome inválido</mat-error>
                 </mat-form-field>
                 <mat-form-field 
                     [hideRequiredMarker]="true"  
@@ -137,8 +137,8 @@
                     appearance="outline"
                 >
                     <mat-label>Data de nascimento</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="dateBirth">
-                    <mat-error *ngIf="registrationForm.controls['dateBirth'].invalid">Este campo é obrigatório</mat-error>
+                    <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+                    <mat-error *ngIf="registrationForm.controls['dateOfBirth'].invalid">Este campo é obrigatório</mat-error>
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>

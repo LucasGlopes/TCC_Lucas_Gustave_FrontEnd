@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EMPTY, Subscription, catchError } from 'rxjs';
 import { SelectorOption } from 'src/app/models/selector.model';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
@@ -12,9 +12,11 @@ import { NotificationService } from 'src/app/services/notification.service';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit, OnDestroy {
     hidePassword: boolean = true;
-    registrationForm: FormGroup = this.initForm();
+    registrationForm!: FormGroup;
+    subscriptions: Subscription[] = [];
+
 
     sexOptions: SelectorOption[] = [
         {
@@ -39,15 +41,19 @@ export class RegistrationComponent {
     ){}
 
     ngOnInit(): void {
-        
+        this.initForm();
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.forEach((subscription) => subscription.unsubscribe());
     }
 
     initForm() {
         const form = {
-            name:['', [Validators.required]],
+            firstName:['', [Validators.required]],
             lastName: ['', [Validators.required]],
             phone:['', [Validators.required]],
-            dateBirth:['', [Validators.required]],
+            dateOfBirth:['', [Validators.required]],
             sex:['', [Validators.required]],
             cpf:['', [Validators.required]],
             email: ['', [Validators.required, Validators.email]],
@@ -55,7 +61,7 @@ export class RegistrationComponent {
             confirmPassword: ['', [Validators.required]],
         }
 
-        return this.fb.group(form);
+        this.registrationForm = this.fb.group(form);
     }
 
     changePasswordVisibility() {
@@ -67,29 +73,27 @@ export class RegistrationComponent {
     }
 
     onSubmit(){
-        const newUser: User = {
-            cpf: this.registrationForm.controls['cpf'].value,
-            dateOfBirth: JSON.stringify(this.registrationForm.controls['dateBirth'].value).substring(1, 11),
-            email: this.registrationForm.controls['email'].value,
-            firstName: this.registrationForm.controls['name'].value,
-            lastName: this.registrationForm.controls['lastName'].value,
-            password: this.registrationForm.controls['password'].value,
-            sex: this.registrationForm.controls['sex'].value,
-            phone: this.registrationForm.controls['phone'].value,
-        }
+        if(this.registrationForm.invalid) return;
 
-        this.auth.createUser(newUser).subscribe({
-            next: (res) => {
+        const newUser: User = this.registrationForm.value;
+        newUser.dateOfBirth = JSON.stringify(newUser.dateOfBirth).substring(1, 11);
+
+        const subscription = this.auth.createUser(newUser)
+        .pipe(
+            catchError(() => {
+                this.notification.openErrorSnackBar('Ocorreu um erro no cadastro.');
+                return EMPTY;
+            })
+        ).subscribe(
+            () => {
                 this.notification.openSuccessSnackBar('Usuário cadastrado com sucesso!')
                 .afterDismissed().subscribe(() =>
                     this.router.navigate(['dashboard'])
                 );
-            },
-            error: (erro) => {
-                this.notification.openErrorSnackBar('Ocorreu um erro no cadastro.');
             }
-        })
+        );
 
+        this.subscriptions.push(subscription);
     }
 
 }

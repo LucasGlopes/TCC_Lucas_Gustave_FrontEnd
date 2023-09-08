@@ -1,31 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import { CurrentUser } from 'src/app/models/user.model';
-import { CurrentUserService } from 'src/app/services/currentUser.service';
-
+import { EMPTY, Subscription, catchError, tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit,OnDestroy {
     hidePassword: boolean = true;
-    loginForm: FormGroup = this.initForm();
+    loginForm!: FormGroup;
+    subscriptions: Subscription[] = [];
 
     constructor(
         private router: Router,
         private fb: FormBuilder,
         private authService: AuthenticationService,
         private notification: NotificationService,
-        private currentUser: CurrentUserService,
     ){}
 
     ngOnInit(): void {
-        
+        this.initForm();
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.forEach((subscription) => subscription.unsubscribe());
     }
 
     initForm() {
@@ -34,7 +36,7 @@ export class LoginComponent implements OnInit {
             password: ['', [Validators.required]]
         }
 
-        return this.fb.group(form);
+        this.loginForm =  this.fb.group(form);
     }
 
     changePasswordVisibility() {
@@ -42,14 +44,20 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-        this.authService.login(this.loginForm.value).subscribe({
-            next: (res) => {
-                this.router.navigate(['dashboard']);
-            },
-            error: (erro) => {
+        if (this.loginForm.invalid) return;
+
+        const subscription = this.authService.login(this.loginForm.value)
+        .pipe(
+            catchError(() => {
                 this.notification.openErrorSnackBar('E-mail e/ou senha inválidos.');
-            }
-        }) 
+                return EMPTY;
+            })
+        )
+        .subscribe(() => {
+            this.router.navigate(['dashboard']);
+        });
+
+        this.subscriptions.push(subscription);
     }
 
     createAccount() {
