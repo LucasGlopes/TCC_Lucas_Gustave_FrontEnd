@@ -5,6 +5,7 @@ import { CurrentUser, User } from '../models/user.model';
 import { Login } from '../models/login.model';
 import { tap, pipe } from 'rxjs';
 import { CurrentUserService } from './currentUser.service';
+import { Router } from '@angular/router';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,7 +16,8 @@ export class AuthenticationService {
 
 	constructor(
 		private http: HttpClient,
-		private currentUser: CurrentUserService
+		private currentUser: CurrentUserService,
+		private router: Router
 	) { }
 
 	createUser(user: User){
@@ -32,6 +34,12 @@ export class AuthenticationService {
 				this.setCurrentUser(res);
 			})
 		);
+	}
+
+	logout(){
+		this.removeToken();
+		this.currentUser.setUserValues(null);
+        this.router.navigate(['auth','login']);
 	}
 
 	setCurrentUser(user: any) {
@@ -52,6 +60,10 @@ export class AuthenticationService {
 
 	getToken(){
 		return sessionStorage.getItem('token');
+	}
+
+	removeToken(){
+		sessionStorage.removeItem('token');
 	}
 
 }

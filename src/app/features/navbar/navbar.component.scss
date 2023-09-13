@@ -1,0 +1,31 @@
+// ::ng-deep .mat-toolbar{
+//     background-color: #20BEC6 !important;
+// }
+
+.toolbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    height: 10vh;
+}
+
+.toolbar .options{
+    width: 50%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toolbar button{
+    font-size: 16px;
+    font-weight: 550;
+    font-family: 'Roboto', 'sans-serif';
+}
+
+.title {
+    font-family: 'Anton', sans-serif;
+
+    font-size: 35px;
+}

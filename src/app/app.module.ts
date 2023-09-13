@@ -10,12 +10,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { UserDialog } from './services/notification.service';
 import { MatButtonModule } from '@angular/material/button';
 import { InterceptorModule } from './middleware/interceptor.module';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { NavBarComponent } from './features/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserDialog
+    UserDialog,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +30,9 @@ import { InterceptorModule } from './middleware/interceptor.module';
     MatDialogModule,
     MatButtonModule,
     InterceptorModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="toolbar">
+    <div class="title">PlaSO</div>
+    <div class="options">
+        <button mat-button routerLink="/vacinas">Vacinação</button>
+        <button mat-button routerLink="/exames">Exames</button>
+        <button mat-button routerLink="/atestados">Atestados</button>
+    </div>
+    <button mat-button [matMenuTriggerFor]="menu">
+        Olá, {{userName}}
+        <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>Configurações</button>
+        <button mat-menu-item (click)="logout()">Sair</button>
+    </mat-menu>
+</mat-toolbar>

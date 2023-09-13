@@ -4,14 +4,18 @@ import { CurrentUser } from "../models/user.model";
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserService {
-    user = new BehaviorSubject<any>(null);
+    private user = new BehaviorSubject<any>(null);
 
-    setUserValues(user: CurrentUser) {
+    setUserValues(user: CurrentUser | null) {
         this.user.next(user);
     }
 
     getUserValues(): CurrentUser {
         return this.user.value;
+    }
+
+    get isLoggedIn() {
+        return this.user.asObservable();
     }
 
 }
