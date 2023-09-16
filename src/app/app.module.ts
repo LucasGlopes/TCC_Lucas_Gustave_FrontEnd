@@ -9,17 +9,13 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDialogModule } from '@angular/material/dialog';
 import { UserDialog } from './services/notification.service';
 import { MatButtonModule } from '@angular/material/button';
-import { InterceptorModule } from './middleware/interceptor.module';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { NavBarComponent } from './features/navbar/navbar.component';
+import { InterceptorModule } from './middleware/interceptor.module';;
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserDialog,
-    NavBarComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +26,7 @@ import { NavBarComponent } from './features/navbar/navbar.component';
     MatDialogModule,
     MatButtonModule,
     InterceptorModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatIconModule
+    ComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
