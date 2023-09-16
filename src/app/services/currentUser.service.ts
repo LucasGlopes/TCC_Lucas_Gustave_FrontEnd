@@ -6,7 +6,26 @@ import { CurrentUser } from "../models/user.model";
 export class CurrentUserService {
     private user = new BehaviorSubject<any>(null);
 
+    constructor(
+    ) {
+        this.restoreSession();
+    }
+
+    restoreSession() {
+        const token = sessionStorage.getItem('token');
+    
+        if (!token) return;
+        //temporário
+        const user: CurrentUser = JSON.parse(sessionStorage.getItem('user') || '');
+
+        if(user){
+            this.setUserValues(user)
+        }
+    
+    }
+
     setUserValues(user: CurrentUser | null) {
+        sessionStorage.setItem('user', JSON.stringify(user));
         this.user.next(user);
     }
 
