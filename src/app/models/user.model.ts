@@ -30,4 +30,5 @@ export interface CurrentUser {
     dataAniversario?: string;
     perfis?: Perfis[];
     telefone?: string;
+    isApproved?: boolean;
 }

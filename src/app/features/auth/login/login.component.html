@@ -25,7 +25,7 @@
                 <mat-label>Senha</mat-label>
                 <input 
                     matInput 
-                    formControlName="password"
+                    formControlName="senha"
                     [type]="hidePassword ? 'password' : 'text'"
                 >
                 <button
@@ -38,7 +38,7 @@
                 >
                     <mat-icon>{{ hidePassword ? "visibility" : "visibility_off" }}</mat-icon>
                 </button>
-                <mat-error *ngIf="loginForm.controls['password'].invalid">Este campo é obrigatório</mat-error>
+                <mat-error *ngIf="loginForm.controls['senha'].invalid">Este campo é obrigatório</mat-error>
             </mat-form-field>
             <button 
                 mat-raised-button 

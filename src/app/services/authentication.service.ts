@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CurrentUser, User } from '../models/user.model';
 import { Login } from '../models/login.model';
-import { tap, pipe } from 'rxjs';
+import { map } from 'rxjs';
 import { CurrentUserService } from './currentUser.service';
 import { Router } from '@angular/router';
 import jwt_decode from "jwt-decode";
@@ -31,8 +31,18 @@ export class AuthenticationService {
 
 	login(login: Login){
 		return this.http.post<any>(`${this.baseUrl}/login`, login, {observe: 'response'}).pipe(
-			tap(res => {
-				this.setCurrentUser(res)
+			map(res => {
+				var token = res?.headers?.get('Authorization')?.substring(7)!;
+				const user: CurrentUser = (jwt_decode(token || ''));
+
+				if(!user.isApproved){
+					throw new Error('Seu cadastro ainda não foi analisado.');
+				}
+
+				this.currentUser.setUserValues(user);
+				this.setToken(token);
+
+				return null;
 			})
 		);
 	}
@@ -41,13 +51,6 @@ export class AuthenticationService {
 		this.removeToken();
 		this.currentUser.setUserValues(null);
         this.router.navigate(['auth','login']);
-	}
-
-	setCurrentUser(res: any) {
-		var token = res?.headers?.get('Authorization')?.substring(7);
-		const user: CurrentUser = (jwt_decode(token || ''));
-		this.currentUser.setUserValues(user);
-		this.setToken(token);
 	}
 
 	setToken(token: string){
