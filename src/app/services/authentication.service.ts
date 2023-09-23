@@ -6,6 +6,7 @@ import { Login } from '../models/login.model';
 import { tap, pipe } from 'rxjs';
 import { CurrentUserService } from './currentUser.service';
 import { Router } from '@angular/router';
+import jwt_decode from "jwt-decode";
 
 @Injectable({
 	providedIn: 'root'
@@ -20,18 +21,18 @@ export class AuthenticationService {
 		private router: Router
 	) { }
 
-	createUser(user: User){
-		return this.http.post<any>(`${this.baseUrl}/registration`, user).pipe(
-			tap(res => {
-				this.setCurrentUser(res);
-			})
-		);
+	criarFuncionario(user: User){
+		return this.http.post<any>(`${this.baseUrl}/funcionarios`, user);
+	}
+
+	criarTecnico(user: User){
+		return this.http.post<any>(`${this.baseUrl}/tecnicos`, user);
 	}
 
 	login(login: Login){
-		return this.http.post<any>(`${this.baseUrl}/registration/login`, login).pipe(
+		return this.http.post<any>(`${this.baseUrl}/login`, login, {observe: 'response'}).pipe(
 			tap(res => {
-				this.setCurrentUser(res);
+				this.setCurrentUser(res)
 			})
 		);
 	}
@@ -42,16 +43,11 @@ export class AuthenticationService {
         this.router.navigate(['auth','login']);
 	}
 
-	setCurrentUser(user: any) {
-		const currentUser: CurrentUser = {
-			email: user.email,
-			firstName: user.firstName,
-			id: user.id,
-			lastName: user.lastName
-		};
-		this.currentUser.setUserValues(currentUser);
-
-		this.setToken('ABCDEF');
+	setCurrentUser(res: any) {
+		var token = res?.headers?.get('Authorization')?.substring(7);
+		const user: CurrentUser = (jwt_decode(token || ''));
+		this.currentUser.setUserValues(user);
+		this.setToken(token);
 	}
 
 	setToken(token: string){

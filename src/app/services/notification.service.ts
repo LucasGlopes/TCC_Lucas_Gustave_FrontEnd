@@ -23,7 +23,7 @@ export class NotificationService {
 
     openSuccessSnackBar(msg: string){
         return this._snackBar.open(msg, 'X', {
-            duration: 3000,
+            duration: 5000,
             panelClass: ['green-snackbar'],
         });
     }

@@ -1,9 +1,11 @@
+import { DatePipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EMPTY, Subscription, catchError } from 'rxjs';
 import { SelectorOption } from 'src/app/models/selector.model';
-import { User } from 'src/app/models/user.model';
+import { Perfis, Sexo, User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -21,15 +23,22 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     sexOptions: SelectorOption[] = [
         {
             label: 'Masculino',
-            value: 'M'
+            value: Sexo.masculino
         },
         {
             label: 'Feminino',
-            value: 'F'
+            value: Sexo.feminino
+        }
+    ]
+
+    userTypes: SelectorOption[] = [
+        {
+            label: 'Funcionário',
+            value: Perfis.funcionario
         },
         {
-            label: 'Outro',
-            value: 'O'
+            label: 'Técnico',
+            value: Perfis.tecnico
         }
     ]
 
@@ -38,6 +47,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         private fb: FormBuilder,
         private auth: AuthenticationService,
         private notification: NotificationService,
+        private datePipe: DatePipe
     ){}
 
     ngOnInit(): void {
@@ -50,15 +60,16 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
     initForm() {
         const form = {
-            firstName:['', [Validators.required]],
-            lastName: ['', [Validators.required]],
-            phone:['', [Validators.required]],
-            dateOfBirth:['', [Validators.required]],
-            sex:['', [Validators.required]],
+            primeiroNome:['', [Validators.required]],
+            ultimoNome: ['', [Validators.required]],
+            telefone:['', [Validators.required]],
+            dataAniversario:['', [Validators.required]],
+            sexoEnum:['', [Validators.required]],
             cpf:['', [Validators.required]],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required]],
-            confirmPassword: ['', [Validators.required]],
+            senha: ['', [Validators.required]],
+            confirmaSenha: ['', [Validators.required]],
+            tipoUsuario: ['', [Validators.required]],
         }
 
         this.registrationForm = this.fb.group(form);
@@ -76,20 +87,26 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         if(this.registrationForm.invalid) return;
 
         const newUser: User = this.registrationForm.value;
-        newUser.dateOfBirth = JSON.stringify(newUser.dateOfBirth).substring(1, 11);
+        newUser.dataAniversario = this.datePipe.transform(newUser.dataAniversario, 'dd/MM/yyyy')!;
+        const tipoUsuario = newUser.tipoUsuario;
 
-        const subscription = this.auth.createUser(newUser)
+        delete newUser.confirmaSenha;
+        delete newUser.tipoUsuario;
+
+        const subscription = (
+            tipoUsuario === Perfis.funcionario ? 
+            this.auth.criarFuncionario(newUser) :
+            this.auth.criarTecnico(newUser)
+        )
         .pipe(
-            catchError(() => {
-                this.notification.openErrorSnackBar('Ocorreu um erro no cadastro.');
+            catchError((error : HttpErrorResponse) => {
+                this.notification.openErrorSnackBar(error.error.message);
                 return EMPTY;
             })
         ).subscribe(
             () => {
-                this.notification.openSuccessSnackBar('Usuário cadastrado com sucesso!')
-                .afterDismissed().subscribe(() =>
-                    this.router.navigate(['dashboard'])
-                );
+                this.router.navigate(['auth','login'])
+                this.notification.openSuccessSnackBar('Solicitação de cadastro realizada com sucesso!');
             }
         );
 

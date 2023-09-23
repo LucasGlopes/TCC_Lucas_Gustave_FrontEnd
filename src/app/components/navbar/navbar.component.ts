@@ -23,8 +23,7 @@ export class NavBarComponent implements OnInit{
 	}
 
 	ngOnInit(): void {
-		this.userName = this.user.firstName;
-		// this.notification.openDialog(this.userName);
+		this.userName = this.user.primeiroNome;
 	}
 
     logout(){

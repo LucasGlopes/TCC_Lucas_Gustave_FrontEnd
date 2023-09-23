@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit{
 	}
 
 	ngOnInit(): void {
-		this.userName = this.user.firstName;
+		this.userName = this.user.primeiroNome;
 		this.notification.openDialog(this.userName);
 	}
 }

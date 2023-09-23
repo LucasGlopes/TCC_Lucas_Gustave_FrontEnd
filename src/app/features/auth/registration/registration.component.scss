@@ -112,3 +112,7 @@ h1{
     width: 8rem;
     height: 2.5rem;
 }
+
+::ng-deep mat-calendar .mdc-button__label{
+    color: #302e2e;
+}
