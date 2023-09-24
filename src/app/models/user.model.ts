@@ -20,6 +20,7 @@ export interface User {
     telefone: string;
     confirmaSenha?: string;
     tipoUsuario?: Perfis;
+    setor: string;
 }
 
 export interface CurrentUser {
@@ -27,8 +28,11 @@ export interface CurrentUser {
     ultimoNome: string;
     email: string;
     id: number;
-    dataAniversario?: string;
-    perfis?: Perfis[];
-    telefone?: string;
-    isApproved?: boolean;
+    dataAniversario: string;
+    perfis: Perfis[];
+    telefone: string;
+    isApproved: boolean;
+    sexoEnum: Sexo;
+    cpf: string;
+    setor: string;
 }

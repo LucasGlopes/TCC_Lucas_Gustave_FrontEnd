@@ -88,7 +88,7 @@
                 <mat-form-field 
                     [hideRequiredMarker]="true"  
                     appearance="outline"  
-                    style="width:48% !important;"
+                    style="width:33% !important;"
                 >
                     <mat-label>Senha</mat-label>
                     <input 
@@ -111,7 +111,7 @@
                 <mat-form-field 
                     [hideRequiredMarker]="true"  
                     appearance="outline"  
-                    style="width:48% !important;"
+                    style="width:33% !important;"
                 >
                     <mat-label>Confirmar senha</mat-label>
                     <input 
@@ -130,6 +130,19 @@
                         <mat-icon>{{ hidePassword ? "visibility" : "visibility_off" }}</mat-icon>
                     </button>
                     <mat-error *ngIf="registrationForm.controls['confirmaSenha'].invalid">Este campo é obrigatório</mat-error>
+                </mat-form-field>
+                <mat-form-field 
+                    [hideRequiredMarker]="true"  
+                    appearance="outline"  
+                    style="width:30% !important;"
+                >
+                    <mat-label>Setor</mat-label>
+                        <input 
+                            type="text" 
+                            matInput 
+                            formControlName="setor"
+                        >
+                        <mat-error *ngIf="registrationForm.controls['setor'].invalid">Campo inválido</mat-error>
                 </mat-form-field>
             </div>
             <div class="field-row">

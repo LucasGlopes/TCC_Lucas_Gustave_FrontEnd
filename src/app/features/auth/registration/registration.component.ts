@@ -70,6 +70,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
             senha: ['', [Validators.required]],
             confirmaSenha: ['', [Validators.required]],
             tipoUsuario: ['', [Validators.required]],
+            setor: ['', [Validators.required]],
         }
 
         this.registrationForm = this.fb.group(form);
