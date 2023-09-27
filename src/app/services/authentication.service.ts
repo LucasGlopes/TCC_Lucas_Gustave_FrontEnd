@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CurrentUser, User } from '../models/user.model';
 import { Login } from '../models/login.model';
-import { tap, pipe } from 'rxjs';
+import { map } from 'rxjs';
 import { CurrentUserService } from './currentUser.service';
 import { Router } from '@angular/router';
+import jwt_decode from "jwt-decode";
 
 @Injectable({
 	providedIn: 'root'
@@ -20,18 +21,28 @@ export class AuthenticationService {
 		private router: Router
 	) { }
 
-	createUser(user: User){
-		return this.http.post<any>(`${this.baseUrl}/registration`, user).pipe(
-			tap(res => {
-				this.setCurrentUser(res);
-			})
-		);
+	criarFuncionario(user: User){
+		return this.http.post<any>(`${this.baseUrl}/funcionarios`, user);
+	}
+
+	criarTecnico(user: User){
+		return this.http.post<any>(`${this.baseUrl}/tecnicos`, user);
 	}
 
 	login(login: Login){
-		return this.http.post<any>(`${this.baseUrl}/registration/login`, login).pipe(
-			tap(res => {
-				this.setCurrentUser(res);
+		return this.http.post<any>(`${this.baseUrl}/login`, login, {observe: 'response'}).pipe(
+			map(res => {
+				var token = res?.headers?.get('Authorization')?.substring(7)!;
+				const user: CurrentUser = (jwt_decode(token || ''));
+
+				if(!user.isApproved){
+					throw new Error('Seu cadastro ainda está em análise.');
+				}
+
+				this.currentUser.setUserValues(user);
+				this.setToken(token);
+
+				return null;
 			})
 		);
 	}
@@ -40,18 +51,6 @@ export class AuthenticationService {
 		this.removeToken();
 		this.currentUser.setUserValues(null);
         this.router.navigate(['auth','login']);
-	}
-
-	setCurrentUser(user: any) {
-		const currentUser: CurrentUser = {
-			email: user.email,
-			firstName: user.firstName,
-			id: user.id,
-			lastName: user.lastName
-		};
-		this.currentUser.setUserValues(currentUser);
-
-		this.setToken('ABCDEF');
 	}
 
 	setToken(token: string){
@@ -65,5 +64,7 @@ export class AuthenticationService {
 	removeToken(){
 		sessionStorage.removeItem('token');
 	}
+
+
 
 }

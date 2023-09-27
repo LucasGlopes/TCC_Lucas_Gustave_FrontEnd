@@ -17,15 +17,16 @@ export class AuthorizationInterceptor implements HttpInterceptor {
 
 	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 		if(
-			request.url.endsWith('/login') ||
-			request.url.endsWith('/registration')
+			(request.url === '/login') ||
+			(request.url === '/funcionarios' && request.method === 'POST') ||
+			(request.url === '/tecnicos' && request.method === 'POST')
 		){
 			return next.handle(request);
 		}
 
 		const newRequest = request.clone({
 			setHeaders: {
-				Authorization: 'JWT ' + this.authService.getToken()
+				Authorization: 'Bearer ' + this.authService.getToken()
 			}
 		});
 

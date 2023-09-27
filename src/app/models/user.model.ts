@@ -1,17 +1,40 @@
+export enum Perfis {
+    admin = 'ADMIN',
+    funcionario = 'FUNCIONARIO',
+    tecnico = 'TECNICO'
+}
+
+export enum Sexo {
+    masculino = 'MASCULINO',
+    feminino = 'FEMININO'
+}
+
 export interface User {
+    id: number;
     cpf: string;
-    dateOfBirth: string;
+    dataAniversario: string;
     email: string;
-    firstName: string;
-    lastName: string;
-    password: string;
-    sex: string;
-    phone: string;
+    primeiroNome: string;
+    ultimoNome: string;
+    senha: string;
+    sexoEnum: Sexo;
+    telefone: string;
+    confirmaSenha?: string;
+    tipoUsuario?: Perfis;
+    setor: string;
+    perfis?: Perfis[];
 }
 
 export interface CurrentUser {
-    firstName: string;
-    lastName: string;
+    primeiroNome: string;
+    ultimoNome: string;
     email: string;
     id: number;
+    dataAniversario: string;
+    perfis: Perfis[];
+    telefone: string;
+    isApproved: boolean;
+    sexoEnum: Sexo;
+    cpf: string;
+    setor: string;
 }

@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { EMPTY, Subscription, catchError, tap } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Login } from 'src/app/models/login.model';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +35,7 @@ export class LoginComponent implements OnInit,OnDestroy {
     initForm() {
         const form = {
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required]]
+            senha: ['', [Validators.required]]
         }
 
         this.loginForm =  this.fb.group(form);
@@ -46,10 +48,18 @@ export class LoginComponent implements OnInit,OnDestroy {
     onSubmit() {
         if (this.loginForm.invalid) return;
 
-        const subscription = this.authService.login(this.loginForm.value)
+        const userlogin: Login = this.loginForm.value
+
+        const subscription = this.authService.login(userlogin)
         .pipe(
-            catchError(() => {
-                this.notification.openErrorSnackBar('E-mail e/ou senha inválidos.');
+            catchError((error: Error | HttpErrorResponse) => {
+                let message: string;
+                if (error instanceof HttpErrorResponse) {
+                    message = 'E-mail e/ou senha inválidos.';
+                } else {
+                    message = 'Seu cadastro ainda está em análise.';
+                }
+                this.notification.openErrorSnackBar(message);
                 return EMPTY;
             })
         )
