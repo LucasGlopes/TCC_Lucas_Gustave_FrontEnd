@@ -12,7 +12,7 @@
 
 .card {
     width: 90%;
-    background-color: #FFFFFF;
+    background-color: var(--white-color);
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
 
@@ -35,7 +35,7 @@
     font-weight: 500;
     font-family: 'Roboto', sans-serif;
     font-size: 23px;
-    color: #0c4c80;
+    color: var(--primary-color);
 }
 
 .search-card {
@@ -57,13 +57,12 @@
 
 ::ng-deep .mat-mdc-table thead{
     // background-color: #3f51b5 !important;
-    background-color: #20BEC6 !important;
+    background-color: var(--primary-color) !important;
 
-    
 }
 
 ::ng-deep .mdc-data-table__header-cell{
-    color: #ffffff !important;
+    color: var(--white-color) !important;
     font-size: 16px;
     font-weight: 500;
     font-family: 'Roboto', sans-serif !important;
@@ -110,3 +109,4 @@
 .buttons button:first-of-type{
     margin-right: 10px;
 }
+

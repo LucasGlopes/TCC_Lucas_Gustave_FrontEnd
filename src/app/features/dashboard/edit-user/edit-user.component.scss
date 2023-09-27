@@ -12,7 +12,7 @@
 
 .card {
     width: 90%;
-    background-color: #FFFFFF;
+    background-color: var(--white-color);
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
 
@@ -32,7 +32,8 @@
     font-weight: 500;
     font-family: 'Roboto', sans-serif;
     font-size: 23px;
-    color: #0c4c80;
+    // color: #0c4c80;
+    color: var(--primary-color);
 }
 
 form{
@@ -79,4 +80,5 @@ form{
 .buttons button:last-of-type{
     margin-left: 10px;
 }
+
 

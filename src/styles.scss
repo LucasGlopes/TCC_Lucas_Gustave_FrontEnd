@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-color: #217b80;
+    --white-color: #FFFFFF;
+}
 
 html, body { 
     height: 100%; 
@@ -8,6 +12,16 @@ html, body {
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.default-button{
+    background-color: var(--primary-color) !important;
+    color: var(--white-color) !important;    
+}
+
+.cancel-button {
+    color: var(--primary-color) !important;
+    background-color: var(--white-color) !important;
+    border: 1px solid var(--primary-color) !important;
+}
 
 .mat-mdc-snack-bar-container {
     &.red-snackbar {
