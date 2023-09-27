@@ -10,6 +10,7 @@ export enum Sexo {
 }
 
 export interface User {
+    id: number;
     cpf: string;
     dataAniversario: string;
     email: string;
@@ -21,6 +22,7 @@ export interface User {
     confirmaSenha?: string;
     tipoUsuario?: Perfis;
     setor: string;
+    perfis?: Perfis[];
 }
 
 export interface CurrentUser {

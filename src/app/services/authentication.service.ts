@@ -36,7 +36,7 @@ export class AuthenticationService {
 				const user: CurrentUser = (jwt_decode(token || ''));
 
 				if(!user.isApproved){
-					throw new Error('Seu cadastro ainda não foi analisado.');
+					throw new Error('Seu cadastro ainda está em análise.');
 				}
 
 				this.currentUser.setUserValues(user);
@@ -64,5 +64,7 @@ export class AuthenticationService {
 	removeToken(){
 		sessionStorage.removeItem('token');
 	}
+
+
 
 }

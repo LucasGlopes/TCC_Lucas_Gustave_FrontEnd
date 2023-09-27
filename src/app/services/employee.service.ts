@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CurrentUser } from '../models/user.model';
+import { CurrentUser, User } from '../models/user.model';
+import { tap } from 'rxjs';
+import { CurrentUserService } from './currentUser.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -11,7 +13,8 @@ export class EmployeeService {
 	private baseUrl = environment.restApiUrl;
 
 	constructor(
-		private http: HttpClient
+		private http: HttpClient,
+		private currentUser: CurrentUserService
 	) { }
 
     getNonApprovedEmployees(){
@@ -22,8 +25,12 @@ export class EmployeeService {
 		return this.http.put(`${this.baseUrl}/funcionarios/aprovarFuncionario/${id}`,{});
 	}
 
-    updateEmployee(employee: CurrentUser){
-        return this.http.put(`${this.baseUrl}/funcionarios/${employee.id}`, employee);
+    updateEmployee(employee: CurrentUser | User){
+        return this.http.put<CurrentUser>(`${this.baseUrl}/funcionarios/${employee.id}`, employee).pipe(
+			tap(user => {
+				this.currentUser.setUserValues(user);
+			})
+		);
     }
 
 	deleteEmployee(id: number){

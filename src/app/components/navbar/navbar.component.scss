@@ -6,6 +6,15 @@
     color: white !important;
 }
 
+.toolbar .options button{
+    color: white !important;
+}
+
+
+.toolbar .name{
+    color: white !important;
+}
+
 .toolbar {
     position: sticky;
     display: flex;
@@ -34,4 +43,5 @@
     font-family: 'Anton', sans-serif;
     color: white;
     font-size: 35px;
+    cursor: pointer;
 }

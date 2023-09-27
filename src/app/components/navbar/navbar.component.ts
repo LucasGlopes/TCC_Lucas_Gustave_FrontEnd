@@ -24,13 +24,12 @@ export class NavBarComponent implements OnInit{
 	}
 
 	ngOnInit(): void {
-		this.userName = this.user.primeiroNome;
+		this.userName = this.user.primeiroNome[0].toUpperCase() + this.user.primeiroNome.slice(1).toLowerCase();
 		this.isAdmin = this.user.perfis.includes(Perfis.admin);
 	}
 
-
-	goToPendingUsers(){
-		this.router.navigate(['dashboard/pending-users']);
+	goTo(route: string){
+		this.router.navigate([route]);
 	}
 
     logout(){

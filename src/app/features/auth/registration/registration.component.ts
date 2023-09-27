@@ -62,7 +62,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         const form = {
             primeiroNome:['', [Validators.required]],
             ultimoNome: ['', [Validators.required]],
-            telefone:['', [Validators.required]],
+            telefone:['', [Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(8)]],
             dataAniversario:['', [Validators.required]],
             sexoEnum:['', [Validators.required]],
             cpf:['', [Validators.required]],
