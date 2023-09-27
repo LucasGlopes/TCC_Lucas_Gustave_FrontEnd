@@ -17,14 +17,14 @@
     <mat-menu #menu="matMenu">
         <button 
             mat-menu-item
-            (click)="goTo('dashboard/edit-user')"
+            (click)="goTo('dashboard/editar-usuario')"
         >
             Editar usuário
         </button>
         <button 
             *ngIf="isAdmin"
             mat-menu-item
-            (click)="goTo('dashboard/pending-users')"
+            (click)="goTo('dashboard/usuarios-pendentes')"
         >
             Usuários pendentes
         </button>

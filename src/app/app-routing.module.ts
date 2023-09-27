@@ -13,7 +13,7 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
-    path: 'vaccination',
+    path: 'vacinas',
     loadChildren: () => import('./features/vaccination/vaccination.module').then(m => m.VaccinationModule),
     canLoad: [AuthGuard]
   },
