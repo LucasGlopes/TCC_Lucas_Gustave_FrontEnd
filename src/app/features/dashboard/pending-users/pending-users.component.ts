@@ -36,18 +36,27 @@ export class PendingUsersComponent implements OnInit, OnDestroy{
 			})
 		).subscribe(res => {
 			this.users = this.users.concat(res);
-			this.dataSource = new MatTableDataSource(this.users);
-			this.dataSource.paginator = this.paginator;
-			this.paginator._intl.itemsPerPageLabel="Usuários por página";
-			this.paginator._intl.getRangeLabel = this.getCustomRangeLabel.bind(this);
+			this.setDatasource();
 		});
 
 		this.subscriptions.push(subscription);
-
 	}
 
 	ngOnDestroy(): void {
 		this.subscriptions.forEach(subscription => subscription.unsubscribe());
+	}
+
+	setDatasource(){
+		this.dataSource = new MatTableDataSource(this.users);
+		this.dataSource.paginator = this.paginator;
+		this.paginator._intl.itemsPerPageLabel="Usuários por página";
+		this.paginator._intl.getRangeLabel = this.getCustomRangeLabel.bind(this);
+	}
+
+	applyFilter(event: Event) {
+		const filterValue = (event.target as HTMLInputElement).value;
+		this.dataSource.filter = filterValue.trim().toLowerCase();
+		console.log(this.dataSource)
 	}
 
 	approveEmployee(id: number){
@@ -67,9 +76,7 @@ export class PendingUsersComponent implements OnInit, OnDestroy{
 		.subscribe(() => {
 			let indexToRemove = this.users.findIndex(user => user.id === id);
 			if (indexToRemove !== -1) {
-				const data = this.dataSource.data;
-				data.splice(indexToRemove,1);
-				this.dataSource.data = data;
+				this.removeRow(indexToRemove);
 				this.notification.openSuccessSnackBar('Solicitação de cadastro aprovada!');
 			}
 		});
@@ -95,15 +102,19 @@ export class PendingUsersComponent implements OnInit, OnDestroy{
 		.subscribe(() => {
 			let indexToRemove = this.users.findIndex(user => user.id === id);
 			if (indexToRemove !== -1) {
-				const data = this.dataSource.data;
-				data.splice(indexToRemove,1);
-				this.dataSource.data = data;
+				this.removeRow(indexToRemove);
 				this.notification.openSuccessSnackBar('Solicitação de cadastro recusada!');
 			}
 		});
 
 		this.subscriptions.push(subscription);
 		
+	}
+
+	removeRow(indexToRemove: number){
+		const data = this.dataSource.data;
+		data.splice(indexToRemove,1);
+		this.dataSource.data = data;
 	}
 
 	getCustomRangeLabel(page: number, pageSize: number, length: number): string {
