@@ -17,6 +17,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: var(--white-color) !important;    
 }
 
+.default-button:disabled{
+    background-color: rgba(0, 0, 0, 0.12) !important;
+    color: rgba(0, 0, 0, 0.38) !important;    
+}
+
 .cancel-button {
     color: var(--primary-color) !important;
     background-color: var(--white-color) !important;
