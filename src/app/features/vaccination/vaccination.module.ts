@@ -9,6 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { VaccinationRoutingModule } from './vaccination-routing.module';
 import { CampaignListComponent } from './campaign-list/campaign-list.component';
 import { CampaignDetailsComponent } from './campaign-details/campaign-details.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -28,6 +30,8 @@ import { CampaignDetailsComponent } from './campaign-details/campaign-details.co
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class VaccinationModule { }
