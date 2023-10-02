@@ -18,5 +18,20 @@ export class VaccinationService {
         return this.http.post(`${this.baseUrl}/campanhas`, campaign);
     }
 
+	getCampaign(id: number){
+		return this.http.get<Campaign>(`${this.baseUrl}/campanhas/${id}`);
+	}
+
+	getCampaigns(){
+		return this.http.get<Campaign[]>(`${this.baseUrl}/campanhas`);
+	}
+
+	deleteCampaign(id: number){
+		return this.http.delete(`${this.baseUrl}/campanhas/${id}`);
+	}
+
+	updateCampaign(campaign: Campaign){
+		return this.http.put(`${this.baseUrl}/campanhas/${campaign.id}`, campaign);
+	}
 
 }

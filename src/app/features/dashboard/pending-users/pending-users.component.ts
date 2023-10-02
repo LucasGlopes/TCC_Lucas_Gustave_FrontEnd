@@ -5,6 +5,7 @@ import { EMPTY, Subscription, catchError, switchMap } from 'rxjs';
 import { CurrentUser, Perfis } from 'src/app/models/user.model';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { TableService } from 'src/app/services/table.service';
 import { TechService } from 'src/app/services/tech.service';
 
 @Component({
@@ -24,10 +25,19 @@ export class PendingUsersComponent implements OnInit, OnDestroy{
 		private employeeService: EmployeeService,
 		private techService: TechService,
         private notification: NotificationService,
+		private tableService: TableService
 	){}
 
 
 	ngOnInit(): void {
+		this.loadUsers();
+	}
+
+	ngOnDestroy(): void {
+		this.subscriptions.forEach(subscription => subscription.unsubscribe());
+	}
+
+	loadUsers(){
 		const subscription = this.employeeService.getNonApprovedEmployees()
 		.pipe(
 			switchMap(res => {
@@ -42,21 +52,16 @@ export class PendingUsersComponent implements OnInit, OnDestroy{
 		this.subscriptions.push(subscription);
 	}
 
-	ngOnDestroy(): void {
-		this.subscriptions.forEach(subscription => subscription.unsubscribe());
-	}
-
 	setDatasource(){
 		this.dataSource = new MatTableDataSource(this.users);
 		this.dataSource.paginator = this.paginator;
-		this.paginator._intl.itemsPerPageLabel="Usuários por página";
-		this.paginator._intl.getRangeLabel = this.getCustomRangeLabel.bind(this);
+		this.paginator._intl.itemsPerPageLabel = "Usuários por página";
+		this.paginator._intl.getRangeLabel = this.tableService.getCustomRangeLabel.bind(this);
 	}
 
 	applyFilter(event: Event) {
 		const filterValue = (event.target as HTMLInputElement).value;
 		this.dataSource.filter = filterValue.trim().toLowerCase();
-		console.log(this.dataSource)
 	}
 
 	approveEmployee(id: number){
@@ -115,21 +120,6 @@ export class PendingUsersComponent implements OnInit, OnDestroy{
 		const data = this.dataSource.data;
 		data.splice(indexToRemove,1);
 		this.dataSource.data = data;
-	}
-
-	getCustomRangeLabel(page: number, pageSize: number, length: number): string {
-		if (length === 0 || pageSize === 0) {
-		  return `0 de ${length}`;
-		}
-	  
-		length = Math.max(length, 0);
-	  
-		const startIndex = page * pageSize;
-		const endIndex = startIndex < length ?
-		  Math.min(startIndex + pageSize, length) :
-		  startIndex + pageSize;
-	  
-		return `${startIndex + 1} - ${endIndex} de ${length}`;
 	}
 
 }
