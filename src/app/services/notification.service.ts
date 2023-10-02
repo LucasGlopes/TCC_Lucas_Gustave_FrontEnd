@@ -28,9 +28,10 @@ export class NotificationService {
         });
     }
 
-    openDeleteDialog() {
+    openDeleteDialog(msg: string) {
         return this.dialog.open(UserDialog, {
-            autoFocus: false
+            autoFocus: false,
+            data: {msg}
         });
     }
 }
@@ -39,14 +40,14 @@ export class NotificationService {
 @Component({
     selector: 'dialog-elements-example-dialog',
     template: `
-        <h1 mat-dialog-title>Você tem certeza?</h1>
-        <div mat-dialog-content>
-            <p>Sua conta será permanentemente deletada.</p>
+        <h1 class="title" mat-dialog-title>Você tem certeza?</h1>
+        <div mat-dialog-content class="content">
+            <p>{{data.msg}}</p>
         </div>
         <div mat-dialog-actions class="container">
             <button 
                 mat-stroked-button 
-                class="cancel"
+                class="cancel-button"
                 (click)="onCancel()"
             >
                 Cancelar
@@ -66,6 +67,14 @@ export class NotificationService {
             width: 100%;
             display: flex;
             justify-content: center;
+        }
+
+        .title{
+            color: var(--primary-color);
+        }
+
+        .content{
+            color: rgba(0, 0, 0, 0.87);
         }
     `]
 })

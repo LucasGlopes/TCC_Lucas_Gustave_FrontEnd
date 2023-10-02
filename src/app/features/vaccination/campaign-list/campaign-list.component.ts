@@ -106,20 +106,28 @@ export class CampaignListComponent implements OnInit, OnDestroy{
 	}
 
 	deleteCampaign(id: number){
-		const subscription = this.vaccination.deleteCampaign(id)
-		.pipe(
-			catchError(() => {
-				this.notification.openErrorSnackBar("Ocorreu um erro. Tente novamente mais tarde.");
-				return EMPTY;
-			})
-		)
-		.subscribe(() => {
-			let indexToRemove = this.dataSource.data.findIndex(campaign => campaign.id === id);
-			if (indexToRemove !== -1) {
-				this.removeRow(indexToRemove);
-				this.notification.openSuccessSnackBar('Campanha de vacinação deletada com sucesso!');
+		const subscription = this.notification.openDeleteDialog('A campanha será permanentemente deletada.')
+		.afterClosed()
+		.subscribe(status => {
+			if(status){
+				const subscription = this.vaccination.deleteCampaign(id)
+				.pipe(
+					catchError(() => {
+						this.notification.openErrorSnackBar("Ocorreu um erro. Tente novamente mais tarde.");
+						return EMPTY;
+					})
+				)
+				.subscribe(() => {
+					let indexToRemove = this.dataSource.data.findIndex(campaign => campaign.id === id);
+					if (indexToRemove !== -1) {
+						this.removeRow(indexToRemove);
+						this.notification.openSuccessSnackBar('Campanha de vacinação deletada com sucesso!');
+					}
+					
+				});
+		
+				this.subscriptions.push(subscription);
 			}
-			
 		});
 
 		this.subscriptions.push(subscription);
