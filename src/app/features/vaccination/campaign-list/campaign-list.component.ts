@@ -4,7 +4,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EMPTY, Subscription, catchError } from 'rxjs';
+import { Perfis } from 'src/app/models/user.model';
 import { Campaign } from 'src/app/models/vaccination.model';
+import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TableService } from 'src/app/services/table.service';
 import { VaccinationService } from 'src/app/services/vaccination.service';
@@ -22,7 +24,8 @@ import { VaccinationService } from 'src/app/services/vaccination.service';
 	],
 })
 export class CampaignListComponent implements OnInit, OnDestroy{
-	displayedColumns: string[] = ['expand', 'nome', 'vacina', 'data', 'actions'];
+	displayedColumns: string[] = [];
+	hasPermission: boolean = false;
 	subscriptions: Subscription[] = [];
 	dataSource!: MatTableDataSource<Campaign>;
 	expandedElement: Campaign | null = null;
@@ -33,15 +36,32 @@ export class CampaignListComponent implements OnInit, OnDestroy{
 		private router: Router,
 		private vaccination: VaccinationService,
 		private notification: NotificationService,
-		private tableService: TableService
+		private tableService: TableService,
+		private user: CurrentUserService
 	){}
 
 	ngOnInit(): void {
+		this.checkPermission();
+		this.displayColumns();
 		this.loadCampaigns();
 	}
 
 	ngOnDestroy(): void {
 		this.subscriptions.forEach(subscription => subscription.unsubscribe());
+	}
+
+	checkPermission(){
+		const profiles = this.user.getUserValues().perfis;
+
+		this.hasPermission = profiles.some(profile => 
+			profile === Perfis.admin || profile === Perfis.tecnico
+		);
+	}
+
+	displayColumns(){
+		this.displayedColumns = this.hasPermission
+			? ['expand', 'nome', 'vacina', 'data', 'actions']
+			: ['expand', 'nome', 'vacina', 'data'];
 	}
 
 	loadCampaigns(){

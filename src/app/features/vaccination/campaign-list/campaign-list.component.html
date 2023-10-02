@@ -4,6 +4,7 @@
             mat-flat-button
             class="default-button"
             (click)="newCampaign()"
+            *ngIf="hasPermission"
         >
             Nova Campanha
         </button>
