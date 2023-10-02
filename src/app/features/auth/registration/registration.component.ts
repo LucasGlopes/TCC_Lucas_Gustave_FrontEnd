@@ -6,8 +6,9 @@ import { Router } from '@angular/router';
 import { EMPTY, Subscription, catchError } from 'rxjs';
 import { SelectorOption } from 'src/app/models/selector.model';
 import { Perfis, Sexo, User } from 'src/app/models/user.model';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { EmployeeService } from 'src/app/services/employee.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { TechService } from 'src/app/services/tech.service';
 
 @Component({
   selector: 'app-registration',
@@ -45,9 +46,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     constructor(
         private router: Router,
         private fb: FormBuilder,
-        private auth: AuthenticationService,
         private notification: NotificationService,
-        private datePipe: DatePipe
+        private datePipe: DatePipe,
+        private employee: EmployeeService,
+        private tech: TechService
     ){}
 
     ngOnInit(): void {
@@ -96,8 +98,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
         const subscription = (
             tipoUsuario === Perfis.funcionario ? 
-            this.auth.criarFuncionario(newUser) :
-            this.auth.criarTecnico(newUser)
+            this.employee.createEmployee(newUser) :
+            this.tech.createTech(newUser)
         )
         .pipe(
             catchError((error : HttpErrorResponse) => {

@@ -21,14 +21,6 @@ export class AuthenticationService {
 		private router: Router
 	) { }
 
-	criarFuncionario(user: User){
-		return this.http.post<any>(`${this.baseUrl}/funcionarios`, user);
-	}
-
-	criarTecnico(user: User){
-		return this.http.post<any>(`${this.baseUrl}/tecnicos`, user);
-	}
-
 	login(login: Login){
 		return this.http.post<any>(`${this.baseUrl}/login`, login, {observe: 'response'}).pipe(
 			map(res => {
