@@ -11,6 +11,7 @@ import { CampaignListComponent } from './campaign-list/campaign-list.component';
 import { CampaignDetailsComponent } from './campaign-details/campaign-details.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatNativeDateModule,
     MatInputModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatIconModule
   ]
 })
 export class VaccinationModule { }

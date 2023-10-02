@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -11,12 +12,20 @@ import { VaccinationService } from 'src/app/services/vaccination.service';
 @Component({
 	selector: 'app-campaign-list',
 	templateUrl: './campaign-list.component.html',
-	styleUrls: ['./campaign-list.component.scss']
+	styleUrls: ['./campaign-list.component.scss'],
+	animations: [
+		trigger('detailExpand', [
+		  state('collapsed', style({height: '0px', minHeight: '0'})),
+		  state('expanded', style({height: '*'})),
+		  transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+		]),
+	],
 })
 export class CampaignListComponent implements OnInit, OnDestroy{
-	displayedColumns: string[] = ['nome', 'vacina', 'data', 'actions'];
+	displayedColumns: string[] = ['expand', 'nome', 'vacina', 'data', 'actions'];
 	subscriptions: Subscription[] = [];
-	dataSource!: MatTableDataSource<Campaign>
+	dataSource!: MatTableDataSource<Campaign>;
+	expandedElement: Campaign | null = null;
 	@ViewChild(MatTable) table!: MatTable<any>;
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 

@@ -116,3 +116,27 @@
 .buttons button:first-of-type{
     margin-right: 10px;
 }
+
+.description-row{
+    padding: 15px;
+    font-family: 'Roboto', sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.description-row .description-title{
+    font-size: 16px;
+    font-weight: 450;
+    margin-bottom: 5px;
+}
+
+.expand-element-detail {
+    overflow: hidden;
+    display: flex;
+}
+
+tr.expand-row {
+    height: 0;
+}
