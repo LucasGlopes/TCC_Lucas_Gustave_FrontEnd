@@ -1,0 +1,21 @@
+<h1 class="title" mat-dialog-title>Você tem certeza?</h1>
+<div mat-dialog-content class="content">
+    <p>{{data.msg}}</p>
+</div>
+<div mat-dialog-actions class="container">
+    <button 
+        mat-stroked-button 
+        class="cancel-button"
+        (click)="onCancel()"
+    >
+        Cancelar
+    </button>
+    <button 
+        mat-flat-button 
+        color="warn" 
+        (click)="onConfirm()"
+    >
+        Deletar
+    </button>
+    
+</div>

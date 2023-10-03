@@ -6,11 +6,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from "@angular/router";
-
+import { UserDialogComponent } from './user-dialog/user-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
-    NavBarComponent
+    NavBarComponent,
+    UserDialogComponent
   ],
   imports: [
     CommonModule,
@@ -18,10 +20,12 @@ import { RouterModule } from "@angular/router";
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
+    MatDialogModule
   ],
   exports: [
-    NavBarComponent
+    NavBarComponent,
+    UserDialogComponent
   ]
 })
 export class ComponentsModule { }

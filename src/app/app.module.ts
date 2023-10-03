@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { MatDialogModule } from '@angular/material/dialog';
-import { UserDialog } from './services/notification.service';
 import { MatButtonModule } from '@angular/material/button';
 import { InterceptorModule } from './middleware/interceptor.module';;
 import { ComponentsModule } from './components/components.module';
@@ -15,7 +13,6 @@ import { ComponentsModule } from './components/components.module';
 @NgModule({
   declarations: [
     AppComponent,
-    UserDialog,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +20,6 @@ import { ComponentsModule } from './components/components.module';
     BrowserAnimationsModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatDialogModule,
     MatButtonModule,
     InterceptorModule,
     ComponentsModule
