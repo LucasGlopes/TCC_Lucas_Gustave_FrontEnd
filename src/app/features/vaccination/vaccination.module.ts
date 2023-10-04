@@ -12,12 +12,14 @@ import { CampaignDetailsComponent } from './campaign-details/campaign-details.co
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
+import { VaccinationHomeComponent } from './vaccination-home/vaccination-home.component';
 
 
 @NgModule({
   declarations: [
     CampaignListComponent,
-    CampaignDetailsComponent
+    CampaignDetailsComponent,
+    VaccinationHomeComponent
   ],
   providers: [
     DatePipe
