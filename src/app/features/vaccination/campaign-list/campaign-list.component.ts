@@ -118,7 +118,7 @@ export class CampaignListComponent implements OnInit, OnDestroy{
 					})
 				)
 				.subscribe(() => {
-					let indexToRemove = this.dataSource.data.findIndex(campaign => campaign.id === id);
+					let indexToRemove = this.dataSource.data.findIndex(campaign => campaign.idCampanha === id);
 					if (indexToRemove !== -1) {
 						this.removeRow(indexToRemove);
 						this.notification.openSuccessSnackBar('Campanha de vacinação deletada com sucesso!');

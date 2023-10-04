@@ -13,13 +13,23 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { VaccinationHomeComponent } from './vaccination-home/vaccination-home.component';
+import { VaccinationSchedulingComponent } from './vaccination-scheduling/vaccination-scheduling.component';
+import { VaccinationListComponent } from './vaccination-list/vaccination-list.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { VaccinationHistoryComponent } from './vaccination-history/vaccination-history.component';
 
 
 @NgModule({
   declarations: [
     CampaignListComponent,
     CampaignDetailsComponent,
-    VaccinationHomeComponent
+    VaccinationHomeComponent,
+    VaccinationSchedulingComponent,
+    VaccinationListComponent,
+    VaccinationHistoryComponent
   ],
   providers: [
     DatePipe
@@ -35,7 +45,11 @@ import { VaccinationHomeComponent } from './vaccination-home/vaccination-home.co
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
-    MatIconModule
+    MatIconModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    MatCheckboxModule,
+    MatSelectModule
   ]
 })
 export class VaccinationModule { }

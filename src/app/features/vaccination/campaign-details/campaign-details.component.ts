@@ -41,7 +41,7 @@ export class CampaignDetailsComponent implements OnInit, OnDestroy {
             nomeVacina: ['', [Validators.required]],
             descricao:['', [Validators.required]],
             dataCampanha:['', [Validators.required]],
-			id:[]
+			idCampanha:[]
         }
 
         this.campaignForm = this.fb.group(form);

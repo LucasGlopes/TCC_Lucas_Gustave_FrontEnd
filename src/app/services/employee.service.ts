@@ -40,4 +40,8 @@ export class EmployeeService {
 	deleteEmployee(id: number){
 		return this.http.delete(`${this.baseUrl}/funcionarios/${id}`);
 	}
+
+	getUsers(){
+		return this.http.get<CurrentUser[]>(`${this.baseUrl}/pessoas/aprovadas`);
+	}
 }

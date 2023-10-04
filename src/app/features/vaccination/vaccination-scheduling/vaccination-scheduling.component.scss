@@ -1,8 +1,4 @@
 .container {
-    // height: 100%;
-    // background-color: red;
-    // overflow: hidden;
-
     margin-top: 6vh;
 
     display: flex;
@@ -25,43 +21,23 @@
     font-weight: 500;
     font-family: 'Roboto', sans-serif;
     font-size: 23px;
-    // color: #0c4c80;
     color: var(--primary-color);
 }
+
 
 form{
     display: flex;
     flex-direction: column;
 }
 
-.fields {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-}
-
-.fields .left{
-    display: flex;
-    flex-direction: column;
-
+.campaign{
     width: 50%;
 }
 
-.fields .right{
-
-    display: flex;
-    flex-direction: column;
-
-    width: 50%;
+.users {
+    width: 100%;
 }
 
-.fields .right .description{
-    height: 100%;
-}
-
-.mat-form-field textarea {
-    height: 90% !important;
-}
 
 .buttons{
     width: 100%;
@@ -80,5 +56,3 @@ form{
 .buttons button:last-of-type{
     margin-left: 10px;
 }
-
-

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Campaign } from '../models/vaccination.model';
+import { Campaign, Vaccination } from '../models/vaccination.model';
 
 @Injectable({
 	providedIn: 'root'
@@ -31,7 +31,22 @@ export class VaccinationService {
 	}
 
 	updateCampaign(campaign: Campaign){
-		return this.http.put(`${this.baseUrl}/campanhas/${campaign.id}`, campaign);
+		return this.http.put(`${this.baseUrl}/campanhas/${campaign.idCampanha}`, campaign);
 	}
 
+	getVaccinations(){
+		return this.http.get<Vaccination[]>(`${this.baseUrl}/vacinacoes`);
+	}
+
+	getVaccinationsByUser(id: number){
+		return this.http.get<Vaccination[]>(`${this.baseUrl}/vacinacoes/pessoa/${id}`);
+	}
+
+	deleteVaccination(id: number){
+		return this.http.delete(`${this.baseUrl}/vacinacoes/${id}`);
+	}
+
+	createVaccination(vaccination: Vaccination){
+		return this.http.post(`${this.baseUrl}/vacinacoes`, vaccination);
+	}
 }
