@@ -16,7 +16,7 @@ import { VaccinationStatusDialogComponent } from '../status-dialog/status-dialog
 	styleUrls: ['./vaccination-list.component.scss']
 })
 export class VaccinationListComponent implements OnInit, OnDestroy {
-	displayedColumns: string[] = ['nome', 'setor', 'campanha', 'data', 'status', 'actions'];
+	displayedColumns: string[] = ['nome', 'setor', 'campanha', 'vacina', 'data', 'status', 'actions'];
 	subscriptions: Subscription[] = [];
 	dataSource!: MatTableDataSource<Vaccination>
 	@ViewChild(MatTable) table!: MatTable<any>;
