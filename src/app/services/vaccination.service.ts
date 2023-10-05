@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Campaign, Vaccination } from '../models/vaccination.model';
+import { Campaign, Status, Vaccination } from '../models/vaccination.model';
 
 @Injectable({
 	providedIn: 'root'
@@ -48,5 +48,11 @@ export class VaccinationService {
 
 	createVaccination(vaccination: Vaccination){
 		return this.http.post(`${this.baseUrl}/vacinacoes`, vaccination);
+	}
+
+	updateVaccination(id: number, status: Status){
+		return this.http.put(`${this.baseUrl}/vacinacoes/${id}`, {
+			statusVacinacao: status
+		});
 	}
 }

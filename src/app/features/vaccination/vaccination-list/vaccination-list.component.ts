@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -7,6 +8,7 @@ import { Vaccination } from 'src/app/models/vaccination.model';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TableService } from 'src/app/services/table.service';
 import { VaccinationService } from 'src/app/services/vaccination.service';
+import { VaccinationStatusDialogComponent } from '../status-dialog/status-dialog.component';
 
 @Component({
 	selector: 'app-vaccination-list',
@@ -24,7 +26,8 @@ export class VaccinationListComponent implements OnInit, OnDestroy {
 		private router: Router,
 		private vaccination: VaccinationService,
 		private notification: NotificationService,
-		private tableService: TableService
+		private tableService: TableService,
+		private dialog: MatDialog
 	){}
 
 	ngOnInit(): void {
@@ -84,6 +87,33 @@ export class VaccinationListComponent implements OnInit, OnDestroy {
 
 	newScheduling(){
 		this.router.navigate(['vacinas/agendamentos/nova']);
+	}
+
+	updateStatus(vaccination: Vaccination){
+		const subscription = this.dialog.open(VaccinationStatusDialogComponent, {
+            autoFocus: false,
+            data: vaccination
+		})
+		.afterClosed()
+		.subscribe(status => {
+			if(status){
+				const subscription = this.vaccination.updateVaccination(vaccination.idVacinacao, status)
+				.pipe(
+					catchError(() => {
+						this.notification.openErrorSnackBar("Ocorreu um erro. Tente novamente mais tarde.");
+						return EMPTY;
+					})
+				)
+				.subscribe(() => {
+					this.notification.openSuccessSnackBar('Status da vacinação alterado com sucesso!');
+					this.loadVaccinations();
+				});
+		
+				this.subscriptions.push(subscription);
+			}
+		});
+
+		this.subscriptions.push(subscription);
 	}
 
 	deleteVaccination(id: number){

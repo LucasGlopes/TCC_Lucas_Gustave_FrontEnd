@@ -20,6 +20,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { VaccinationHistoryComponent } from './vaccination-history/vaccination-history.component';
+import { VaccinationStatusDialogComponent } from './status-dialog/status-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { VaccinationHistoryComponent } from './vaccination-history/vaccination-h
     VaccinationHomeComponent,
     VaccinationSchedulingComponent,
     VaccinationListComponent,
-    VaccinationHistoryComponent
+    VaccinationHistoryComponent,
+    VaccinationStatusDialogComponent
   ],
   providers: [
     DatePipe
@@ -49,7 +52,8 @@ import { VaccinationHistoryComponent } from './vaccination-history/vaccination-h
     MatAutocompleteModule,
     MatChipsModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ]
 })
 export class VaccinationModule { }
