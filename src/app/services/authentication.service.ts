@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CurrentUser, User } from '../models/user.model';
+import { CurrentUser } from '../models/user.model';
 import { Login } from '../models/login.model';
 import { map } from 'rxjs';
 import { CurrentUserService } from './currentUser.service';
