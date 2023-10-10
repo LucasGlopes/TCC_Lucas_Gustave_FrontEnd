@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit,OnDestroy {
     }
 
     createAccount() {
-        this.router.navigate(['auth','registration']);
+        this.router.navigate(['auth','cadastro']);
     }
 
 }

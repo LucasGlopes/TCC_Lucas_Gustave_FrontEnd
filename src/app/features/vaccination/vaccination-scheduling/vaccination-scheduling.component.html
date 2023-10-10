@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="card">
+        <h2 class="title">
+            Agendar Vacinação
+        </h2>
+        
+        <form [formGroup]="schedulingForm" (ngSubmit)="onSubmit()">
+
+            <mat-form-field
+                appearance="outline" 
+                class="campaign"
+            >
+                <mat-label>Campanha</mat-label>
+                <mat-select
+                    formControlName="idCampanha"
+                    matInput
+                >
+                    <mat-option *ngFor="let campaign of campaigns" [value]="campaign.idCampanha">
+                    {{campaign.nomeCampanha}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="schedulingForm.controls['idCampanha'].invalid">Este campo é obrigatório</mat-error>
+            </mat-form-field>
+
+            <mat-form-field
+                appearance="outline" 
+                class="users"
+            >
+                <mat-select matInput placeholder="Funcionários" formControlName="idFuncionarios" multiple>
+                    <mat-option *ngFor="let user of users" [value]="user.id">{{user.primeiroNome + ' ' + user.ultimoNome}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="schedulingForm.controls['idFuncionarios'].invalid">Este campo é obrigatório</mat-error>
+
+            </mat-form-field>
+
+            <div class="buttons">
+                <button 
+                    mat-flat-button 
+                    (click)="goBack()"
+                    class="cancel-button"
+                    type="button"
+                >
+                    Cancelar
+                </button>
+                <button 
+                    mat-flat-button 
+                    [disabled]="schedulingForm.invalid"
+                    type="submit"
+                    class="default-button"
+                >
+                    Salvar
+                </button>
+            </div>
+            
+        </form>
+    </div>
+
+</div>

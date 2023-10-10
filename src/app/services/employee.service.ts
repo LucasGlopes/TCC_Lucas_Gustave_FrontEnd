@@ -17,6 +17,10 @@ export class EmployeeService {
 		private currentUser: CurrentUserService
 	) { }
 
+	createEmployee(user: User){
+		return this.http.post<any>(`${this.baseUrl}/funcionarios`, user);
+	}
+
     getNonApprovedEmployees(){
         return this.http.get<CurrentUser[]>(`${this.baseUrl}/funcionarios/naoAprovados`);
     }
@@ -35,5 +39,9 @@ export class EmployeeService {
 
 	deleteEmployee(id: number){
 		return this.http.delete(`${this.baseUrl}/funcionarios/${id}`);
+	}
+
+	getUsers(){
+		return this.http.get<CurrentUser[]>(`${this.baseUrl}/pessoas/aprovadas`);
 	}
 }

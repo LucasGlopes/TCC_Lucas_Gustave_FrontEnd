@@ -105,16 +105,17 @@
             <div class="buttons">
                 <button 
                     mat-flat-button 
-                    color="warn"
                     (click)="goBack()"
+                    class="cancel-button"
+                    type="button"
                 >
                     Cancelar
                 </button>
                 <button 
                     mat-flat-button 
-                    color="primary"
                     [disabled]="editForm.invalid"
                     type="submit"
+                    class="default-button"
                 >
                     Salvar
                 </button>

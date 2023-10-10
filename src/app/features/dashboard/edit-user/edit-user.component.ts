@@ -101,7 +101,7 @@ export class EditUserComponent implements OnInit, OnDestroy{
 	}
 
 	deleteAccount(){
-		const subscription = this.notification.openDeleteDialog()
+		const subscription = this.notification.openDeleteDialog('Sua conta será permanentemente deletada.')
 		.afterClosed()
 		.subscribe(status => {
 			if(status){

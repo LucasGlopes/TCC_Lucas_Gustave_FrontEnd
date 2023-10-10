@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './services/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -10,6 +10,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
+    canLoad: [AuthGuard]
+  },
+  {
+    path: 'vacinas',
+    loadChildren: () => import('./features/vaccination/vaccination.module').then(m => m.VaccinationModule),
     canLoad: [AuthGuard]
   },
   {
