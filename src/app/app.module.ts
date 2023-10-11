@@ -9,6 +9,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatButtonModule } from '@angular/material/button';
 import { InterceptorModule } from './middleware/interceptor.module';;
 import { ComponentsModule } from './components/components.module';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { ComponentsModule } from './components/components.module';
     MatSnackBarModule,
     MatButtonModule,
     InterceptorModule,
-    ComponentsModule
+    ComponentsModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [],
   bootstrap: [AppComponent]
