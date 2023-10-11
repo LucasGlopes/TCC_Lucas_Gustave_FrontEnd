@@ -8,11 +8,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from "@angular/router";
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CalendarModule } from 'angular-calendar';
+import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
 
 @NgModule({
   declarations: [
     NavBarComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    CalendarHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -21,11 +24,13 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatIconModule,
     MatButtonModule,
     RouterModule,
-    MatDialogModule
+    MatDialogModule,
+    CalendarModule
   ],
   exports: [
     NavBarComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    CalendarHeaderComponent
   ]
 })
 export class ComponentsModule { }

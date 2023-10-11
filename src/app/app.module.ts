@@ -11,6 +11,9 @@ import { InterceptorModule } from './middleware/interceptor.module';;
 import { ComponentsModule } from './components/components.module';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
