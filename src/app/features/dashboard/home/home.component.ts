@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EMPTY, Observable, catchError, map } from 'rxjs';
+import { EMPTY, Observable, catchError, map, switchMap } from 'rxjs';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { CalendarDateFormatter, CalendarEvent, CalendarView } from 'angular-calendar';
@@ -11,6 +11,8 @@ import { colors } from '../../../../assets/colors';
 import { VaccinationService } from 'src/app/services/vaccination.service';
 import { Vaccination } from 'src/app/models/vaccination.model';
 import { CustomDateFormatter } from '../../../services/custom-date-formatter.service';
+import { ExamService } from 'src/app/services/exam.service';
+import { Exam } from 'src/app/models/exam.model';
   
 @Component({
 	selector: 'app-home',
@@ -25,35 +27,34 @@ import { CustomDateFormatter } from '../../../services/custom-date-formatter.ser
 })
 export class HomeComponent implements OnInit{
 	view: CalendarView = CalendarView.Month;
-
 	locale: string = 'pt';
-
 	viewDate: Date = new Date();
-
-	events$!: Observable<CalendarEvent<{ vaccination: Vaccination }>[]>;
-
+	events$!: Observable<CalendarEvent<{ vaccination: Vaccination } | { exam: Exam}>[]>;
 	activeDayIsOpen: boolean = false;
+	userId!: number;
 
 	constructor(
 		private vaccination: VaccinationService,
 		private currentUser: CurrentUserService,
-		private notification: NotificationService
+		private notification: NotificationService,
+		private exam: ExamService
 	) {}
 
 	ngOnInit(): void {
+		this.userId = this.currentUser.getUserValues().id;
 		this.fetchEvents();
 	}
 
 	fetchEvents(): void {
-		this.events$ = this.vaccination.getVaccinationsByUser(this.currentUser.getUserValues().id)
+		let events: CalendarEvent<{ vaccination: Vaccination } | { exam: Exam}>[] = [];
+
+		this.events$ = this.vaccination.getVaccinationsByUser(this.userId)
 		.pipe(
-			map((res) => {
-				const events = res.map((vaccination: Vaccination) => {
+			switchMap((vaccinations) => {
+				const vaccinationEvents = vaccinations.map((vaccination: Vaccination) => {
 					return {
-						title: vaccination.campanha.nomeCampanha,
-						start: new Date(
-							this.formatDate(vaccination.campanha.dataCampanha) + this.getTimezoneOffsetString(this.viewDate)
-						),
+						title: `${vaccination.campanha.nomeCampanha} - ${vaccination.campanha.nomeVacina}`,
+						start: this.formatDate(vaccination.campanha.dataCampanha),
 						color: colors.yellow,
 						allDay: true,
 						meta: {
@@ -61,7 +62,23 @@ export class HomeComponent implements OnInit{
 						},
 					};
 				});
-				return events;
+				events = events.concat(vaccinationEvents);
+
+				return this.exam.getExamsByUser(this.userId);
+			}),
+			map((exams) => {
+				const examEvents = exams.map((exam: Exam) => {
+					return {
+						title: exam.nomeExame,
+						start: this.formatDateHour(exam.dataExame, exam.horaExame),
+						color: colors.red,
+						meta: {
+							exam,
+						},
+					};
+				});
+
+				return events.concat(examEvents);
 			}),
 			catchError(() => {
 				this.notification.openErrorSnackBar('Ocorreu um erro. Tente novamente mais tarde.');
@@ -106,18 +123,18 @@ export class HomeComponent implements OnInit{
 			parseInt(dateComponents[1], 10) - 1,
 			parseInt(dateComponents[0], 10)
 		);
-		return `${dateComponents[2]}-${dateComponents[1]}-${dateComponents[0]}`;
+		return dateObject;
 	}
 
-	getTimezoneOffsetString(date: Date): string {
-		const timezoneOffset = date.getTimezoneOffset();
-		const hoursOffset = String(
-		  Math.floor(Math.abs(timezoneOffset / 60))
-		).padStart(2, '0');
-		const minutesOffset = String(Math.abs(timezoneOffset % 60)).padEnd(2, '0');
-		const direction = timezoneOffset > 0 ? '-' : '+';
-	  
-		return `T00:00:00${direction}${hoursOffset}:${minutesOffset}`;
+	formatDateHour(dateString: string, hourString: string){
+		const dateObject: Date = this.formatDate(dateString);
+		const hourComponents = hourString.split(":");
+
+		dateObject.setHours(parseInt(hourComponents[0]));
+		dateObject.setMinutes(parseInt(hourComponents[1]));
+
+		return dateObject;
 	}
+
 }
 
