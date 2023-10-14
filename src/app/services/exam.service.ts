@@ -27,9 +27,16 @@ export class ExamService {
 		return this.http.put(`${this.baseUrl}/exames/${exam.idExame}`, exam);
 	}
 
+	deleteExam(id: number){
+		return this.http.delete(`${this.baseUrl}/exames/${id}`);
+	}
+
     getExamsByUser(id: number){
         return this.http.get<Exam[]>(`${this.baseUrl}/exames/exame/${id}`);
     }
 
+	getExams(){
+		return this.http.get<Exam[]>(`${this.baseUrl}/exames`);
+	}
    
 }
