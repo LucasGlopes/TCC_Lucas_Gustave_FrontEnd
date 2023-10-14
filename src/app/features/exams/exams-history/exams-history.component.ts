@@ -40,9 +40,9 @@ export class ExamsHistoryComponent implements OnInit, OnDestroy {
 		const subscription = this.examService.getExamsByUser(userId)
 		.pipe(
 			map(exams => {
-				return exams.sort((e1, e2) => this.compareDates(e1,e2))
+				return exams.sort((e1, e2) => this.compareDates(e2,e1))
 			}),
-			catchError((error) => {
+			catchError(() => {
 				this.notification.openErrorSnackBar('Ocorreu um erro. Tente novamente mais tarde.');
 				return EMPTY;
 			})

@@ -13,6 +13,9 @@ import { Vaccination } from 'src/app/models/vaccination.model';
 import { CustomDateFormatter } from '../../../services/custom-date-formatter.service';
 import { ExamService } from 'src/app/services/exam.service';
 import { Exam } from 'src/app/models/exam.model';
+import { MatDialog } from '@angular/material/dialog';
+import { EventDialogComponent } from '../../exams/event-dialog/event-dialog.component';
+import { Info } from 'src/app/models/info.model';
   
 @Component({
 	selector: 'app-home',
@@ -32,12 +35,17 @@ export class HomeComponent implements OnInit{
 	events$!: Observable<CalendarEvent<{ vaccination: Vaccination } | { exam: Exam}>[]>;
 	activeDayIsOpen: boolean = false;
 	userId!: number;
+	exams: Exam[] = [];
+	vaccinations: Vaccination[] = [];
+	nearestExam: Exam | undefined;
+	nearestVaccination: Vaccination | undefined;
 
 	constructor(
-		private vaccination: VaccinationService,
+		private vaccinationService: VaccinationService,
 		private currentUser: CurrentUserService,
 		private notification: NotificationService,
-		private exam: ExamService
+		private examService: ExamService,
+		private dialog: MatDialog
 	) {}
 
 	ngOnInit(): void {
@@ -48,9 +56,10 @@ export class HomeComponent implements OnInit{
 	fetchEvents(): void {
 		let events: CalendarEvent<{ vaccination: Vaccination } | { exam: Exam}>[] = [];
 
-		this.events$ = this.vaccination.getVaccinationsByUser(this.userId)
+		this.events$ = this.vaccinationService.getVaccinationsByUser(this.userId)
 		.pipe(
 			switchMap((vaccinations) => {
+				this.vaccinations = vaccinations;
 				const vaccinationEvents = vaccinations.map((vaccination: Vaccination) => {
 					return {
 						title: `${vaccination.campanha.nomeCampanha} - ${vaccination.campanha.nomeVacina}`,
@@ -64,9 +73,10 @@ export class HomeComponent implements OnInit{
 				});
 				events = events.concat(vaccinationEvents);
 
-				return this.exam.getExamsByUser(this.userId);
+				return this.examService.getExamsByUser(this.userId);
 			}),
 			map((exams) => {
+				this.exams = exams;
 				const examEvents = exams.map((exam: Exam) => {
 					return {
 						title: exam.nomeExame,
@@ -78,6 +88,8 @@ export class HomeComponent implements OnInit{
 					};
 				});
 
+				this.getNearestEvents();
+
 				return events.concat(examEvents);
 			}),
 			catchError(() => {
@@ -86,6 +98,35 @@ export class HomeComponent implements OnInit{
 			})
 		);
 
+	}
+
+	getNearestEvents(){
+		this.getNearestExam();
+		this.getNearestVaccination();
+	}
+
+	getNearestExam(){
+		const currentDate = new Date();
+
+		this.exams.sort((e1, e2) => 
+			this.compareDates(this.formatDateHour(e1.dataExame, e1.horaExame),this.formatDateHour(e2.dataExame, e2.horaExame))
+		)
+		const futureExams = this.exams.filter(exam => 
+			this.formatDateHour(exam.dataExame, exam.horaExame) >= currentDate
+		)
+		this.nearestExam = futureExams[0];
+	}
+
+	getNearestVaccination(){
+		const currentDate = new Date();
+
+		this.vaccinations.sort((v1, v2) => 
+			this.compareDates(this.formatDate(v1.campanha.dataCampanha),this.formatDate(v2.campanha.dataCampanha))
+		)
+		const futureVaccinations = this.vaccinations.filter(vaccination => 
+			this.formatDate(vaccination.campanha.dataCampanha) >= currentDate
+		)
+		this.nearestVaccination = futureVaccinations[0];
 	}
 
 	closeActiveDay(){
@@ -112,8 +153,62 @@ export class HomeComponent implements OnInit{
 		}
 	}
 
-	eventClicked(event: CalendarEvent<{ vaccination: Vaccination }>): void {
-		console.log(event)
+	nearestExamClicked(){
+		let infoObject: Info;
+		infoObject = {
+			title: this.nearestExam!.nomeExame,
+			dateTimeTitle: 'Data/Hora',
+			dateTimeContent: `${this.nearestExam!.dataExame} - ${this.nearestExam!.horaExame}`,
+			bodyTitle: 'Local',
+			bodyContent: this.nearestExam!.localExame
+		}
+
+		this.openDialog(infoObject);
+	}
+
+
+	nearestVaccinationClicked(){
+		let infoObject: Info;
+		infoObject = {
+			title: this.nearestVaccination!.campanha.nomeCampanha,
+			dateTimeTitle: 'Data',
+			dateTimeContent: `${this.nearestVaccination!.campanha.dataCampanha}`,
+			bodyTitle: 'Descrição',
+			bodyContent: this.nearestVaccination!.campanha.descricao
+		}
+
+		this.openDialog(infoObject);
+	}
+
+	eventClicked(event: CalendarEvent): void {
+		let infoObject: Info;
+		if(event.meta?.exam) {
+			infoObject = {
+				title: event.meta?.exam.nomeExame,
+				dateTimeTitle: 'Data/Hora',
+				dateTimeContent: `${event.meta?.exam.dataExame} - ${event.meta?.exam.horaExame}`,
+				bodyTitle: 'Local',
+				bodyContent: event.meta?.exam.localExame
+			}
+		} else {
+			infoObject = {
+				title: `${event.meta?.vaccination.campanha.nomeCampanha} - ${event.meta?.vaccination.campanha.nomeVacina}`,
+				dateTimeTitle: 'Data',
+				dateTimeContent: `${event.meta?.vaccination.campanha.dataCampanha}`,
+				bodyTitle: 'Descrição',
+				bodyContent: event.meta?.vaccination.campanha.descricao
+			}
+		}
+		this.openDialog(infoObject);
+		
+	}
+
+	openDialog(infoObject: Info){
+		this.dialog.open(EventDialogComponent, {
+            autoFocus: false,
+            data: infoObject,
+			maxWidth: '600px'
+		})
 	}
 
 	formatDate(dateString: string){
@@ -134,6 +229,17 @@ export class HomeComponent implements OnInit{
 		dateObject.setMinutes(parseInt(hourComponents[1]));
 
 		return dateObject;
+	}
+
+
+	compareDates(d1: Date, d2: Date){
+		if (d1 > d2) {
+			return 1;
+		}
+		if (d1 < d2) {
+			return -1;
+		}
+		return 0;
 	}
 
 }

@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 import { ExamsRoutingModule } from './exams-routing.module';
@@ -20,13 +21,15 @@ import {
   NgxMatNativeDateModule, 
   NgxMatTimepickerModule 
 } from '@angular-material-components/datetime-picker';
+import { EventDialogComponent } from './event-dialog/event-dialog.component';
 
 @NgModule({
   declarations: [
     ExamsHomeComponent,
     ExamsHistoryComponent,
     ExamsListComponent,
-    ExamsDetailsComponent
+    ExamsDetailsComponent,
+    EventDialogComponent
   ],
   providers: [
     DatePipe
@@ -43,7 +46,8 @@ import {
     NgxMatNativeDateModule,
     NgxMatTimepickerModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ]
 })
 export class ExamsModule { }

@@ -1,4 +1,44 @@
 <div class="container">
+	<div class="header">
+		<div 
+			class="info" 
+			*ngIf="nearestExam; else noExam;" 
+			(click)="nearestExamClicked()"
+		>
+			<p>
+				Seu próximo exame é no dia
+			</p>
+			<p class="date">
+				{{nearestExam.dataExame}}
+			</p>
+		</div>
+		<ng-template #noExam>
+			<div class="info">
+				<p>
+					Você não possui nenhum exame agendado.
+				</p>
+			</div>
+		</ng-template>
+		<div 
+			class="info" 
+			*ngIf="nearestVaccination; else noVaccination;" 
+			(click)="nearestVaccinationClicked()"
+		>
+			<p>
+				Sua próxima vacinação é no dia 
+			</p>
+			<p class="date">
+				{{nearestVaccination.campanha.dataCampanha}}
+			</p>
+		</div>
+		<ng-template #noVaccination>
+			<div class="info">
+				<p>
+					Você não possui nenhuma vacinação agendada.
+				</p>
+			</div>
+		</ng-template>
+	</div>
 	<div class="card">
 		<calendar-header
 			[(view)]="view"
@@ -9,14 +49,7 @@
 	  	>
 		</calendar-header>
 	
-		<ng-template #loading>
-			<div class="text-center">
-				<i class="fas fa-spin fa-spinner fa-5x"></i> <br />
-				Loading events...
-			</div>
-		</ng-template>
-	
-		<div *ngIf="events$ | async; else loading; let events" class="calendar">
+		<div *ngIf="events$ | async; let events" class="calendar">
 			<div [ngSwitch]="view">
 				<mwl-calendar-month-view
 					*ngSwitchCase="'month'"
