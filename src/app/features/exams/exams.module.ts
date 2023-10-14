@@ -12,7 +12,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { ExamsRoutingModule } from './exams-routing.module';
 import { ExamsHomeComponent } from './exams-home/exams-home.component';
 import { ExamsHistoryComponent } from './exams-history/exams-history.component';
-import { ExamsSchedulingComponent } from './exams-scheduling/exams-scheduling.component';
+import { ExamsListComponent } from './exams-list/exams-list.component';
 import { ExamsDetailsComponent } from './exams-details/exams-details.component';
 
 import {
@@ -25,7 +25,7 @@ import {
   declarations: [
     ExamsHomeComponent,
     ExamsHistoryComponent,
-    ExamsSchedulingComponent,
+    ExamsListComponent,
     ExamsDetailsComponent
   ],
   providers: [

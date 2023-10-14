@@ -12,10 +12,10 @@ import { TableService } from 'src/app/services/table.service';
 
 @Component({
 	selector: 'app-exams-scheduling',
-	templateUrl: './exams-scheduling.component.html',
-	styleUrls: ['./exams-scheduling.component.scss']
+	templateUrl: './exams-list.component.html',
+	styleUrls: ['./exams-list.component.scss']
 })
-export class ExamsSchedulingComponent implements OnInit, OnDestroy {
+export class ExamsListComponent implements OnInit, OnDestroy {
 	hasPermission: boolean = false;
 	dataSource!: MatTableDataSource<Exam>;
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
