@@ -13,7 +13,11 @@ const routes: Routes = [
       {path: 'agendamentos', component: ExamsListComponent},
       {path: 'agendamentos/novo-exame', component: ExamsDetailsComponent},
       {path: 'agendamentos/:idExame', component: ExamsDetailsComponent},
-
+      { 
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '/exames/historico'  
+      }
     ]
   }
 ];

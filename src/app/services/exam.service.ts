@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Campaign, Status, Vaccination } from '../models/vaccination.model';
 import { Exam } from '../models/exam.model';
 
 @Injectable({
