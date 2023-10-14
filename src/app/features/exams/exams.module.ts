@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 import { ExamsRoutingModule } from './exams-routing.module';
@@ -9,6 +13,11 @@ import { ExamsHistoryComponent } from './exams-history/exams-history.component';
 import { ExamsSchedulingComponent } from './exams-scheduling/exams-scheduling.component';
 import { ExamsDetailsComponent } from './exams-details/exams-details.component';
 
+import {
+  NgxMatDatetimePickerModule, 
+  NgxMatNativeDateModule, 
+  NgxMatTimepickerModule 
+} from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [
@@ -17,10 +26,20 @@ import { ExamsDetailsComponent } from './exams-details/exams-details.component';
     ExamsSchedulingComponent,
     ExamsDetailsComponent
   ],
+  providers: [
+    DatePipe
+  ],
   imports: [
     CommonModule,
     ExamsRoutingModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
+    NgxMatTimepickerModule
   ]
 })
 export class ExamsModule { }

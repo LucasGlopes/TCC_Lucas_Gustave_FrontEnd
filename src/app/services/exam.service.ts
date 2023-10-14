@@ -15,6 +15,18 @@ export class ExamService {
 		private http: HttpClient,
 	) { }
 
+	createExam(exam: Exam){
+		return this.http.post(`${this.baseUrl}/exames`, exam);
+	}
+
+	getExam(id: number){
+		return this.http.get<Exam>(`${this.baseUrl}/exames/${id}`);
+	}
+
+	updateExam(exam: Exam){
+		return this.http.put(`${this.baseUrl}/exames/${exam.idExame}`, exam);
+	}
+
     getExamsByUser(id: number){
         return this.http.get<Exam[]>(`${this.baseUrl}/exames/exame/${id}`);
     }
