@@ -14,7 +14,7 @@ import { CustomDateFormatter } from '../../../services/custom-date-formatter.ser
 import { ExamService } from 'src/app/services/exam.service';
 import { Exam } from 'src/app/models/exam.model';
 import { MatDialog } from '@angular/material/dialog';
-import { EventDialogComponent } from '../../exams/event-dialog/event-dialog.component';
+import { EventDialogComponent } from '../../../components/event-dialog/event-dialog.component';
 import { Info } from 'src/app/models/info.model';
   
 @Component({

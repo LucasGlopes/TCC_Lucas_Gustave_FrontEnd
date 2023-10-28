@@ -21,15 +21,13 @@ import {
   NgxMatNativeDateModule, 
   NgxMatTimepickerModule 
 } from '@angular-material-components/datetime-picker';
-import { EventDialogComponent } from './event-dialog/event-dialog.component';
 
 @NgModule({
   declarations: [
     ExamsHomeComponent,
     ExamsHistoryComponent,
     ExamsListComponent,
-    ExamsDetailsComponent,
-    EventDialogComponent
+    ExamsDetailsComponent
   ],
   providers: [
     DatePipe

@@ -10,12 +10,14 @@ import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CalendarModule } from 'angular-calendar';
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
+import { EventDialogComponent } from './event-dialog/event-dialog.component';
 
 @NgModule({
   declarations: [
     NavBarComponent,
     UserDialogComponent,
-    CalendarHeaderComponent
+    CalendarHeaderComponent,
+    EventDialogComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { CalendarHeaderComponent } from './calendar-header/calendar-header.compo
   exports: [
     NavBarComponent,
     UserDialogComponent,
-    CalendarHeaderComponent
+    CalendarHeaderComponent,
+    EventDialogComponent
   ]
 })
 export class ComponentsModule { }
