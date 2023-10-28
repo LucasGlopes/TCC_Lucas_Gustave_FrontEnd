@@ -8,8 +8,7 @@
     <div class="tabs">
         <button mat-button routerLinkActive="active" routerLink="/vacinas/campanhas">Campanhas</button>
         <button mat-button routerLinkActive="active" routerLink="/vacinas/historico">Histórico Pessoal</button>
-        <button mat-button routerLinkActive="active" routerLink="/vacinas/agendamentos">Agendamentos</button>
-
+        <button *ngIf="hasPermission" mat-button routerLinkActive="active" routerLink="/vacinas/agendamentos">Agendamentos</button>
     </div>
 </div>
 <router-outlet></router-outlet>

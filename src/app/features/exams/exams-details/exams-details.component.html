@@ -1,0 +1,120 @@
+<div class="container">
+    <div class="card">
+        <h2 class="title">
+            {{examId ? "Editar Exame" : "Agendar Exame"}}
+        </h2>
+
+        <form [formGroup]="examForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="left">
+                    <mat-form-field
+                        appearance="outline" 
+                    >
+                        <mat-label>Funcionário</mat-label>
+                        <mat-select
+                            formControlName="idPessoa"
+                            matInput
+                        >
+                            <mat-option *ngFor="let user of users" [value]="user.value">
+                                {{user.label}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="examForm.controls['idPessoa'].invalid">Este campo é obrigatório</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field
+                        appearance="outline" 
+                    >
+                        <mat-label>Data e Horário</mat-label>
+                        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Escolha uma data e hora" formControlName="dataExame">
+                        <ngx-mat-datepicker-toggle matSuffix [for]="picker"></ngx-mat-datepicker-toggle>
+                        <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+                          [stepHour]="stepHour" [stepMinute]="stepMinute"
+                        >
+                            <ngx-mat-datepicker-actions>
+                                <button mat-flat-button class="cancel-button" ngxMatDatepickerCancel>Cancelar</button>
+                                <button mat-flat-button class="default-button" ngxMatDatepickerApply>Aplicar</button>
+                            </ngx-mat-datepicker-actions>
+                        </ngx-mat-datetime-picker>
+                        <mat-error *ngIf="examForm.controls['dataExame'].invalid">Este campo é obrigatório</mat-error>
+
+                    </mat-form-field>
+                    <mat-form-field 
+                        appearance="outline"  
+                    >
+                        <mat-label>Local do Exame</mat-label>
+                        <input 
+                            type="text" 
+                            matInput 
+                            formControlName="localExame"
+                        >
+                        <mat-error *ngIf="examForm.controls['localExame'].invalid">Este campo é obrigatório</mat-error>
+                        
+                    </mat-form-field>
+                </div>
+                <div class="right">
+                    <mat-form-field 
+                        appearance="outline"  
+                    >
+                        <mat-label>Nome do Exame</mat-label>
+                        <input 
+                            type="text" 
+                            matInput 
+                            formControlName="nomeExame"
+                        >
+                        <mat-error *ngIf="examForm.controls['nomeExame'].invalid">Este campo é obrigatório</mat-error>
+                        
+                    </mat-form-field>
+
+                    <mat-form-field
+                        appearance="outline" 
+                        class="status"
+                    >
+                        <mat-label>Status</mat-label>
+                        <mat-select
+                            formControlName="statusExame"
+                        >
+                            <mat-option *ngFor="let status of statusOptions" [value]="status">
+                                {{status}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline" 
+                        class="status"
+                    >
+                        <mat-label>Tipo de Exame</mat-label>
+                        <mat-select
+                            formControlName="tipoExame"
+                        >
+                            <mat-option *ngFor="let type of examTypes" [value]="type.value">
+                                {{type.label}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="examForm.controls['tipoExame'].invalid">Este campo é obrigatório</mat-error>
+
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button 
+                    mat-flat-button 
+                    (click)="goBack()"
+                    class="cancel-button"
+                    type="button"
+                >
+                    Cancelar
+                </button>
+                <button 
+                    mat-flat-button 
+                    [disabled]="examForm.invalid"
+                    type="submit"
+                    class="default-button"
+                >
+                    Salvar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

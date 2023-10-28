@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Perfis } from 'src/app/models/user.model';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 
 @Component({
-	selector: 'app-vaccination-home',
-	templateUrl: './vaccination-home.component.html',
-	styleUrls: ['./vaccination-home.component.scss']
+	selector: 'app-exams-home',
+	templateUrl: './exams-home.component.html',
+	styleUrls: ['./exams-home.component.scss']
 })
-export class VaccinationHomeComponent implements OnInit{
+export class ExamsHomeComponent {
 	hasPermission:boolean = false;
 
 	constructor(
@@ -26,4 +26,3 @@ export class VaccinationHomeComponent implements OnInit{
 		);
 	}
 }
-

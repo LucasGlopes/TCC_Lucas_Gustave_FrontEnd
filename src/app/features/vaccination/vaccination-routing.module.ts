@@ -18,7 +18,6 @@ const routes: Routes = [
         { path: 'historico', component: VaccinationHistoryComponent },
         { path: 'agendamentos', component: VaccinationListComponent },
         { path: 'agendamentos/nova', component: VaccinationSchedulingComponent },
-        { path: 'agendamentos/:idCampanha', component: VaccinationSchedulingComponent },
         { path: '',
           pathMatch: 'full',
           redirectTo: '/vacinas/campanhas'  

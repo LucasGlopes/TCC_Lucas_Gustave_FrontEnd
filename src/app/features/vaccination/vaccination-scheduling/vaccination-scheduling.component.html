@@ -16,7 +16,7 @@
                     matInput
                 >
                     <mat-option *ngFor="let campaign of campaigns" [value]="campaign.idCampanha">
-                    {{campaign.nomeCampanha}}
+                        {{campaign.nomeCampanha}}, {{campaign.nomeVacina}} - {{campaign.dataCampanha}}
                     </mat-option>
                 </mat-select>
                 <mat-error *ngIf="schedulingForm.controls['idCampanha'].invalid">Este campo é obrigatório</mat-error>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +9,11 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatButtonModule } from '@angular/material/button';
 import { InterceptorModule } from './middleware/interceptor.module';;
 import { ComponentsModule } from './components/components.module';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -22,9 +27,10 @@ import { ComponentsModule } from './components/components.module';
     MatSnackBarModule,
     MatButtonModule,
     InterceptorModule,
-    ComponentsModule
+    ComponentsModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'pt'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

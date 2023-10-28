@@ -18,6 +18,11 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'exames',
+    loadChildren: () => import('./features/exams/exams.module').then(m => m.ExamsModule),
+    canLoad: [AuthGuard]
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: '/auth/login'  

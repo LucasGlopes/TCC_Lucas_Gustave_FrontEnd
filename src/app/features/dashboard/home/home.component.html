@@ -1,2 +1,83 @@
-
-ENTREI NA HOME
+<div class="container">
+	<div class="header">
+		<div 
+			class="info" 
+			*ngIf="nearestExam; else noExam;" 
+			(click)="nearestExamClicked()"
+		>
+			<p>
+				Seu próximo exame é no dia
+			</p>
+			<p class="date">
+				{{nearestExam.dataExame}}
+			</p>
+		</div>
+		<ng-template #noExam>
+			<div class="info">
+				<p>
+					Você não possui nenhum exame agendado.
+				</p>
+			</div>
+		</ng-template>
+		<div 
+			class="info" 
+			*ngIf="nearestVaccination; else noVaccination;" 
+			(click)="nearestVaccinationClicked()"
+		>
+			<p>
+				Sua próxima vacinação é no dia 
+			</p>
+			<p class="date">
+				{{nearestVaccination.campanha.dataCampanha}}
+			</p>
+		</div>
+		<ng-template #noVaccination>
+			<div class="info">
+				<p>
+					Você não possui nenhuma vacinação agendada.
+				</p>
+			</div>
+		</ng-template>
+	</div>
+	<div class="card">
+		<calendar-header
+			[(view)]="view"
+			[(viewDate)]="viewDate"
+			class="header"
+			[locale]="locale"
+			(viewDateChange)="closeActiveDay()"
+	  	>
+		</calendar-header>
+	
+		<div *ngIf="events$ | async; let events" class="calendar">
+			<div [ngSwitch]="view">
+				<mwl-calendar-month-view
+					*ngSwitchCase="'month'"
+					[viewDate]="viewDate"
+					[events]="events"
+					[locale]="locale"
+					[activeDayIsOpen]="activeDayIsOpen"
+					(dayClicked)="dayClicked($event.day)"
+					(eventClicked)="eventClicked($event.event)"
+				>
+				</mwl-calendar-month-view>
+				<mwl-calendar-week-view
+					*ngSwitchCase="'week'"
+					[viewDate]="viewDate"
+					[events]="events"
+					[locale]="locale"
+					(eventClicked)="eventClicked($event.event)"
+				>
+				</mwl-calendar-week-view>
+				<mwl-calendar-day-view
+					*ngSwitchCase="'day'"
+					[viewDate]="viewDate"
+					[events]="events"
+					[locale]="locale"
+					(eventClicked)="eventClicked($event.event)"
+				>
+				</mwl-calendar-day-view>
+			</div>
+	  	</div>
+	</div>
+</div>

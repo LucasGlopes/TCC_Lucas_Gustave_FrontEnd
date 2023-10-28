@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="card">
+        <div class="row">
+            <h2 class="title">
+                Histórico Pessoal
+            </h2>
+        </div>
+        <div class="search-card">
+            <mat-form-field 
+                class="search"
+                appearance="outline"  
+            >
+                <mat-label>Pesquisar exame</mat-label>
+                <input matInput (keyup)="applyFilter($event)">
+            </mat-form-field>
+        </div>
+        <div class="table">
+            <table mat-table [dataSource]="dataSource" aria-label="histórico de exames">
+
+                <ng-container matColumnDef="exame">
+                    <th mat-header-cell *matHeaderCellDef> Exame </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nomeExame}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="local">
+                    <th mat-header-cell *matHeaderCellDef> Local </th>
+                    <td mat-cell *matCellDef="let element"> {{element.localExame}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="data-hora">
+                    <th mat-header-cell *matHeaderCellDef> Data/Hora </th>
+                    <td mat-cell *matCellDef="let element"> {{element.dataExame}} - {{element.horaExame}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let element"> {{element.statusExame}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+            <mat-paginator 
+                [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons
+            ></mat-paginator>
+
+        </div>
+    </div>
+</div>
