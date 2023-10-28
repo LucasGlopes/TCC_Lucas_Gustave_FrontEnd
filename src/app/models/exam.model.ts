@@ -8,6 +8,11 @@ export enum ExamStatus {
     cancelado = 'CANCELADO'
 }
 
+export enum ExamType {
+    clinico = 'CLINICO',
+    complementar = 'COMPLEMENTAR'
+}
+
 export interface Exam {
     idExame: number;
     dataExame: string;
@@ -16,4 +21,5 @@ export interface Exam {
     nomeExame: string;
     pessoa: CurrentUser;
     statusExame: ExamStatus;
+    tipoExame: ExamType;
 }

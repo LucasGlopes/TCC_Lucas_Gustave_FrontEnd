@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, Observable, Subscription, catchError, map, take } from 'rxjs';
-import { Exam, ExamStatus } from 'src/app/models/exam.model';
+import { Exam, ExamStatus, ExamType } from 'src/app/models/exam.model';
 import { SelectorOption } from 'src/app/models/selector.model';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { ExamService } from 'src/app/services/exam.service';
@@ -22,12 +22,22 @@ export class ExamsDetailsComponent implements OnInit, OnDestroy {
 	filteredOptions!: Observable<string[]>;
 	statusOptions: ExamStatus[] = Object.values(ExamStatus);
 
-	public disabled = false;
-	public showSpinners = true;
-	public showSeconds = false;
-	public stepHour = 1;
-	public stepMinute = 5;
+	examTypes: SelectorOption[] = [
+		{
+			label: 'Clínico',
+			value: ExamType.clinico
+		},
+		{
+			label: 'Complementar',
+			value: ExamType.complementar
+		}
+	]
 
+	disabled = false;
+	showSpinners = true;
+	showSeconds = false;
+	stepHour = 1;
+	stepMinute = 5;
 
 	constructor(
 		private fb: FormBuilder,
@@ -80,6 +90,7 @@ export class ExamsDetailsComponent implements OnInit, OnDestroy {
             horaExame: ['', [Validators.required]],
             localExame: ['', [Validators.required]],
             idPessoa: ['', [Validators.required]],  
+			tipoExame: ['', [Validators.required]],
             statusExame:[{value: ExamStatus.pendente, disabled: true}, [Validators.required]]
     	}
 
