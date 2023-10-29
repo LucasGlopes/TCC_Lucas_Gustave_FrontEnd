@@ -23,6 +23,11 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'aso',
+    loadChildren: () => import('./features/aso/aso.module').then(m => m.AsoModule),
+    canLoad: [AuthGuard]
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: '/auth/login'  
