@@ -41,21 +41,13 @@ export class CampaignListComponent implements OnInit, OnDestroy{
 	){}
 
 	ngOnInit(): void {
-		this.checkPermission();
+		this.hasPermission = this.user.hasPermission;
 		this.displayColumns();
 		this.loadCampaigns();
 	}
 
 	ngOnDestroy(): void {
 		this.subscriptions.forEach(subscription => subscription.unsubscribe());
-	}
-
-	checkPermission(){
-		const profiles = this.user.getUserValues().perfis;
-
-		this.hasPermission = profiles.some(profile => 
-			profile === Perfis.admin || profile === Perfis.tecnico
-		);
 	}
 
 	displayColumns(){

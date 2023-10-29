@@ -15,15 +15,8 @@ export class VaccinationHomeComponent implements OnInit{
 	){}
 
 	ngOnInit(): void {
-		this.checkPermission();
+		this.hasPermission = this.user.hasPermission;
 	}
 
-	checkPermission(){
-		const profiles = this.user.getUserValues().perfis;
-
-		this.hasPermission = profiles.some(profile => 
-			profile === Perfis.admin || profile === Perfis.tecnico
-		);
-	}
 }
 
