@@ -1,0 +1,19 @@
+.container {
+    margin-top: 3vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding-bottom: 3vh;
+}
+
+.header{
+    width: 90%;
+
+    display: flex;
+    justify-content: flex-end;
+
+    margin-bottom: 3vh;
+}

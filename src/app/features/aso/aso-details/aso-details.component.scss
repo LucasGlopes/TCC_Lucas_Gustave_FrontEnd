@@ -1,0 +1,106 @@
+.container {
+    margin-top: 6vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 90%;
+    background-color: var(--white-color);
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+
+    padding: 20px;
+    margin-bottom: 6vh;
+
+}
+
+.card .title{
+    display: inline-flex; 
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    font-size: 23px;
+    color: var(--primary-color);
+}
+
+.subtitle{
+    display: inline-flex; 
+    font-weight: 450;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: var(--primary-color); 
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+
+    gap: 20px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.w100{
+    width: 100%;
+}
+
+.w50 {
+    width: 50%;
+}
+
+.separator {
+    width: 100%;
+    margin-bottom: 22px;
+}
+
+.delete-button{
+    background-color: white;
+    color: red;
+    border: 1px red solid;
+
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.trash-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    margin: 0;
+}
+
+.add-button{
+    width: 350px;
+    margin-bottom: 22px;
+}
+
+.buttons{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.buttons button{
+    width: 150px;
+}
+
+.buttons button:first-of-type{
+    margin-right: 10px;
+}
+
+.buttons button:last-of-type{
+    margin-left: 10px;
+}
