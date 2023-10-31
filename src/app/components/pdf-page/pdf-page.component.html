@@ -1,0 +1,184 @@
+<div class="container">
+	<div class="header">
+		<span class="title">
+			ASO - Atestado de Saúde Ocupacional
+		</span>
+		<span class="subtitle">
+			{{aso.nomeEmpresa}}
+		</span>
+	</div>
+	<div class="infoHeader"> Empresa </div>
+	<div class="row" >
+		<div class="row" style="width: 60%;">
+			<div class="infoTitle" style="width: 25%; padding-left: 10px;">
+				Razão Social:
+			</div>
+			<div class="infoData" style="width: 75%; padding-left: 10px; border-right: 0px;">
+				{{aso.nomeEmpresa}}
+			</div>
+		</div>
+		<div class="row" style="width: 40%;">
+			<div class="infoTitle" style="width: 18%; padding-left: 10px;">
+				CNPJ:
+			</div>
+			<div class="infoData" style="width: 82%; padding-left: 10px;">
+				{{aso.cnpj}}
+			</div>
+		</div>
+	</div>
+
+	<div class="infoHeader"> Funcionário </div>
+	<div class="row">
+		<div class="row" style="width: 100%;">
+			<div class="infoTitle" style="width: 10%; padding-left: 10px;">
+				Nome:
+			</div>
+			<div class="infoData" style="width: 90%; padding-left: 10px;">
+				{{aso.pessoa.primeiroNome}} {{aso.pessoa.ultimoNome}} 
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="row" style="width: 50%;">
+			<div class="infoTitle" style="width: 15%; padding-left: 10px; border-top: 0px;">
+				CPF:
+			</div>
+			<div class="infoData" style="width: 85%; padding-left: 10px; border-top: 0px; border-right: 0px;">
+				{{aso.pessoa.cpf}}
+			</div>
+		</div>
+		<div class="row" style="width: 50%;">
+			<div class="infoTitle" style="width: 40%; padding-left: 10px; border-top: 0px;">
+				Data de Nascimento:
+			</div>
+			<div class="infoData" style="width: 60%; padding-left: 10px; border-top: 0px;">
+				{{aso.pessoa.dataAniversario}}
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="row" style="width: 50%;">
+			<div class="infoTitle" style="width: 15%; padding-left: 10px; border-top: 0px;">
+				Cargo:
+			</div>
+			<div class="infoData" style="width: 85%; padding-left: 10px; border-top: 0px; border-right: 0px;">
+				{{aso.pessoa.cargo}}
+			</div>
+		</div>
+		<div class="row" style="width: 50%;">
+			<div class="infoTitle" style="width: 15%; padding-left: 10px; border-top: 0px;">
+				Setor:
+			</div>
+			<div class="infoData" style="width: 85%; padding-left: 10px; border-top: 0px;">
+				{{aso.pessoa.setor}}
+			</div>
+		</div>
+	</div>
+
+	<div class="infoHeader"> Tipo de Exame Ocupacional </div>
+	<div class="row">
+		<div class="infoData" style="width: 100%; padding-left: 10px;">
+			Exame Admissional
+		</div>
+	</div>
+
+	<div class="infoHeader"> Médico Responsável pelo PCMSO </div>
+	<div class="row" >
+		<div class="row" style="width: 60%;">
+			<div class="infoTitle" style="width: 15%; padding-left: 10px;">
+				Nome:
+			</div>
+			<div class="infoData" style="width: 85%; padding-left: 10px; border-right: 0px;">
+				{{aso.nomeMedicoPCMSO}}
+			</div>
+		</div>
+		<div class="row" style="width: 40%;">
+			<div class="infoTitle" style="width: 15%; padding-left: 10px;">
+				CRM:
+			</div>
+			<div class="infoData" style="width: 85%; padding-left: 10px;">
+				{{aso.crmMedicoPCMSO}}
+			</div>
+		</div>
+	</div>
+
+	<div class="infoHeader"> Perigos/Fatores de Risco </div>
+	<div class="row">
+		<div class="infoData column" style="width: 100%; padding-left: 10px;">
+			<span *ngFor="let risk of aso.risco">{{risk}}</span>
+		</div>
+	</div>
+
+	<div class="infoHeader"> Exame Clínico-Ocupacional </div>
+	<div class="row">
+		<div class="row" style="width: 100%;">
+			<div class="infoTitle" style="width: 25%; padding-left: 10px;">
+				Data de Realização:
+			</div>
+			<div class="infoData" style="width: 75%; padding-left: 10px;">
+				{{clinicalExam.dataExame}}
+			</div>
+		</div>
+	</div>
+
+	<ng-container *ngIf="complementaryExams.length > 0">
+		<div class="infoHeader bb"> Exames Complementares </div>
+		<div class="row" *ngFor="let exam of complementaryExams">
+			<div class="row" style="width: 60%;">
+				<div class="infoTitle" style="width: 25%; padding-left: 10px; border-top: 0px;">
+					Tipo de Exame:
+				</div>
+				<div class="infoData" style="width: 75%; padding-left: 10px; border-right: 0px; border-top: 0px;">
+					{{exam.nomeExame}}
+				</div>
+			</div>
+			<div class="row" style="width: 40%;">
+				<div class="infoTitle" style="width: 50%; padding-left: 10px; border-top: 0px;">
+					Data de Realização:
+				</div>
+				<div class="infoData" style="width: 50%; padding-left: 10px; border-top: 0px;">
+					{{exam.dataExame}}
+				</div>
+			</div>
+		</div>
+	</ng-container>
+	
+	<div class="infoHeader"> Parecer </div>
+	<div class="row">
+		<div class="infoData" style="width: 100%; padding-left: 10px;">
+			{{aso.resultadoASO}} para função
+		</div>
+	</div>
+	<div class="row" style="margin-top: 10px;">
+		<div class="row" style="width: 50%;">
+			<div class="infoTitle" style="width: 15%; padding-left: 10px;">
+				Data:
+			</div>
+			<div class="infoData" style="width: 85%; padding-left: 10px; border-right: 0px;">
+				{{clinicalExam.dataExame}}
+			</div>
+		</div>
+		<div class="row" style="width: 50%;">
+			<div class="infoTitle" style="width: 20%; padding-left: 10px;">
+				Validade:
+			</div>
+			<div class="infoData" style="width: 80%; padding-left: 10px;">
+				{{aso.validade}}
+			</div>
+		</div>
+	</div>
+
+	<div class="row signatures">
+		<div style="width: 50%;">
+			<hr/>
+			<span>{{aso.nomeMedicoClinico}}</span>
+			<span>CRM {{aso.crmMedicoClinico}}</span>
+		</div>
+
+		<div style="width: 50%;">
+			<hr/>
+			<span>{{aso.pessoa.primeiroNome}} {{aso.pessoa.ultimoNome}}</span>
+		</div>
+	</div>
+
+</div>

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NavBarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -11,13 +11,18 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CalendarModule } from 'angular-calendar';
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
 import { EventDialogComponent } from './event-dialog/event-dialog.component';
+import { PdfPageComponent } from './pdf-page/pdf-page.component';
 
 @NgModule({
   declarations: [
     NavBarComponent,
     UserDialogComponent,
     CalendarHeaderComponent,
-    EventDialogComponent
+    EventDialogComponent,
+    PdfPageComponent,
+  ],
+  providers: [
+    DatePipe 
   ],
   imports: [
     CommonModule,
@@ -33,7 +38,7 @@ import { EventDialogComponent } from './event-dialog/event-dialog.component';
     NavBarComponent,
     UserDialogComponent,
     CalendarHeaderComponent,
-    EventDialogComponent
+    EventDialogComponent,
   ]
 })
 export class ComponentsModule { }
