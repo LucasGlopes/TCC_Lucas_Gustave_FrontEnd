@@ -156,7 +156,7 @@ export class AsoDetailsComponent implements OnInit, OnDestroy{
 			});
 			this.formatDate(aso.validade);
 
-			aso.risco.forEach((risk, index) => {
+			aso.risco.forEach((risk) => {
 				this.risksArray.push(new FormControl(risk))
 			});
 

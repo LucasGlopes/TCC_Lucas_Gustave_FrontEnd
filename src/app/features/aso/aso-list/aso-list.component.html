@@ -9,4 +9,103 @@
             Registrar ASO
         </button>
     </div>
+
+    <div class="card">
+        <div class="row">
+            <h2 class="title">
+                Visão Geral
+            </h2>
+        </div>
+        <div class="search-card">
+            <mat-form-field 
+                class="search"
+                appearance="outline"  
+            >
+                <mat-label>Pesquisar ASO</mat-label>
+                <input matInput (keyup)="applyFilter($event)">
+            </mat-form-field>
+        </div>
+
+        <div class="table">
+            <table mat-table [dataSource]="dataSource" aria-label="listagem de asos">
+
+                <ng-container matColumnDef="nome">
+                    <th mat-header-cell *matHeaderCellDef> Nome </th>
+                    <td mat-cell *matCellDef="let element"> {{element.pessoa.primeiroNome + ' ' + element.pessoa.ultimoNome}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="cargo">
+                    <th mat-header-cell *matHeaderCellDef> Cargo </th>
+                    <td mat-cell *matCellDef="let element"> {{element.pessoa.cargo}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="tipoAso">
+                    <th mat-header-cell *matHeaderCellDef> Tipo de ASO </th>
+                    <td mat-cell *matCellDef="let element"> {{element.tipoASO}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="data">
+                    <th mat-header-cell *matHeaderCellDef> Data de Realização </th>
+                    <td mat-cell *matCellDef="let element"> {{ findClinicalExam(element.exames).dataExame }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="resultado">
+                    <th mat-header-cell *matHeaderCellDef> Resultado </th>
+                    <td mat-cell *matCellDef="let element"> {{element.resultadoASO}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>  </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <button mat-button [matMenuTriggerFor]="menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button 
+                                mat-menu-item
+                                (click)="editAso(element.idASO)"
+                            >
+                                <mat-icon>edit</mat-icon>
+                                Editar ASO
+                            </button>
+                            <button 
+                                mat-menu-item
+                                (click)="deleteAso(element.idASO)"
+                            >
+                                <mat-icon>delete</mat-icon>
+                                Deletar ASO
+                            </button>
+                            <button 
+                                mat-menu-item
+                                (click)="openPdf(element.idASO)"
+                            >
+                                <mat-icon>visibility</mat-icon>
+                                Ver PDF
+                            </button>
+                            <button 
+                                mat-menu-item
+                                (click)="downloadPdf(element.idASO)"
+                            >
+                                <mat-icon>download</mat-icon>
+                                Baixar PDF
+                            </button>
+                        </mat-menu>
+
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+            <mat-paginator 
+                [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons
+            ></mat-paginator>
+
+        </div>
+    </div>
+    
+    <div #asoPdf></div>
 </div>

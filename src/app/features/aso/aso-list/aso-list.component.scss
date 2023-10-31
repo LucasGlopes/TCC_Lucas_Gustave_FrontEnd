@@ -17,3 +17,65 @@
 
     margin-bottom: 3vh;
 }
+
+.card {
+    width: 90%;
+    background-color: var(--white-color);
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.row{
+    width: 100%;
+}
+
+
+.card .title{
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    font-size: 23px;
+    color: var(--primary-color);
+}
+
+
+.search-card {
+    width: 100%;
+}
+
+.search-card .search {
+    width: 100%;
+}
+
+::ng-deep .mat-mdc-table{
+    border-radius: 4px;
+    overflow:hidden !important;
+}
+
+::ng-deep .mat-mdc-table thead{
+    background-color: var(--primary-color) !important;
+
+}
+
+::ng-deep .mdc-data-table__header-cell{
+    color: var(--white-color) !important;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.mat-mdc-paginator{
+    border-top: 1px solid rgb(223, 223, 223);
+}
+
+.table{
+    width: 100%;
+    border: 1px solid rgb(223, 223, 223);
+    border-radius: 4px;
+}

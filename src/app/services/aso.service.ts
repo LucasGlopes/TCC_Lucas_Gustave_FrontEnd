@@ -27,11 +27,11 @@ export class AsoService {
 		return this.http.put(`${this.baseUrl}/aso/${aso.idASO}`, aso);
 	}
 
-	deleteExam(id: number){
+	deleteAso(id: number){
 		return this.http.delete(`${this.baseUrl}/aso/${id}`);
 	}
 
-    getExamsByUser(idPessoa: number){
+    getAsosByUser(idPessoa: number){
         return this.http.get<Exam[]>(`${this.baseUrl}/aso/pessoa/${idPessoa}`);
     }
 

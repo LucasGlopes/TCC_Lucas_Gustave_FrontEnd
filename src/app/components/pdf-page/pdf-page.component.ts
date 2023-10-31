@@ -1,7 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, EventEmitter, OnInit } from '@angular/core';
-import { Aso } from 'src/app/models/aso.model';
+import { Aso, AsoType } from 'src/app/models/aso.model';
 import { Exam, ExamType } from 'src/app/models/exam.model';
+import { SelectorOption } from 'src/app/models/selector.model';
 
 @Component({
 	selector: 'app-pdf-page',
@@ -14,6 +15,29 @@ export class PdfPageComponent implements OnInit, AfterViewInit {
 	complementaryExams: Exam[] = [];
 
 	emitter: EventEmitter<void> = new EventEmitter();
+
+	asoTypes: SelectorOption[] = [
+		{
+			label: 'Admissional',
+			value: AsoType.admissional
+		},
+		{
+			label: 'Demissional',
+			value: AsoType.demissional
+		},
+		{
+			label: 'Periódico',
+			value: AsoType.periodico
+		},
+		{
+			label: 'de Mudança de risco',
+			value: AsoType.mudanca
+		},
+		{
+			label: 'de Retorno ao trabalho',
+			value: AsoType.retorno
+		}
+	]
 
 	constructor(
 		private datePipe: DatePipe
@@ -37,6 +61,10 @@ export class PdfPageComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit(): void {
 		this.emitter.emit();
+	}
+
+	getType(type: AsoType){
+		return this.asoTypes.find(asoType => asoType.value === type)?.label;
 	}
 
 }

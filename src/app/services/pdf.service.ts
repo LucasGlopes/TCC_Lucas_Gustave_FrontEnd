@@ -49,6 +49,16 @@ export class PdfService {
 		.set(config)
 		.from(content)
 		.toPdf()
-		.save(`ASO_${aso.tipoASO}_${aso.pessoa.primeiroNome}`)
+		.save(`ASO_${aso.tipoASO}_${this.getFullName(aso)}`)
+	}
+
+	private getFullName(aso: Aso){
+		let fullName = aso.pessoa.primeiroNome;
+		aso.pessoa.ultimoNome.split(' ').forEach(name => {
+			fullName = fullName.concat(`_${name}`)
+		})
+
+		console.log(fullName)
+		return fullName;
 	}
 }
