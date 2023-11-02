@@ -114,12 +114,14 @@ export class AsoDetailsComponent implements OnInit, OnDestroy{
 			risco: this.fb.array([]),
 			tipoASO: ['', Validators.required],
 			validade: ['', Validators.required],
+			dataASO: ['', Validators.required],
 			idASO: ['']
 		}
 
 		this.asoForm = this.fb.group(form);
 
 		this.onEmployeeChange();
+		this.onClinicalExamChange();
 	}
 
 	checkRoute(){
@@ -152,7 +154,8 @@ export class AsoDetailsComponent implements OnInit, OnDestroy{
 				nomeMedicoPCMSO: aso.nomeMedicoPCMSO,
 				resultadoASO: aso.resultadoASO,
 				tipoASO: aso.tipoASO,
-				idASO: aso.idASO
+				idASO: aso.idASO,
+				dataASO: aso.dataASO
 			});
 			this.formatDate(aso.validade);
 
@@ -224,7 +227,8 @@ export class AsoDetailsComponent implements OnInit, OnDestroy{
 					return {
 						label: `${exam.nomeExame}, ${exam.dataExame}`,
 						value: exam.idExame,
-						type: exam.tipoExame
+						type: exam.tipoExame,
+						additionalInfo: exam.dataExame
 					}
 				});
 			}),
@@ -256,6 +260,21 @@ export class AsoDetailsComponent implements OnInit, OnDestroy{
 		this.subscriptions.push(subscription);
 	}
 
+	onClinicalExamChange(){
+		const subscription = this.asoForm.controls['exameClinico'].valueChanges
+		.subscribe((examId) => {
+			const clinicalExam = this.clinicalExams.find(
+				clinical => clinical.value === examId);
+			console.log(clinicalExam)
+			if(clinicalExam){
+				const asoDate = clinicalExam.additionalInfo;
+				this.asoForm.controls['dataASO'].setValue(asoDate);
+				console.log(this.asoForm.controls['dataASO'].value)
+			}
+		});
+
+		this.subscriptions.push(subscription);
+	}
 
 	onSubmit(){
 		if(this.asoForm.invalid) return;
@@ -326,8 +345,11 @@ export class AsoDetailsComponent implements OnInit, OnDestroy{
 	}
 
 	formatDate(date: string){
+		const dateComponents = date.split("/");
 		const dateObject = new Date(
-			date.replace(/-/g, '\/')
+			parseInt(dateComponents[2], 10),
+			parseInt(dateComponents[1], 10) - 1,
+			parseInt(dateComponents[0], 10)
 		);
 		this.asoForm.controls['validade'].setValue(dateObject);
 	}

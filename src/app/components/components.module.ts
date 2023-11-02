@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NavBarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -20,9 +20,6 @@ import { PdfPageComponent } from './pdf-page/pdf-page.component';
     CalendarHeaderComponent,
     EventDialogComponent,
     PdfPageComponent,
-  ],
-  providers: [
-    DatePipe 
   ],
   imports: [
     CommonModule,

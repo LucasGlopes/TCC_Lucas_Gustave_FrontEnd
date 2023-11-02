@@ -127,10 +127,6 @@ export class AsoListComponent implements OnInit, OnDestroy{
 		this.dataSource.data = data;
 	}
 
-	findClinicalExam(exams: Exam[]){
-		return exams.find(exam => exam.tipoExame === ExamType.clinico)!;
-	}
-
 	openPdf(idASO: number){
 		const aso = this.asos.find(aso => aso.idASO === idASO);
 		if (aso) {

@@ -18,6 +18,7 @@ export interface AsoRequest {
     cnpj: string;
     crmMedicoPCMSO: string;
     crmMedicoClinico: string;
+    dataASO: string;
     exames: number[];
     idASO: number;
     idPessoa: number;
@@ -37,6 +38,7 @@ export interface Aso {
     cnpj: string;
     crmMedicoPCMSO: string;
     crmMedicoClinico: string;
+    dataASO: string;
     exames: Exam[];
     idASO: number;
     pessoa: CurrentUser;

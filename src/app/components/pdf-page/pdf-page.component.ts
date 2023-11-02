@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, EventEmitter, OnInit } from '@angular/core';
 import { Aso, AsoType } from 'src/app/models/aso.model';
 import { Exam, ExamType } from 'src/app/models/exam.model';
@@ -39,10 +38,6 @@ export class PdfPageComponent implements OnInit, AfterViewInit {
 		}
 	]
 
-	constructor(
-		private datePipe: DatePipe
-	) { }
-
 	ngOnInit(): void {
 		this.aso.exames.forEach(exam => {
 			if(exam.tipoExame === ExamType.clinico){
@@ -51,8 +46,6 @@ export class PdfPageComponent implements OnInit, AfterViewInit {
 				this.complementaryExams.push(exam);
 			}
 		});
-
-		this.aso.validade = this.datePipe.transform(this.aso.validade, 'dd/MM/yyyy')!;
 
 		if(this.aso.risco.length === 0){
 			this.aso.risco.push('Não existe exposição a agentes nocivos');
