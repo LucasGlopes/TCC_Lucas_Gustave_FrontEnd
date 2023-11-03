@@ -32,7 +32,7 @@ export class AsoService {
 	}
 
     getAsosByUser(idPessoa: number){
-        return this.http.get<Exam[]>(`${this.baseUrl}/aso/pessoa/${idPessoa}`);
+        return this.http.get<Aso[]>(`${this.baseUrl}/aso/pessoa/${idPessoa}`);
     }
 
 	getAsos(){

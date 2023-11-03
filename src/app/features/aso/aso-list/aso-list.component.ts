@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EMPTY, Subscription, catchError } from 'rxjs';
 import { Aso } from 'src/app/models/aso.model';
-import { Exam, ExamType } from 'src/app/models/exam.model';
+import { ExamType } from 'src/app/models/exam.model';
 import { AsoService } from 'src/app/services/aso.service';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -24,7 +24,6 @@ export class AsoListComponent implements OnInit, OnDestroy{
 	displayedColumns: string[] = ['nome', 'cargo', 'tipoAso',  'data', 'resultado', 'actions'];
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 	@ViewChild('asoPdf', { static: true, read: ViewContainerRef }) asoPdf!: ViewContainerRef;
-
 
 	constructor(
 		private router: Router,

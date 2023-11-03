@@ -16,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatTableModule,
     MatPaginatorModule,
     MatMenuModule,
+    MatExpansionModule
   ]
 })
 export class AsoModule { }

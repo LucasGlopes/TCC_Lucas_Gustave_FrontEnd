@@ -1,3 +1,4 @@
+import { MatTableDataSource } from "@angular/material/table";
 import { Exam } from "./exam.model";
 import { CurrentUser } from "./user.model";
 
@@ -49,4 +50,11 @@ export interface Aso {
     risco: string[];
     tipoASO: AsoType;
     validade: string;
+}
+
+export interface AsosByType {
+    type: AsoType;
+    title: string;
+    asos: Aso[];
+    dataSource: MatTableDataSource<Aso> | undefined;
 }
