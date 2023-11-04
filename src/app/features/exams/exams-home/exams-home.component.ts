@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Perfis } from 'src/app/models/user.model';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 
 @Component({
@@ -8,21 +7,14 @@ import { CurrentUserService } from 'src/app/services/currentUser.service';
 	styleUrls: ['./exams-home.component.scss']
 })
 export class ExamsHomeComponent {
-	hasPermission:boolean = false;
+	hasPermission: boolean = false;
 
 	constructor(
 		private user: CurrentUserService
 	){}
 
 	ngOnInit(): void {
-		this.checkPermission();
+		this.hasPermission = this.user.hasPermission;
 	}
 
-	checkPermission(){
-		const profiles = this.user.getUserValues().perfis;
-
-		this.hasPermission = profiles.some(profile => 
-			profile === Perfis.admin || profile === Perfis.tecnico
-		);
-	}
 }

@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 
 @Component({
-	selector: 'app-vaccination-home',
-	templateUrl: './vaccination-home.component.html',
-	styleUrls: ['./vaccination-home.component.scss']
+	selector: 'app-aso-home',
+	templateUrl: './aso-home.component.html',
+	styleUrls: ['./aso-home.component.scss']
 })
-export class VaccinationHomeComponent implements OnInit{
-	hasPermission:boolean = false;
+export class AsoHomeComponent implements OnInit {
+	hasPermission: boolean = false;
 
 	constructor(
 		private user: CurrentUserService
@@ -16,6 +16,4 @@ export class VaccinationHomeComponent implements OnInit{
 	ngOnInit(): void {
 		this.hasPermission = this.user.hasPermission;
 	}
-
 }
-

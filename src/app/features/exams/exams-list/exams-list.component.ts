@@ -4,7 +4,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EMPTY, Subscription, catchError } from 'rxjs';
 import { Exam } from 'src/app/models/exam.model';
-import { Perfis } from 'src/app/models/user.model';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { ExamService } from 'src/app/services/exam.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -31,20 +30,12 @@ export class ExamsListComponent implements OnInit, OnDestroy {
 	){}
 
 	ngOnInit(): void {
-		this.checkPermission();
+		this.hasPermission = this.user.hasPermission;
 		this.loadExams();
 	}
 
 	ngOnDestroy(): void {
 		this.subscriptions.forEach(subscription => subscription.unsubscribe());
-	}
-
-	checkPermission(){
-		const profiles = this.user.getUserValues().perfis;
-
-		this.hasPermission = profiles.some(profile => 
-			profile === Perfis.admin || profile === Perfis.tecnico
-		);
 	}
 
 	loadExams(){

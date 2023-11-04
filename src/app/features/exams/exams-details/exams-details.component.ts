@@ -63,12 +63,16 @@ export class ExamsDetailsComponent implements OnInit, OnDestroy {
 		const subscription = this.employee.getUsers()
 		.pipe(
 			map(users => {
-				return users.map(user => {
+				const userOptions = users.map(user => {
 					return {
 						label: `${user.primeiroNome} ${user.ultimoNome}`,
 						value: user.id
 					}
-				})
+				});
+
+				return userOptions.sort((a,b) =>
+					a.label < b.label ? -1 : 1
+				)
 			}),
 			catchError(() => {
 				this.notification.openErrorSnackBar('Ocorreu um erro. Tente novamente mais tarde.');
@@ -135,10 +139,12 @@ export class ExamsDetailsComponent implements OnInit, OnDestroy {
 				nomeExame: exam.nomeExame,
 				localExame: exam.localExame,
 				statusExame: exam.statusExame,
-				idPessoa: exam.pessoa.id
+				idPessoa: exam.pessoa.id,
+				tipoExame: exam.tipoExame
 			});
 
 			this.examForm.controls['statusExame'].enable();
+			this.examForm.controls['idPessoa'].disable();
 
 			this.formatDate(exam.dataExame, exam.horaExame);
 		});

@@ -1,0 +1,311 @@
+<div class="container">
+    <div class="card">
+        <h2 class="title">
+            {{asoId ? "Editar ASO" : "Registrar ASO"}}
+        </h2>
+
+        <form [formGroup]="asoForm" (ngSubmit)="onSubmit()">
+
+            <div class="column">
+                <h3 class="subtitle">
+                    Informações básicas
+                </h3>
+                <div class="row w100">
+                    <mat-form-field
+                        appearance="outline" 
+                        style="width:50% !important;"
+                    >
+                        <mat-label>Funcionário</mat-label>
+                        <mat-select
+                            formControlName="idPessoa"
+                            matInput
+                        >
+                            <mat-option *ngFor="let user of users" [value]="user.value">
+                                {{user.label}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="asoForm.controls['idPessoa'].invalid">Este campo é obrigatório</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field
+                        appearance="outline" 
+                        style="width:18% !important;"
+                    >
+                        <mat-label>Tipo do ASO</mat-label>
+                        <mat-select
+                            formControlName="tipoASO"
+                            matInput
+                        >
+                            <mat-option *ngFor="let type of asoTypes" [value]="type.value">
+                                {{type.label}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="asoForm.controls['tipoASO'].invalid">Este campo é obrigatório</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row w100">
+                    <mat-form-field 
+                        appearance="outline" 
+                        style="width:50% !important;"
+                    >
+                        <mat-label>Empresa</mat-label>
+                        <input 
+                            type="text" 
+                            matInput 
+                            formControlName="nomeEmpresa"
+                        >
+                        <mat-error *ngIf="asoForm.controls['nomeEmpresa'].invalid">Este campo é obrigatório</mat-error>
+                    </mat-form-field>
+                    <mat-form-field 
+                        appearance="outline"  
+                        style="width:18% !important;"
+                    >
+                        <mat-label>CNPJ</mat-label>
+                        <input 
+                            matInput 
+                            formControlName="cnpj"
+                        >
+                        <mat-error *ngIf="asoForm.controls['cnpj'].hasError('required')">Este campo é obrigatório</mat-error>
+                        <mat-error *ngIf="asoForm.controls['cnpj'].hasError('pattern')">Não é um formato válido de CNPJ</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <hr class="separator"/>
+            <div class="column">
+                <h3 class="subtitle">
+                    Médico responsável pelo PCMSO
+                </h3>
+                <div class="row">
+                    <mat-form-field 
+                        appearance="outline" 
+                        style="width:50% !important;"
+                    >
+                        <mat-label>Nome do Médico</mat-label>
+                        <input 
+                            type="text" 
+                            matInput 
+                            formControlName="nomeMedicoPCMSO"
+                        >
+                        <mat-error *ngIf="asoForm.controls['nomeMedicoPCMSO'].invalid">Este campo é obrigatório</mat-error>
+                    </mat-form-field>
+                    <mat-form-field 
+                        appearance="outline"  
+                        style="width:18% !important;"
+                    >
+                        <mat-label>CRM do Médico</mat-label>
+                        <input 
+                            matInput 
+                            formControlName="crmMedicoPCMSO"
+                        >
+                        <mat-error *ngIf="asoForm.controls['crmMedicoPCMSO'].hasError('required')">Este campo é obrigatório</mat-error>
+                        <mat-error *ngIf="asoForm.controls['crmMedicoPCMSO'].hasError('pattern')">Não é um formato válido de CRM</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <hr class="separator"/>
+            <div class="column">
+                <h3 class="subtitle">
+                    Exames
+                </h3>
+                <div class="row w50">
+                    <mat-form-field
+                        appearance="outline" 
+                        style="width:100% !important;"
+                    >
+                        <mat-label>Exame Clínico</mat-label>
+                        <mat-select
+                            formControlName="exameClinico"
+                            matInput
+                        >
+                            <mat-option *ngFor="let exam of clinicalExams" [value]="exam.value">
+                                {{exam.label}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="asoForm.controls['exameClinico'].invalid">Este campo é obrigatório</mat-error>
+                    </mat-form-field>
+                </div>
+                <div 
+                    class="column"
+                    formArrayName="examesComplementares"    
+                >
+                    <div 
+                        *ngFor="let exam of examsArray.controls; let i = index;"  
+                        class="row w100"
+                    >
+                        <mat-form-field 
+                            appearance="outline" 
+                            style="width:50% !important;"
+                        >
+                            <mat-label>Exames Complementares</mat-label>
+                            <mat-select
+                                [formControlName]="i"
+                                matInput
+                            >
+                                <mat-option 
+                                    *ngFor="let exam of complementaryExams" 
+                                    [value]="exam.value"
+                                    [disabled]="isExamChosen(exam.value)"
+                                >
+                                    {{exam.label}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button 
+                            mat-flat-button 
+                            (click)="removeExam(i)"
+                            type="button"    
+                            class="delete-button"
+                        >
+                            <mat-icon class="trash-icon" [inline]="true">delete</mat-icon>
+                        </button>
+                        
+                    </div>
+                </div>
+                <button 
+                    mat-flat-button 
+                    (click)="addExam()"
+                    class="cancel-button add-button"
+                    type="button"    
+                    *ngIf="complementaryExams.length > 0"
+                >
+                    Adicionar Exame Complementar
+                </button>
+            </div>
+            <hr class="separator"/>
+            <div class="column">
+                <h3 class="subtitle">
+                    Riscos
+                </h3>
+                <div 
+                    class="column"
+                    formArrayName="risco"    
+                >
+                    <div 
+                        *ngFor="let risk of risksArray.controls; let i = index;"  
+                        class="row w100"
+                    >
+                        <mat-form-field
+                            appearance="outline" 
+                            style="width:50% !important;"
+                        >
+                            <mat-label>Riscos</mat-label>
+                            <mat-select
+                                [formControlName]="i"
+                                matInput
+                            >
+                                <mat-option 
+                                    *ngFor="let risk of riskOptions" 
+                                    [value]="risk"
+                                    [disabled]="isRiskChosen(risk)"    
+                                >
+                                    {{risk}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field> 
+                        <button 
+                            mat-flat-button 
+                            (click)="removeRisk(i)"
+                            type="button"    
+                            class="delete-button"
+                        >
+                            <mat-icon class="trash-icon" [inline]="true">delete</mat-icon>
+                        </button>
+                
+                    </div>
+                    <button 
+                        mat-flat-button 
+                        (click)="addRisk()"
+                        class="cancel-button add-button"
+                        type="button"    
+                    >
+                        Adicionar Risco
+                    </button>
+
+                </div>
+            </div>
+
+            <hr class="separator"/>
+            <div class="column">
+                <h3 class="subtitle">
+                    Médico responsável pelo Exame Clínico
+                </h3>
+                <div class="row">
+                    <mat-form-field 
+                        appearance="outline" 
+                        style="width:50% !important;"
+                    >
+                        <mat-label>Nome do Médico</mat-label>
+                        <input 
+                            type="text" 
+                            matInput 
+                            formControlName="nomeMedicoClinico"
+                        >
+                        <mat-error *ngIf="asoForm.controls['nomeMedicoClinico'].invalid">Este campo é obrigatório</mat-error>
+                    </mat-form-field>
+                    <mat-form-field 
+                        appearance="outline"  
+                        style="width:18% !important;"
+                    >
+                        <mat-label>CRM do Médico</mat-label>
+                        <input 
+                            matInput 
+                            formControlName="crmMedicoClinico"
+                        >
+                        <mat-error *ngIf="asoForm.controls['crmMedicoClinico'].hasError('required')">Este campo é obrigatório</mat-error>
+                        <mat-error *ngIf="asoForm.controls['crmMedicoClinico'].hasError('pattern')">Não é um formato válido de CRM</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <hr class="separator"/>
+            <div class="column">
+                <h3 class="subtitle">
+                    Conclusão
+                </h3>
+                <div class="row w50">
+                    <mat-form-field
+                        appearance="outline" 
+                        style="width:100% !important;"
+                    >
+                        <mat-label>Status</mat-label>
+                        <mat-select
+                            formControlName="resultadoASO"
+                        >
+                            <mat-option *ngFor="let status of statusOptions" [value]="status">
+                                {{status}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="asoForm.controls['resultadoASO'].invalid">Este campo é obrigatório</mat-error>
+                    </mat-form-field>
+                    <mat-form-field 
+                        appearance="outline"
+                        style="width:100% !important;"
+                    >
+                        <mat-label>Validade</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="validade">
+                        <mat-error *ngIf="asoForm.controls['validade'].invalid">Este campo é obrigatório</mat-error>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="buttons">
+                <button 
+                    mat-flat-button 
+                    (click)="goBack()"
+                    class="cancel-button"
+                    type="button"
+                >
+                    Cancelar
+                </button>
+                <button 
+                    mat-flat-button 
+                    [disabled]="asoForm.invalid"
+                    type="submit"
+                    class="default-button"
+                >
+                    Salvar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
