@@ -1,7 +1,7 @@
 <mat-toolbar class="toolbar">
     <div 
         class="title"
-        (click)="goTo('dashboard')"
+        (click)="goTo('home')"
     >
         PlaSO
     </div>
@@ -17,14 +17,14 @@
     <mat-menu #menu="matMenu">
         <button 
             mat-menu-item
-            (click)="goTo('dashboard/editar-usuario')"
+            (click)="goTo('home/editar-usuario')"
         >
             Editar usuário
         </button>
         <button 
             *ngIf="isAdmin"
             mat-menu-item
-            (click)="goTo('dashboard/usuarios-pendentes')"
+            (click)="goTo('home/usuarios-pendentes')"
         >
             Usuários pendentes
         </button>

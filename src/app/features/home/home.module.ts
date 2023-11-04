@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 
-import { DashboardRoutingModule } from './dashboard-routing.module';
+import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,7 +32,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule,
+    HomeRoutingModule,
     MatToolbarModule,
     MatButtonModule,
     MatMenuModule,
@@ -50,4 +50,4 @@ import { ComponentsModule } from 'src/app/components/components.module';
     ComponentsModule
   ]
 })
-export class DashboardModule { }
+export class HomeModule { }

@@ -8,8 +8,8 @@ const routes: Routes = [
     loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: 'dashboard',
-    loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
+    path: 'home',
+    loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule),
     canLoad: [AuthGuard]
   },
   {

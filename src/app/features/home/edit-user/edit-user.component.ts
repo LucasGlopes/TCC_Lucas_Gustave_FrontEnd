@@ -131,7 +131,7 @@ export class EditUserComponent implements OnInit, OnDestroy{
 	}
 
 	goBack(){
-		this.router.navigate(['dashboard']);
+		this.router.navigate(['home']);
 	}
 
 	formatDate(){
