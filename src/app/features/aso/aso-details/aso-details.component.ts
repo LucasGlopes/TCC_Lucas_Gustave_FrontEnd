@@ -104,9 +104,9 @@ export class AsoDetailsComponent implements OnInit, OnDestroy{
 			idPessoa: ['', Validators.required],
 			exameClinico: [{value: '', disabled: true}, Validators.required],
 			examesComplementares: this.fb.array([]),
-			cnpj: ['', Validators.required],
-			crmMedicoPCMSO: ['', Validators.required],
-			crmMedicoClinico: ['', Validators.required],
+			cnpj: ['', [Validators.required, Validators.pattern(/^(\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}|\d{14})$/)]],
+			crmMedicoPCMSO: ['', [Validators.required, Validators.pattern(/^\d{6}\/[A-Z]{2}$/)]],
+			crmMedicoClinico: ['', [Validators.required, Validators.pattern(/^\d{6}\/[A-Z]{2}$/)]],
 			nomeEmpresa: ['', Validators.required],
 			nomeMedicoClinico: ['', Validators.required],
 			nomeMedicoPCMSO: ['', Validators.required],
@@ -265,11 +265,9 @@ export class AsoDetailsComponent implements OnInit, OnDestroy{
 		.subscribe((examId) => {
 			const clinicalExam = this.clinicalExams.find(
 				clinical => clinical.value === examId);
-			console.log(clinicalExam)
 			if(clinicalExam){
 				const asoDate = clinicalExam.additionalInfo;
 				this.asoForm.controls['dataASO'].setValue(asoDate);
-				console.log(this.asoForm.controls['dataASO'].value)
 			}
 		});
 

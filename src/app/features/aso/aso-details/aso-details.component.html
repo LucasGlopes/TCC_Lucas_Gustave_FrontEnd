@@ -29,6 +29,7 @@
 
                     <mat-form-field
                         appearance="outline" 
+                        style="width:18% !important;"
                     >
                         <mat-label>Tipo do ASO</mat-label>
                         <mat-select
@@ -57,13 +58,15 @@
                     </mat-form-field>
                     <mat-form-field 
                         appearance="outline"  
+                        style="width:18% !important;"
                     >
                         <mat-label>CNPJ</mat-label>
                         <input 
                             matInput 
                             formControlName="cnpj"
                         >
-                        <mat-error *ngIf="asoForm.controls['cnpj'].invalid">Este campo é obrigatório</mat-error>
+                        <mat-error *ngIf="asoForm.controls['cnpj'].hasError('required')">Este campo é obrigatório</mat-error>
+                        <mat-error *ngIf="asoForm.controls['cnpj'].hasError('pattern')">Não é um formato válido de CNPJ</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -87,13 +90,15 @@
                     </mat-form-field>
                     <mat-form-field 
                         appearance="outline"  
+                        style="width:18% !important;"
                     >
                         <mat-label>CRM do Médico</mat-label>
                         <input 
                             matInput 
                             formControlName="crmMedicoPCMSO"
                         >
-                        <mat-error *ngIf="asoForm.controls['crmMedicoPCMSO'].invalid">Este campo é obrigatório</mat-error>
+                        <mat-error *ngIf="asoForm.controls['crmMedicoPCMSO'].hasError('required')">Este campo é obrigatório</mat-error>
+                        <mat-error *ngIf="asoForm.controls['crmMedicoPCMSO'].hasError('pattern')">Não é um formato válido de CRM</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -239,13 +244,15 @@
                     </mat-form-field>
                     <mat-form-field 
                         appearance="outline"  
+                        style="width:18% !important;"
                     >
                         <mat-label>CRM do Médico</mat-label>
                         <input 
                             matInput 
                             formControlName="crmMedicoClinico"
                         >
-                        <mat-error *ngIf="asoForm.controls['crmMedicoClinico'].invalid">Este campo é obrigatório</mat-error>
+                        <mat-error *ngIf="asoForm.controls['crmMedicoClinico'].hasError('required')">Este campo é obrigatório</mat-error>
+                        <mat-error *ngIf="asoForm.controls['crmMedicoClinico'].hasError('pattern')">Não é um formato válido de CRM</mat-error>
                     </mat-form-field>
                 </div>
             </div>
