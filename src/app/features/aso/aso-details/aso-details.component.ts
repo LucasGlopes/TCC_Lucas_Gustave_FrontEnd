@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, Observable, Subscription, catchError, map, startWith, take } from 'rxjs';
+import { EMPTY, Subscription, catchError, map, take } from 'rxjs';
 import { AsoRequest, AsoResult, AsoType } from 'src/app/models/aso.model';
 import { ExamType } from 'src/app/models/exam.model';
 import { SelectorOption } from 'src/app/models/selector.model';

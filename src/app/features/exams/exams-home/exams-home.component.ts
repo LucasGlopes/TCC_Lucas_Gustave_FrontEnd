@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Perfis } from 'src/app/models/user.model';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 
 @Component({

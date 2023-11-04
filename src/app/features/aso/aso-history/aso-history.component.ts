@@ -7,7 +7,6 @@ import { AsoService } from 'src/app/services/aso.service';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { PdfService } from 'src/app/services/pdf.service';
-import { TableService } from 'src/app/services/table.service';
 
 @Component({
 	selector: 'app-aso-history',
