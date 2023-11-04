@@ -6,18 +6,34 @@ import { VaccinationHomeComponent } from './vaccination-home/vaccination-home.co
 import { VaccinationListComponent } from './vaccination-list/vaccination-list.component';
 import { VaccinationSchedulingComponent } from './vaccination-scheduling/vaccination-scheduling.component';
 import { VaccinationHistoryComponent } from './vaccination-history/vaccination-history.component';
-
+import { PermissionGuard } from './../../guards/permission.guard';
 
 const routes: Routes = [
   {
     path: '', component: VaccinationHomeComponent,
     children: [
         { path: 'campanhas', component: CampaignListComponent },
-        { path: 'campanhas/nova', component: CampaignDetailsComponent },
-        { path: 'campanhas/:id', component: CampaignDetailsComponent },
+        { 
+          path: 'campanhas/nova', 
+          component: CampaignDetailsComponent,
+          canActivate: [PermissionGuard]
+        },
+        { 
+          path: 'campanhas/:id', 
+          component: CampaignDetailsComponent,
+          canActivate: [PermissionGuard]
+        },
         { path: 'historico', component: VaccinationHistoryComponent },
-        { path: 'agendamentos', component: VaccinationListComponent },
-        { path: 'agendamentos/nova', component: VaccinationSchedulingComponent },
+        { 
+          path: 'agendamentos', 
+          component: VaccinationListComponent,
+          canActivate: [PermissionGuard]
+        },
+        { 
+          path: 'agendamentos/nova', 
+          component: VaccinationSchedulingComponent,
+          canActivate: [PermissionGuard]
+        },
         { path: '',
           pathMatch: 'full',
           redirectTo: '/vacinas/campanhas'  
