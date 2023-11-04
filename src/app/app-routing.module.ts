@@ -28,6 +28,11 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'dashboard',
+    loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
+    canLoad: [AuthGuard]
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: '/auth/login'  
