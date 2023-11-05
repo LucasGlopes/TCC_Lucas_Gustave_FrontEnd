@@ -58,7 +58,6 @@ export class PdfService {
 			fullName = fullName.concat(`_${name}`)
 		})
 
-		console.log(fullName)
 		return fullName;
 	}
 }

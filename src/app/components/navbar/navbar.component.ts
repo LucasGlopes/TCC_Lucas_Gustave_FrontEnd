@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { Subscription, filter } from 'rxjs';
 import { CurrentUser } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
