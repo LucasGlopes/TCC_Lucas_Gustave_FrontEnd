@@ -55,12 +55,14 @@ export class DashboardChartsComponent implements OnInit, OnDestroy{
 			{
 				name: 'Masculino',
 				description: `${data.dados.homens}`,
-				y: data.porcentagem.homens
+				y: data.porcentagem.homens,
+				color: '#4D648D'
 			},
 			{
 				name: 'Feminino',
 				description: `${data.dados.mulheres}`,
-				y: data.porcentagem.mulheres
+				y: data.porcentagem.mulheres,
+				color: '#C28FD9'
 			}
 		]
 
@@ -90,12 +92,14 @@ export class DashboardChartsComponent implements OnInit, OnDestroy{
 			{
 				name: 'Apto',
 				description: `${data.dados.apto}`,
-				y: data.porcentagem.apto
+				y: data.porcentagem.apto,
+				color: '#0d9e9b'
 			},
 			{
 				name: 'Inapto',
 				description: `${data.dados.inapto}`,
-				y: data.porcentagem.inapto
+				y: data.porcentagem.inapto,
+				color: '#D94A4A'
 			}
 		]
 
