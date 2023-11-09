@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Chart } from 'angular-highcharts';
-import { PointOptionsObject } from 'highcharts';
+import { OptionsStackingValue, PointOptionsObject, SeriesOptionsType } from 'highcharts';
 
 @Injectable({
 	providedIn: 'root'
@@ -32,7 +32,8 @@ export class ChartService {
                     dataLabels: {
                         enabled: false           
                     },
-                    showInLegend: true
+                    showInLegend: true,
+                    
                 }
             },
             series : [{
@@ -44,5 +45,56 @@ export class ChartService {
         return newChart;
     }
 
+    setColumnChart(
+        title: string, 
+        yAxisTitle: string, 
+        chartCategories: string[], 
+        chartData: SeriesOptionsType[],
+        columnStacking: OptionsStackingValue | undefined = undefined
+    ){
+        const newChart = new Chart({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: title,
+                align: 'center'
+            },
+            xAxis: {
+                categories: chartCategories,
+                crosshair: true,
+                accessibility: {
+                    description: yAxisTitle
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: yAxisTitle
+                }
+            },
+            tooltip: {
+                valueSuffix: ''
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                column: {
+                    stacking: columnStacking,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '14px',
+                        }
+                    }
+                }
+
+            },
+            series: chartData
+        });
+
+        return newChart;
+    }
    
 }

@@ -9,7 +9,7 @@ export interface Campaign {
 
 export enum Status {
     pendente = 'PENDENTE',
-    concluido = 'CONCLUÍDO',
+    concluido = 'CONCLUIDO',
     atrasado = 'ATRASADO',
     cancelado = 'CANCELADO'
 }

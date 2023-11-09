@@ -1,3 +1,6 @@
+import { ExamType } from "./exam.model";
+import { Status } from "./vaccination.model";
+
 export interface SexNumbers {
     mulheres: number;
     homens: number;
@@ -22,4 +25,21 @@ export interface AptitudeNumbers {
 export interface QuantityByAptitude {
     dados: AptitudeNumbers;
     porcentagem: AptitudeNumbers;
+}
+
+export interface QuantityByCampaign {
+    quantidadeVacinacoes: number;
+    campanha: string;
+    quantidadeVacinados: number;
+}
+
+export interface ExamByMonth {
+    tipoExame: ExamType;
+    mes: number;
+    quantidade: number;
+}
+
+export interface CampaignStatusQuantity {
+    status: Status;
+    quantidade: number;
 }
