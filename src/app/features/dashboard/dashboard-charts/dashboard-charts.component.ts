@@ -188,7 +188,7 @@ export class DashboardChartsComponent implements OnInit, OnDestroy{
 		)
 
 		const chartTitle = 'Quantidade de Vacinações por Campanha';
-		const yAxisTitle = 'Vacinações';
+		const yAxisTitle = 'Total de Vacinações';
 		const columnStacking = 'normal';
 
 		this.campaignsColumnChart = this.chartService.setColumnChart(chartTitle, yAxisTitle, chartCategories, chartData, columnStacking);
@@ -312,7 +312,7 @@ export class DashboardChartsComponent implements OnInit, OnDestroy{
 			}
 		]
 
-		const chartTitle = 'Status por Campanha';
+		const chartTitle = 'Status por Campanha de Vacinação';
 
 		this.campaignsPieChart = this.chartService.setPieChart(chartTitle, chartData);
 	}

@@ -69,6 +69,7 @@ export class ChartService {
             },
             yAxis: {
                 min: 0,
+                allowDecimals: false,
                 title: {
                     text: yAxisTitle
                 }
@@ -83,7 +84,7 @@ export class ChartService {
                 column: {
                     stacking: columnStacking,
                     dataLabels: {
-                        enabled: true,
+                        enabled: false,
                         style: {
                             fontSize: '14px',
                         }
