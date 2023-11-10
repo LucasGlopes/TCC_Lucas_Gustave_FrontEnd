@@ -28,6 +28,10 @@ export class EditUserComponent implements OnInit, OnDestroy{
         {
             label: 'Feminino',
             value: Sexo.feminino
+        },
+		{
+            label: 'Outro',
+            value: Sexo.outro
         }
     ]
 

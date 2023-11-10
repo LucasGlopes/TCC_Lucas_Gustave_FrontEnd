@@ -4,6 +4,7 @@ import { Status } from "./vaccination.model";
 export interface SexNumbers {
     mulheres: number;
     homens: number;
+    outros: number;
 }
 
 export interface QuantityBySex {
@@ -42,4 +43,5 @@ export interface ExamByMonth {
 export interface CampaignStatusQuantity {
     status: Status;
     quantidade: number;
+    porcentagem: number;
 }

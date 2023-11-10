@@ -1,5 +1,15 @@
 <div class="container">
     <div class="card">
+        <div 
+			class="info" 
+		>
+			<p>
+				Total de Funcionários: 
+			</p>
+			<p class="total">
+				{{totalEmployees}}
+			</p>
+		</div>
         <div class="row">
 
             <div 
@@ -18,38 +28,44 @@
             ></div>
         </div>
 
-        <div 
-            [chart]="campaignsColumnChart"
-            class="chart-container column"    
-        ></div>
+        <div class="row">
 
-        <div
-            class="campaign-container pie"
-        >
-            <mat-form-field
-                appearance="outline" 
-                class="campaign"
-                [hideRequiredMarker]="true"
+            <div
+                class="campaign-container"
+                style="width: 30%;"   
+
             >
-                <mat-label>Campanha</mat-label>
-                <mat-select
-                    [formControl]="currentCampaign"
-                    matInput
+                <mat-form-field
+                    appearance="outline" 
+                    class="campaign"
+                    [hideRequiredMarker]="true"
                 >
-                    <mat-option *ngFor="let campaign of campaigns" [value]="campaign.idCampanha">
-                        {{campaign.nomeCampanha}}, {{campaign.nomeVacina}} - {{campaign.dataCampanha}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-
+                    <mat-label>Campanha</mat-label>
+                    <mat-select
+                        [formControl]="currentCampaign"
+                        matInput
+                    >
+                        <mat-option *ngFor="let campaign of campaigns" [value]="campaign.idCampanha">
+                            {{campaign.nomeCampanha}}, {{campaign.nomeVacina}} - {{campaign.dataCampanha}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+    
+                <div 
+                    [chart]="campaignsPieChart"
+                    class="campaign-pie"
+                ></div>
+            </div>
             <div 
-                [chart]="campaignsPieChart"
-                class="pie"    
+                [chart]="examsChart"
+                class="chart-container exams-column"    
             ></div>
         </div>
+
         <div 
-            [chart]="examsChart"
-            class="chart-container column"    
+            [chart]="campaignsColumnChart"
+            class="chart-container column" 
+            style="width: 100%;"   
         ></div>
 
 

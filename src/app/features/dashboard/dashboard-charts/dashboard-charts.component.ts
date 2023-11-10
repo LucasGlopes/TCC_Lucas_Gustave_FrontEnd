@@ -27,6 +27,7 @@ export class DashboardChartsComponent implements OnInit, OnDestroy{
 	campaigns: Campaign[] = [];
 	currentCampaign = new FormControl();
 	subscriptions: Subscription[] = [];
+	totalEmployees: number = 0;
 
 	constructor(
 		private dashboardService: DashboardService,
@@ -76,8 +77,15 @@ export class DashboardChartsComponent implements OnInit, OnDestroy{
 				description: `${data.dados.mulheres}`,
 				y: data.porcentagem.mulheres,
 				color: '#C28FD9'
+			},
+			{
+				name: 'Outro',
+				description: `${data.dados.outros}`,
+				y: data.porcentagem.outros,
 			}
-		]
+		];
+
+		this.totalEmployees = data.dados.homens + data.dados.mulheres + data.dados.outros;
 
 		const chartTitle = 'Quantidade de funcionários por sexo';
 
@@ -293,22 +301,22 @@ export class DashboardChartsComponent implements OnInit, OnDestroy{
 			{
 				name: 'Pendente',
 				description: `${data.find(item => item.status == Status.pendente)!.quantidade}`,
-				y: data.find(item => item.status == Status.pendente)!.quantidade
+				y: data.find(item => item.status == Status.pendente)!.porcentagem
 			},
 			{
 				name: 'Concluído',
 				description: `${data.find(item => item.status == Status.concluido)!.quantidade}`,
-				y: data.find(item => item.status == Status.concluido)!.quantidade
+				y: data.find(item => item.status == Status.concluido)!.porcentagem
 			},
 			{
 				name: 'Atrasado',
 				description: `${data.find(item => item.status == Status.atrasado)!.quantidade}`,
-				y: data.find(item => item.status == Status.atrasado)!.quantidade
+				y: data.find(item => item.status == Status.atrasado)!.porcentagem
 			},
 			{
 				name: 'Cancelado',
 				description: `${data.find(item => item.status == Status.cancelado)!.quantidade}`,
-				y: data.find(item => item.status == Status.cancelado)!.quantidade
+				y: data.find(item => item.status == Status.cancelado)!.porcentagem
 			}
 		]
 

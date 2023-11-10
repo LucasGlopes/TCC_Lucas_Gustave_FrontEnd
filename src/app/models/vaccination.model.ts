@@ -20,3 +20,9 @@ export interface Vaccination {
     pessoa: CurrentUser;
     status: Status;
 }
+
+export interface VaccinationScheduling {
+    idCampanha: number;
+    idFuncionarios: number[];
+    status: Status;
+}
