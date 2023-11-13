@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { EMPTY, Subscription, catchError, map } from 'rxjs';
-import { Exam } from 'src/app/models/exam.model';
+import { Exam, ExamType } from 'src/app/models/exam.model';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { ExamService } from 'src/app/services/exam.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -14,7 +14,7 @@ import { TableService } from 'src/app/services/table.service';
 	styleUrls: ['./exams-history.component.scss']
 })
 export class ExamsHistoryComponent implements OnInit, OnDestroy {
-	displayedColumns: string[] = ['exame', 'local', 'data-hora', 'status'];
+	displayedColumns: string[] = ['exame', 'tipo', 'local', 'data-hora', 'status'];
 	dataSource!: MatTableDataSource<Exam>
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 	subscriptions: Subscription[] = [];
@@ -79,12 +79,6 @@ export class ExamsHistoryComponent implements OnInit, OnDestroy {
 		this.dataSource.filter = filterValue.trim().toLowerCase();
 	}
 
-	removeRow(indexToRemove: number){
-		const data = this.dataSource.data;
-		data.splice(indexToRemove,1);
-		this.dataSource.data = data;
-	}
-
 	formatDate(dateString: string){
 		const dateComponents = dateString.split("/");
 		const dateObject = new Date(
@@ -106,6 +100,10 @@ export class ExamsHistoryComponent implements OnInit, OnDestroy {
 			return -1;
 		}
 		return 0;
+	}
+
+	getExamTypeLabel(exam: Exam){
+		return exam.tipoExame === ExamType.clinico ? 'Clínico' : 'Complementar';
 	}
 
 }

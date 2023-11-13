@@ -43,6 +43,11 @@
                     <td mat-cell *matCellDef="let element"> {{element.nomeExame}} </td>
                 </ng-container>
 
+                <ng-container matColumnDef="tipo">
+                    <th mat-header-cell *matHeaderCellDef> Tipo de Exame </th>
+                    <td mat-cell *matCellDef="let element"> {{getExamTypeLabel(element)}} </td>
+                </ng-container>
+
                 <ng-container matColumnDef="data-hora">
                     <th mat-header-cell *matHeaderCellDef> Data/Hora </th>
                     <td mat-cell *matCellDef="let element"> {{element.dataExame}} - {{element.horaExame}}</td>
