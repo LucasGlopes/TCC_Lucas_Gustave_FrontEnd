@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EMPTY, Subscription, catchError} from 'rxjs';
 import { CurrentUser } from 'src/app/models/user.model';
-import { Campaign, Status, Vaccination } from 'src/app/models/vaccination.model';
+import { Campaign, Status, Vaccination, VaccinationScheduling } from 'src/app/models/vaccination.model';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { VaccinationService } from 'src/app/services/vaccination.service';
@@ -82,7 +82,7 @@ export class VaccinationSchedulingComponent implements OnInit, OnDestroy{
 	onSubmit(){
 		if(this.schedulingForm.invalid) return;
 
-		const vaccination: Vaccination = this.schedulingForm.value;
+		const vaccination: VaccinationScheduling = this.schedulingForm.value;
 
 		const subscription = this.vaccination.createVaccination(vaccination)
 		.pipe(

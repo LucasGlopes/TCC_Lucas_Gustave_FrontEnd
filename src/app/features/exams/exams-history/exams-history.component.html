@@ -22,6 +22,11 @@
                     <td mat-cell *matCellDef="let element"> {{element.nomeExame}} </td>
                 </ng-container>
 
+                <ng-container matColumnDef="tipo">
+                    <th mat-header-cell *matHeaderCellDef> Tipo de Exame </th>
+                    <td mat-cell *matCellDef="let element"> {{getExamTypeLabel(element)}} </td>
+                </ng-container>
+
                 <ng-container matColumnDef="local">
                     <th mat-header-cell *matHeaderCellDef> Local </th>
                     <td mat-cell *matCellDef="let element"> {{element.localExame}} </td>
@@ -39,6 +44,12 @@
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <tr *matNoDataRow>
+                    <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+                        <div class="no-data">Não há exames cadastrados.</div>
+                    </td>
+                </tr>
 
             </table>
             <mat-paginator 

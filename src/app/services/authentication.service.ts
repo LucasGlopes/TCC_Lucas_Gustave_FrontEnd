@@ -33,7 +33,7 @@ export class AuthenticationService {
 
 				this.currentUser.setUserValues(user);
 				this.setToken(token);
-
+				
 				return null;
 			})
 		);

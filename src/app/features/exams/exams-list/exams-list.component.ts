@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EMPTY, Subscription, catchError } from 'rxjs';
-import { Exam } from 'src/app/models/exam.model';
+import { Exam, ExamType } from 'src/app/models/exam.model';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { ExamService } from 'src/app/services/exam.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -18,7 +18,7 @@ export class ExamsListComponent implements OnInit, OnDestroy {
 	hasPermission: boolean = false;
 	dataSource!: MatTableDataSource<Exam>;
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
-	displayedColumns: string[] = ['nome', 'setor', 'exame', 'data-hora', 'status', 'actions'];
+	displayedColumns: string[] = ['nome', 'setor', 'exame', 'tipo', 'data-hora', 'status', 'actions'];
 	subscriptions: Subscription[] = []
 
 	constructor(
@@ -110,6 +110,9 @@ export class ExamsListComponent implements OnInit, OnDestroy {
 		this.subscriptions.push(subscription);
 	}
 
+	getExamTypeLabel(exam: Exam){
+		return exam.tipoExame === ExamType.clinico ? 'Clínico' : 'Complementar';
+	}
 
 	applyFilter(event: Event) {
 		const filterValue = (event.target as HTMLInputElement).value;

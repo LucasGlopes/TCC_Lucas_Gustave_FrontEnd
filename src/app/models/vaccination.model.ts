@@ -9,7 +9,7 @@ export interface Campaign {
 
 export enum Status {
     pendente = 'PENDENTE',
-    concluido = 'CONCLUÍDO',
+    concluido = 'CONCLUIDO',
     atrasado = 'ATRASADO',
     cancelado = 'CANCELADO'
 }
@@ -18,5 +18,11 @@ export interface Vaccination {
     idVacinacao: number;
     campanha: Campaign;
     pessoa: CurrentUser;
+    status: Status;
+}
+
+export interface VaccinationScheduling {
+    idCampanha: number;
+    idFuncionarios: number[];
     status: Status;
 }

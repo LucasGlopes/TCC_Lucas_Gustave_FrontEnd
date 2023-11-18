@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StatusDialogComponent } from './status-dialog.component';
+import { VaccinationStatusDialogComponent } from './status-dialog.component';
 
 describe('StatusDialogComponent', () => {
-  let component: StatusDialogComponent;
-  let fixture: ComponentFixture<StatusDialogComponent>;
+  let component: VaccinationStatusDialogComponent;
+  let fixture: ComponentFixture<VaccinationStatusDialogComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [StatusDialogComponent]
+      declarations: [VaccinationStatusDialogComponent]
     });
-    fixture = TestBed.createComponent(StatusDialogComponent);
+    fixture = TestBed.createComponent(VaccinationStatusDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

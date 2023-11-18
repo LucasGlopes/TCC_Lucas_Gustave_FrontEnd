@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Campaign, Status, Vaccination } from '../models/vaccination.model';
+import { Campaign, Status, Vaccination, VaccinationScheduling } from '../models/vaccination.model';
 
 @Injectable({
 	providedIn: 'root'
@@ -46,7 +46,7 @@ export class VaccinationService {
 		return this.http.delete(`${this.baseUrl}/vacinacoes/${id}`);
 	}
 
-	createVaccination(vaccination: Vaccination){
+	createVaccination(vaccination: VaccinationScheduling){
 		return this.http.post(`${this.baseUrl}/vacinacoes`, vaccination);
 	}
 

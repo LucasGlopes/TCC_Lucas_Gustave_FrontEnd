@@ -29,6 +29,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         {
             label: 'Feminino',
             value: Sexo.feminino
+        },
+        {
+            label: 'Outro',
+            value: Sexo.outro
         }
     ]
 

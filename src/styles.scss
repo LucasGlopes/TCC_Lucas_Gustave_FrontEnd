@@ -40,3 +40,12 @@ body { margin: 0; font-family: 'Roboto', "Helvetica Neue", sans-serif; }
 
     --mat-snack-bar-button-color: white;
 }
+
+.no-data{
+    padding: 10px;
+
+    font-weight: 450;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: rgb(48, 48, 48);
+}

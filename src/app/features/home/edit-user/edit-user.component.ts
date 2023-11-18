@@ -28,6 +28,10 @@ export class EditUserComponent implements OnInit, OnDestroy{
         {
             label: 'Feminino',
             value: Sexo.feminino
+        },
+		{
+            label: 'Outro',
+            value: Sexo.outro
         }
     ]
 
@@ -131,7 +135,7 @@ export class EditUserComponent implements OnInit, OnDestroy{
 	}
 
 	goBack(){
-		this.router.navigate(['dashboard']);
+		this.router.navigate(['home']);
 	}
 
 	formatDate(){

@@ -1,53 +1,32 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { ChartModule } from 'angular-highcharts';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule  } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { HomeComponent } from './home/home.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { PendingUsersComponent } from './pending-users/pending-users.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { EditUserComponent } from './edit-user/edit-user.component';
-import { ReactiveFormsModule  } from '@angular/forms';
-import { MatOptionModule } from '@angular/material/core';
-import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { CalendarModule } from 'angular-calendar';
-import { ComponentsModule } from 'src/app/components/components.module';
+import { DashboardChartsComponent } from './dashboard-charts/dashboard-charts.component';
+import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
+
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    PendingUsersComponent,
-    EditUserComponent
-  ],
-  providers: [
-    DatePipe
+    DashboardChartsComponent,
+    DashboardHomeComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    MatToolbarModule,
     MatButtonModule,
-    MatMenuModule,
-    MatIconModule,
-    MatTableModule,
-    MatPaginatorModule,
+    ChartModule,
     MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatOptionModule,
     MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    CalendarModule,
-    ComponentsModule
+    ReactiveFormsModule,
+    MatInputModule
   ]
 })
 export class DashboardModule { }

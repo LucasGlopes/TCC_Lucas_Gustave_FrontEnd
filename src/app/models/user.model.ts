@@ -6,7 +6,8 @@ export enum Perfis {
 
 export enum Sexo {
     masculino = 'MASCULINO',
-    feminino = 'FEMININO'
+    feminino = 'FEMININO',
+    outro = 'OUTRO'
 }
 
 export interface User {
