@@ -19,8 +19,8 @@ export class AuthGuard implements CanLoad {
     ) {}
     canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
       if (this.currentUser.getUserValues()) {
-            return true;
-        }
-        return this.router.createUrlTree(['auth', 'login']);
+        return true;
+      }
+      return this.router.createUrlTree(['auth', 'login']);
     }
 }
