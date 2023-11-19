@@ -26,8 +26,9 @@
                 appearance="outline" 
                 class="users"
             >
+                <mat-label>Funcionários</mat-label>
                 <mat-select matInput placeholder="Funcionários" formControlName="idFuncionarios" multiple>
-                    <mat-option *ngFor="let user of users" [value]="user.id">{{user.primeiroNome + ' ' + user.ultimoNome}}</mat-option>
+                    <mat-option *ngFor="let user of users$ | async" [value]="user.id">{{user.primeiroNome + ' ' + user.ultimoNome}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="schedulingForm.controls['idFuncionarios'].invalid">Este campo é obrigatório</mat-error>
 

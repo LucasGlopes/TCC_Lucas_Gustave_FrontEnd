@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, Observable, Subscription, catchError, map, take } from 'rxjs';
+import { EMPTY, Observable, Subscription, catchError, map, take, throwError } from 'rxjs';
 import { Exam, ExamStatus, ExamType } from 'src/app/models/exam.model';
 import { SelectorOption } from 'src/app/models/selector.model';
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -17,7 +17,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class ExamsDetailsComponent implements OnInit, OnDestroy {
 	examId: number | undefined;
 	examForm!: FormGroup;
-	users: SelectorOption[] = [];
+	users$!: Observable<SelectorOption[]>;
 	subscriptions: Subscription[] = [];
 	filteredOptions!: Observable<string[]>;
 	statusOptions: ExamStatus[] = Object.values(ExamStatus);
@@ -60,7 +60,7 @@ export class ExamsDetailsComponent implements OnInit, OnDestroy {
 	}
 
 	getUsers(){
-		const subscription = this.employee.getUsers()
+		this.users$ = this.employee.getUsers()
 		.pipe(
 			map(users => {
 				const userOptions = users.map(user => {
@@ -78,12 +78,7 @@ export class ExamsDetailsComponent implements OnInit, OnDestroy {
 				this.notification.openErrorSnackBar('Ocorreu um erro. Tente novamente mais tarde.');
 				return EMPTY;
 			})
-		)
-		.subscribe((users) => {
-			this.users = users;
-		});
-
-		this.subscriptions.push(subscription);
+		);
 	}
 
 	initForm(){

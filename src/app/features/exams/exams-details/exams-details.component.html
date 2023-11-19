@@ -15,7 +15,7 @@
                             formControlName="idPessoa"
                             matInput
                         >
-                            <mat-option *ngFor="let user of users" [value]="user.value">
+                            <mat-option *ngFor="let user of users$ | async" [value]="user.value">
                                 {{user.label}}
                             </mat-option>
                         </mat-select>
