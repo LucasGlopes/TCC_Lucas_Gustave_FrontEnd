@@ -35,6 +35,7 @@
                     (click)="changePasswordVisibility()"
                     [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hidePassword"
+                    data-testid="password-visibility"
                 >
                     <mat-icon>{{ hidePassword ? "visibility" : "visibility_off" }}</mat-icon>
                 </button>
