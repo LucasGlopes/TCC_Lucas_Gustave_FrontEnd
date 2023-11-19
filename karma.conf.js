@@ -22,7 +22,8 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, './coverage/frontend'),
       subdir: '.',
       reporters: [
-        { type: 'lcov' }
+        { type: 'lcov' },
+        { type: 'html'}
       ]
     },
     reporters: ['progress', 'kjhtml'],

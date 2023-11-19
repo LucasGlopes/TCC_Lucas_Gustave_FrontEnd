@@ -38,11 +38,15 @@ export class CurrentUserService {
     }
 
     get hasPermission() {
-        const profiles = this.getUserValues().perfis;
-
-		return profiles.some(profile => 
-			profile === Perfis.admin || profile === Perfis.tecnico
-		);
+        const user = this.getUserValues();
+    
+        if (user && user.perfis) {
+            return user.perfis.some(profile => 
+                profile === Perfis.admin || profile === Perfis.tecnico
+            );
+        }
+    
+        return false;
     }
 
 }
