@@ -4,7 +4,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EMPTY, Subscription, catchError } from 'rxjs';
-import { Perfis } from 'src/app/models/user.model';
 import { Campaign } from 'src/app/models/vaccination.model';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { NotificationService } from 'src/app/services/notification.service';
