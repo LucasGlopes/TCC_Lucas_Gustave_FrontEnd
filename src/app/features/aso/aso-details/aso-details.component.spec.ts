@@ -14,6 +14,7 @@ import { of } from 'rxjs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { By } from '@angular/platform-browser';
 
 describe('AsoDetailsComponent', () => {
   let component: AsoDetailsComponent;
@@ -55,5 +56,20 @@ describe('AsoDetailsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should go back', () => {
+    const navigateSpy = spyOn((<any>component).router, 'navigate');
+
+    const button = fixture.debugElement.query(
+      By.css('[data-testid="cancel-button"]')
+    ) 
+
+    expect(button).toBeTruthy();
+
+    button.nativeElement.click();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['aso/asos']);
+
   });
 });

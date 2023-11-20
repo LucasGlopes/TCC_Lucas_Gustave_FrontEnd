@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { By } from '@angular/platform-browser';
 describe('CampaignDetailsComponent', () => {
   let component: CampaignDetailsComponent;
   let fixture: ComponentFixture<CampaignDetailsComponent>;
@@ -54,5 +55,20 @@ describe('CampaignDetailsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should go back', () => {
+    const navigateSpy = spyOn((<any>component).router, 'navigate');
+
+    const button = fixture.debugElement.query(
+      By.css('.cancel-button')
+    ) 
+
+    expect(button).toBeTruthy();
+
+    button.nativeElement.click();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['vacinas/campanhas']);
+
   });
 });

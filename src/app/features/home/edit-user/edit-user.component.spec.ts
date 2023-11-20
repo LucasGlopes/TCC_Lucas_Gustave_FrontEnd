@@ -13,6 +13,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
 
 describe('EditUserComponent', () => {
   let component: EditUserComponent;
@@ -43,5 +44,20 @@ describe('EditUserComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should go back', () => {
+    const navigateSpy = spyOn((<any>component).router, 'navigate');
+
+    const button = fixture.debugElement.query(
+      By.css('.cancel-button')
+    ) 
+
+    expect(button).toBeTruthy();
+
+    button.nativeElement.click();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['home']);
+
   });
 });

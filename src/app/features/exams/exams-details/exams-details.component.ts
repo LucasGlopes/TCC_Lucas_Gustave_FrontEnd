@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, Observable, Subscription, catchError, map, take, throwError } from 'rxjs';
+import { EMPTY, Observable, Subscription, catchError, map, take } from 'rxjs';
 import { Exam, ExamStatus, ExamType } from 'src/app/models/exam.model';
 import { SelectorOption } from 'src/app/models/selector.model';
 import { EmployeeService } from 'src/app/services/employee.service';
