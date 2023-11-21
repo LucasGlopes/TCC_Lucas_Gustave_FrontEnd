@@ -15,7 +15,7 @@
                     formControlName="idCampanha"
                     matInput
                 >
-                    <mat-option *ngFor="let campaign of campaigns" [value]="campaign.idCampanha">
+                    <mat-option *ngFor="let campaign of campaigns$ | async" [value]="campaign.idCampanha">
                         {{campaign.nomeCampanha}}, {{campaign.nomeVacina}} - {{campaign.dataCampanha}}
                     </mat-option>
                 </mat-select>
