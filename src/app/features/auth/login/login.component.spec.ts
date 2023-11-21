@@ -10,6 +10,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { of, throwError } from 'rxjs';
+import { NotificationService } from 'src/app/services/notification.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -66,6 +69,43 @@ describe('LoginComponent', () => {
     button.nativeElement.click();
 
     expect(component.hidePassword).toBe(false);
+  });
+
+  it('should navigate to home on successful login', () => {
+    const navigateSpy = spyOn((<any>component).router, 'navigate');
+
+    const authService = TestBed.inject(AuthenticationService);
+    spyOn(authService, 'login').and.returnValue(of(null));
+
+    component.loginForm.controls['email'].setValue('teste@email.com');
+    component.loginForm.controls['senha'].setValue('12345');
+
+    expect(component.loginForm.valid).toBe(true)
+    component.onSubmit();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['home']);
+  });
+
+  it('should return if is invalid', () => {
+    component.onSubmit();
+
+    expect(component.loginForm.valid).toBe(false)
+  });
+
+  it('should show error', () => {
+    const authService = TestBed.inject(AuthenticationService);
+    spyOn(authService, 'login').and.returnValue(throwError({}));
+
+    const notification = TestBed.inject(NotificationService);
+    const notificationSpy = spyOn(notification, 'openErrorSnackBar')
+
+    component.loginForm.controls['email'].setValue('teste@email.com');
+    component.loginForm.controls['senha'].setValue('12345');
+
+    component.onSubmit();
+
+    expect(notificationSpy).toHaveBeenCalledWith('Seu cadastro ainda está em análise.')
+
   });
   
 });

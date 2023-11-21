@@ -75,4 +75,11 @@ describe('RegistrationComponent', () => {
 
     expect(component.hidePassword).toBe(false);
   });
+
+  it('should return if is invalid', () => {
+    component.onSubmit();
+
+    expect(component.registrationForm.valid).toBe(false)
+  });
+
 });
