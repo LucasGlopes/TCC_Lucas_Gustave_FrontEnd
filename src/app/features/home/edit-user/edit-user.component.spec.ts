@@ -1,6 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditUserComponent } from './edit-user.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DatePipe } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
 
 describe('EditUserComponent', () => {
   let component: EditUserComponent;
@@ -8,7 +21,21 @@ describe('EditUserComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EditUserComponent]
+      declarations: [EditUserComponent],
+      providers: [DatePipe],
+      imports: [
+        HttpClientTestingModule,
+        MatSnackBarModule,
+        MatDialogModule,
+        MatIconModule,
+        MatFormFieldModule, 
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        MatInputModule,
+        BrowserAnimationsModule
+      ]
     });
     fixture = TestBed.createComponent(EditUserComponent);
     component = fixture.componentInstance;
@@ -17,5 +44,20 @@ describe('EditUserComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should go back', () => {
+    const navigateSpy = spyOn((<any>component).router, 'navigate');
+
+    const button = fixture.debugElement.query(
+      By.css('.cancel-button')
+    ) 
+
+    expect(button).toBeTruthy();
+
+    button.nativeElement.click();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['home']);
+
   });
 });

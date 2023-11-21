@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { By } from '@angular/platform-browser';
 
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;
@@ -44,5 +45,34 @@ describe('RegistrationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call cancel()', () => {
+    const navigateSpy = spyOn((<any>component).router, 'navigate');
+
+    const button = fixture.debugElement.query(
+      By.css('.left-button')
+    ) 
+
+    expect(button).toBeTruthy();
+
+    button.nativeElement.click();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['auth', 'login']);
+
+  });
+
+  it('should change password visibility', () => {
+    expect(component.hidePassword).toBe(true);
+
+    const button = fixture.debugElement.query(
+      By.css('[data-testid="password-visibility"]')
+    );
+
+    expect(button).toBeTruthy();
+
+    button.nativeElement.click();
+
+    expect(component.hidePassword).toBe(false);
   });
 });

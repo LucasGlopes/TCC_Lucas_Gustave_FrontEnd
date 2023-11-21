@@ -17,7 +17,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class ExamsDetailsComponent implements OnInit, OnDestroy {
 	examId: number | undefined;
 	examForm!: FormGroup;
-	users: SelectorOption[] = [];
+	users$!: Observable<SelectorOption[]>;
 	subscriptions: Subscription[] = [];
 	filteredOptions!: Observable<string[]>;
 	statusOptions: ExamStatus[] = Object.values(ExamStatus);
@@ -60,7 +60,7 @@ export class ExamsDetailsComponent implements OnInit, OnDestroy {
 	}
 
 	getUsers(){
-		const subscription = this.employee.getUsers()
+		this.users$ = this.employee.getUsers()
 		.pipe(
 			map(users => {
 				const userOptions = users.map(user => {
@@ -78,12 +78,7 @@ export class ExamsDetailsComponent implements OnInit, OnDestroy {
 				this.notification.openErrorSnackBar('Ocorreu um erro. Tente novamente mais tarde.');
 				return EMPTY;
 			})
-		)
-		.subscribe((users) => {
-			this.users = users;
-		});
-
-		this.subscriptions.push(subscription);
+		);
 	}
 
 	initForm(){

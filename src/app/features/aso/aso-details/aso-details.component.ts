@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, Subscription, catchError, map, take } from 'rxjs';
+import { EMPTY, Observable, Subscription, catchError, map, take } from 'rxjs';
 import { AsoRequest, AsoResult, AsoType } from 'src/app/models/aso.model';
 import { ExamType } from 'src/app/models/exam.model';
 import { SelectorOption } from 'src/app/models/selector.model';
@@ -21,7 +21,7 @@ export class AsoDetailsComponent implements OnInit, OnDestroy{
 	asoId: number | undefined;
 	asoForm!: FormGroup;
 	subscriptions: Subscription[] = [];
-	users: SelectorOption[] = [];
+	users$!: Observable<SelectorOption[]>;
 	clinicalExams: SelectorOption[] = [];
 	complementaryExams: SelectorOption[] = [];
 	statusOptions: AsoResult[] = Object.values(AsoResult);
@@ -73,7 +73,7 @@ export class AsoDetailsComponent implements OnInit, OnDestroy{
 	}
 
 	getUsers(){
-		const subscription = this.employee.getUsers()
+		this.users$ = this.employee.getUsers()
 		.pipe(
 			map(users => {
 				const userOptions = users.map(user => {
@@ -91,12 +91,7 @@ export class AsoDetailsComponent implements OnInit, OnDestroy{
 				this.notification.openErrorSnackBar('Ocorreu um erro. Tente novamente mais tarde.');
 				return EMPTY;
 			})
-		)
-		.subscribe((users) => {
-			this.users = users;
-		});
-
-		this.subscriptions.push(subscription);
+		);
 	}
 
 	initForm(){
@@ -140,7 +135,8 @@ export class AsoDetailsComponent implements OnInit, OnDestroy{
 		.pipe(
 			catchError(() => {
                 this.notification.openErrorSnackBar('Ocorreu um erro. Tente novamente mais tarde.');
-                return EMPTY;
+                this.goBack();
+				return EMPTY;
             })
 		)
 		.subscribe(aso => {

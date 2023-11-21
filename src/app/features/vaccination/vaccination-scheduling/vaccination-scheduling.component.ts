@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EMPTY, Subscription, catchError} from 'rxjs';
+import { EMPTY, Observable, Subscription, catchError} from 'rxjs';
 import { CurrentUser } from 'src/app/models/user.model';
 import { Campaign, Status, Vaccination, VaccinationScheduling } from 'src/app/models/vaccination.model';
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -17,7 +17,7 @@ export class VaccinationSchedulingComponent implements OnInit, OnDestroy{
 	schedulingForm!: FormGroup;
 	subscriptions: Subscription[] = [];
 	campaigns: Campaign[] = []
-	users: CurrentUser[] = []
+	users$!: Observable<CurrentUser[]>;
 
 	constructor(
 		private vaccination: VaccinationService,
@@ -53,18 +53,13 @@ export class VaccinationSchedulingComponent implements OnInit, OnDestroy{
 	}
 
 	loadUsers(){
-		const subscription = this.employee.getUsers()
+		this.users$ = this.employee.getUsers()
 		.pipe(
 			catchError(() => {
 				this.notification.openErrorSnackBar("Ocorreu um erro. Tente novamente mais tarde.");
 				return EMPTY;
 			})
-		)
-		.subscribe((users) => {
-			this.users = users;
-		});
-
-		this.subscriptions.push(subscription);
+		);
 	}
 
 	initForm(){
