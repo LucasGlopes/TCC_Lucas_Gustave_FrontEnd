@@ -30,9 +30,9 @@ describe('AsoDetailsComponent', () => {
           useValue: { 
             snapshot: { 
               data: of({}),
-              paramMap: convertToParamMap({ idAso: '1' }) 
+              paramMap: convertToParamMap({ idAso: 1 }) 
             },
-            params: of({ idAso: '1' }) 
+            params: of({ idAso: 1 }) 
           }
         }
       ],
@@ -71,5 +71,11 @@ describe('AsoDetailsComponent', () => {
 
     expect(navigateSpy).toHaveBeenCalledWith(['aso/asos']);
 
+  });
+
+  it('should return if is invalid', () => {
+    component.onSubmit();
+
+    expect(component.asoForm.valid).toBe(false)
   });
 });

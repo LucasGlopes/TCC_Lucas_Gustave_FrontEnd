@@ -16,7 +16,7 @@ import { VaccinationService } from 'src/app/services/vaccination.service';
 export class VaccinationSchedulingComponent implements OnInit, OnDestroy{
 	schedulingForm!: FormGroup;
 	subscriptions: Subscription[] = [];
-	campaigns: Campaign[] = []
+	campaigns$!: Observable<Campaign[]>;
 	users$!: Observable<CurrentUser[]>;
 
 	constructor(
@@ -38,18 +38,13 @@ export class VaccinationSchedulingComponent implements OnInit, OnDestroy{
 	}
 
 	loadCampaigns(){
-		const subscription = this.vaccination.getCampaigns()
+		this.campaigns$ = this.vaccination.getCampaigns()
 		.pipe(
 			catchError(() => {
 				this.notification.openErrorSnackBar("Ocorreu um erro. Tente novamente mais tarde.");
 				return EMPTY;
 			})
-		)
-		.subscribe((campaigns) => {
-			this.campaigns = campaigns;
-		});
-
-		this.subscriptions.push(subscription);
+		);
 	}
 
 	loadUsers(){

@@ -17,33 +17,52 @@
         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
             <div class="fields">
                 <div class="left">
-                    <mat-form-field 
-                        [hideRequiredMarker]="true"  
-                        appearance="outline"  
-                    >
-                        <mat-label>Nome</mat-label>
-                        <input 
-                            type="text" 
-                            matInput 
-                            formControlName="primeiroNome"
+                    <div class="fields">
+                        <mat-form-field 
+                            [hideRequiredMarker]="true"  
+                            appearance="outline"  
+                            class="w-50"
                         >
-                        <mat-error *ngIf="editForm.controls['primeiroNome'].invalid">Este campo é obrigatório</mat-error>
-                        
-                    </mat-form-field>
-        
-                    <mat-form-field 
-                        [hideRequiredMarker]="true"  
-                        appearance="outline"  
-                    >
-                        <mat-label>Sobrenome</mat-label>
-                        <input 
-                            type="text" 
-                            matInput 
-                            formControlName="ultimoNome"
-                        >
-                        <mat-error *ngIf="editForm.controls['ultimoNome'].invalid">Este campo é obrigatório</mat-error>
+                            <mat-label>Nome</mat-label>
+                            <input 
+                                type="text" 
+                                matInput 
+                                formControlName="primeiroNome"
+                            >
+                            <mat-error *ngIf="editForm.controls['primeiroNome'].invalid">Este campo é obrigatório</mat-error>
+                            
+                        </mat-form-field>
 
+                        <mat-form-field 
+                            [hideRequiredMarker]="true"  
+                            appearance="outline"  
+                            class="w-50"
+                        >
+                            <mat-label>Sobrenome</mat-label>
+                            <input 
+                                type="text" 
+                                matInput 
+                                formControlName="ultimoNome"
+                            >
+                            <mat-error *ngIf="editForm.controls['ultimoNome'].invalid">Este campo é obrigatório</mat-error>
+    
+                        </mat-form-field>
+                    </div>
+                    
+                    <mat-form-field 
+                        [hideRequiredMarker]="true"  
+                        appearance="outline"  
+                    >
+                        <mat-label>Cargo</mat-label>
+                        <input 
+                            type="text" 
+                            matInput 
+                            formControlName="cargo"
+                        >
+                        <mat-error *ngIf="editForm.controls['cargo'].invalid">Este campo é obrigatório</mat-error>
+                            
                     </mat-form-field>
+                   
         
                     <mat-form-field
                         [hideRequiredMarker]="true"  
