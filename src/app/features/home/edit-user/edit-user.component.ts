@@ -49,8 +49,6 @@ export class EditUserComponent implements OnInit, OnDestroy{
 
 	ngOnInit(): void {
 		this.initForm();
-		this.editForm.patchValue(this.user.getUserValues());
-		this.formatDate();
 	}
 
 	ngOnDestroy(): void {
@@ -69,10 +67,12 @@ export class EditUserComponent implements OnInit, OnDestroy{
             email: ['', [Validators.required]],
             perfis: [[], [Validators.required]],
 			id: ['', [Validators.required]],
-
+			cargo: ['', [Validators.required]],
         }
 
         this.editForm = this.fb.group(form);
+		this.editForm.patchValue(this.user.getUserValues());
+		this.formatDate();
 	}
 
 	onSubmit(){
