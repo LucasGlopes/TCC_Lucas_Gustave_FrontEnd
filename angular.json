@@ -52,7 +52,11 @@
               "core-js/modules/web.dom-collections.iterator.js",
               "html2pdf.js",
               "rgbcolor",
-              "raf"
+              "raf",
+              "highcharts",
+              "highcharts/highcharts-gantt",
+              "highcharts/highmaps",
+              "highcharts/highstock"
             ]
           },
           "configurations": {
@@ -60,8 +64,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -126,6 +130,9 @@
     }
   },
   "cli": {
-    "analytics": "d42f03f5-f6fd-4e88-8ed9-1164284ed834"
+    "analytics": "d42f03f5-f6fd-4e88-8ed9-1164284ed834",
+    "cache": {
+      "enabled": false
+    }
   }
 }
