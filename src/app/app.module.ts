@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { InterceptorModule } from './middleware/interceptor.module';;
 import { ComponentsModule } from './components/components.module';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -26,6 +27,7 @@ registerLocaleData(localePt);
     HttpClientModule,
     MatSnackBarModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     InterceptorModule,
     ComponentsModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })

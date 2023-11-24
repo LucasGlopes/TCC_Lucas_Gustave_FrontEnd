@@ -3,26 +3,37 @@ import {
 	HttpRequest,
 	HttpHandler,
 	HttpEvent,
-	HttpInterceptor
+	HttpInterceptor,
+	HttpResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, finalize, tap } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
+import { LoadingService } from '../services/loading.service';
 
 @Injectable()
 export class AuthorizationInterceptor implements HttpInterceptor {
 
 	constructor(
-		private authService: AuthenticationService
+		private authService: AuthenticationService,
+		private loadingService: LoadingService
 	) {}
 
 	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+		this.loadingService.show();
+		
 		if(
-			(request.url === '/login') ||
-			(request.url === '/funcionarios' && request.method === 'POST') ||
-			(request.url === '/tecnicos' && request.method === 'POST')
+			(request.url.endsWith('/login')) ||
+			(request.url.endsWith('/funcionarios') && request.method === 'POST') ||
+			(request.url.endsWith('/tecnicos') && request.method === 'POST')
 		){
-			return next.handle(request);
+			return next.handle(request)
+			.pipe(
+				finalize(() => {
+					this.loadingService.hide();
+				})
+			);
 		}
+
 
 		const newRequest = request.clone({
 			setHeaders: {
@@ -30,6 +41,11 @@ export class AuthorizationInterceptor implements HttpInterceptor {
 			}
 		});
 
-		return next.handle(newRequest);
+		return next.handle(newRequest)
+		.pipe(
+			finalize(() => {
+				this.loadingService.hide();
+		   	})
+		)
 	}
 }
