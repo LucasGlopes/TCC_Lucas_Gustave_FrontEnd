@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="btn-group">
+        <button
+            mat-flat-button
+            class="cancel-button"
+            mwlCalendarPreviousView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="viewDateChange.emit(viewDate)"
+        >
+            Anterior
+        </button>
+        <button
+            mat-flat-button
+            class="cancel-button"
+            mwlCalendarToday
+            [(viewDate)]="viewDate"
+            (viewDateChange)="viewDateChange.emit(viewDate)"
+        >
+            Hoje
+        </button>
+        <button
+            mat-flat-button
+            class="cancel-button"
+            mwlCalendarNextView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="viewDateChange.emit(viewDate)"
+        >
+            Próximo
+        </button>
+    </div>
+    <div class="middle">
+        <h2 class="current-date">{{ viewDate | calendarDate: view + 'ViewTitle':locale }}</h2>
+    </div>
+    <div class="btn-group">
+        <button
+            mat-flat-button
+            [ngClass]="view === CalendarView.Month ? 'default-button' : 'cancel-button'"
+            (click)="viewChange.emit(CalendarView.Month)"
+        >
+            Mês
+        </button>
+        <button
+            mat-flat-button
+            [ngClass]="view === CalendarView.Week ? 'default-button' : 'cancel-button'"
+            (click)="viewChange.emit(CalendarView.Week)"
+        >
+            Semana
+        </button>
+        <button
+            mat-flat-button
+            [ngClass]="view === CalendarView.Day ? 'default-button' : 'cancel-button'"
+            (click)="viewChange.emit(CalendarView.Day)"
+        >
+            Dia
+        </button>
+    </div>
+</div>
+<br />

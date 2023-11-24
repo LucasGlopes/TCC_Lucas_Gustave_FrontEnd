@@ -1,14 +1,20 @@
-<mat-toolbar class="toolbar">
+<mat-toolbar 
+    class="toolbar"
+    [ngClass]="{
+        'home-shadow': isHome
+    }"
+>
     <div 
         class="title"
-        (click)="goTo('dashboard')"
+        (click)="goTo('home')"
     >
         PlaSO
     </div>
     <div class="options">
         <button mat-button routerLink="/vacinas">Vacinação</button>
         <button mat-button routerLink="/exames">Exames</button>
-        <button mat-button routerLink="/atestados">Atestados</button>
+        <button mat-button routerLink="/aso">ASO</button>
+        <button mat-button *ngIf="hasPermission" routerLink="/dashboard">Dashboard</button>
     </div>
     <button mat-button [matMenuTriggerFor]="menu" class="name">
         Olá, {{userName}}
@@ -17,14 +23,14 @@
     <mat-menu #menu="matMenu">
         <button 
             mat-menu-item
-            (click)="goTo('dashboard/edit-user')"
+            (click)="goTo('home/editar-usuario')"
         >
             Editar usuário
         </button>
         <button 
-            *ngIf="isAdmin"
+            *ngIf="hasPermission"
             mat-menu-item
-            (click)="goTo('dashboard/pending-users')"
+            (click)="goTo('home/usuarios-pendentes')"
         >
             Usuários pendentes
         </button>

@@ -1,15 +1,15 @@
 ::ng-deep .mat-toolbar{
-    background-color: #20BEC6 !important;
+    background-color: #217b80 !important;
+
 }
 
-::ng-deep .mat-icon{
+.mat-icon{
     color: white !important;
 }
 
 .toolbar .options button{
     color: white !important;
 }
-
 
 .toolbar .name{
     color: white !important;
@@ -21,7 +21,12 @@
     justify-content: space-around;
     align-items: center;
 
-    height: 10vh;
+    height: 70px;
+    max-height: 70px;
+}
+
+.home-shadow {
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
 }
 
 
@@ -34,7 +39,7 @@
 }
 
 .toolbar button{
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 550;
     font-family: 'Roboto', sans-serif;
 }

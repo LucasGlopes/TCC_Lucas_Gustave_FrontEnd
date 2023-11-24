@@ -1,13 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-color: #217b80;
+    --white-color: #FFFFFF;
+}
 
 html, body { 
     height: 100%; 
-    // background-color: #ececec;
-    background-color: #f8f8f8;
+    background-color: #F2F0F0;
 
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Roboto', "Helvetica Neue", sans-serif; }
 
+.default-button{
+    background-color: var(--primary-color) !important;
+    color: var(--white-color) !important;    
+}
+
+.default-button:disabled{
+    background-color: rgba(0, 0, 0, 0.12) !important;
+    color: rgba(0, 0, 0, 0.38) !important;    
+}
+
+.cancel-button {
+    color: var(--primary-color) !important;
+    background-color: var(--white-color) !important;
+    border: 1px solid var(--primary-color) !important;
+}
 
 .mat-mdc-snack-bar-container {
     &.red-snackbar {
@@ -21,4 +39,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
 
     --mat-snack-bar-button-color: white;
+}
+
+.no-data{
+    padding: 10px;
+
+    font-weight: 450;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: rgb(48, 48, 48);
 }

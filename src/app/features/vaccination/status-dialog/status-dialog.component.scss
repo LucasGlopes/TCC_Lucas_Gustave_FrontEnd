@@ -1,0 +1,30 @@
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;   
+}
+
+.mat-mdc-dialog-content{
+    padding-bottom: 0;
+} 
+
+.title{
+    color: var(--primary-color);
+}
+
+.content{
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.content p{
+    margin-bottom: 20px;
+}
+
+.mat-mdc-dialog-actions{
+    padding-top: 0;
+    padding-bottom: 16px;
+}
+
+.status {
+    width: 100%;
+}

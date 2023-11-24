@@ -1,0 +1,102 @@
+<div class="container">
+    <div class="header">
+        <button
+            mat-flat-button
+            class="default-button"
+            (click)="newScheduling()"
+        >
+            Agendar Vacinação
+        </button>
+    </div>
+
+    <div class="card">
+        <div class="row">
+            <h2 class="title">
+                Agendamentos de Vacinações
+            </h2>
+        </div>
+        <div class="search-card">
+            <mat-form-field 
+                class="search"
+                appearance="outline"  
+            >
+                <mat-label >Pesquisar vacinação</mat-label>
+                <input matInput (keyup)="applyFilter($event)">
+            </mat-form-field>
+        </div>
+        <div class="table">
+            <table mat-table [dataSource]="dataSource" aria-label="agendamentos de vacinação">
+
+                <ng-container matColumnDef="nome">
+                    <th mat-header-cell *matHeaderCellDef> Nome </th>
+                    <td mat-cell *matCellDef="let element"> {{element.pessoa.primeiroNome + ' ' + element.pessoa.ultimoNome}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="setor">
+                    <th mat-header-cell *matHeaderCellDef> Setor </th>
+                    <td mat-cell *matCellDef="let element"> {{element.pessoa.setor}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="campanha">
+                    <th mat-header-cell *matHeaderCellDef> Campanha </th>
+                    <td mat-cell *matCellDef="let element"> {{element.campanha.nomeCampanha}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="vacina">
+                    <th mat-header-cell *matHeaderCellDef> Vacina </th>
+                    <td mat-cell *matCellDef="let element"> {{element.campanha.nomeVacina}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="data">
+                    <th mat-header-cell *matHeaderCellDef> Data </th>
+                    <td mat-cell *matCellDef="let element"> {{element.campanha.dataCampanha}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>  </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <section
+                            class="buttons"
+                        >
+                            <button 
+                                mat-flat-button 
+                                class="default-button"
+                                (click)="updateStatus(element)"
+                            >
+                                Alterar Status
+                            </button>
+                            <button 
+                                mat-flat-button 
+                                color="warn"
+                                (click)="deleteVaccination(element.idVacinacao)"
+                            >
+                                Deletar
+                            </button>
+                        </section>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+                <tr *matNoDataRow>
+                    <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+                        <div class="no-data">Não há vacinações agendadas.</div>
+                    </td>
+                </tr>
+
+            </table>
+            <mat-paginator 
+                [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons
+            ></mat-paginator>
+
+        </div>
+    </div>
+</div>

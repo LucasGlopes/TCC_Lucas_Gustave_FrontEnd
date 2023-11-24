@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { CurrentUser } from "../models/user.model";
+import { CurrentUser, Perfis } from "../models/user.model";
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserService {
@@ -35,6 +35,18 @@ export class CurrentUserService {
 
     get isLoggedIn() {
         return this.user.asObservable();
+    }
+
+    get hasPermission() {
+        const user = this.getUserValues();
+    
+        if (user && user.perfis) {
+            return user.perfis.some(profile => 
+                profile === Perfis.admin || profile === Perfis.tecnico
+            );
+        }
+    
+        return false;
     }
 
 }

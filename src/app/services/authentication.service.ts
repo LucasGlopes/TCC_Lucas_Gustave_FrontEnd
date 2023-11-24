@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CurrentUser, User } from '../models/user.model';
+import { CurrentUser } from '../models/user.model';
 import { Login } from '../models/login.model';
 import { map } from 'rxjs';
 import { CurrentUserService } from './currentUser.service';
@@ -21,14 +21,6 @@ export class AuthenticationService {
 		private router: Router
 	) { }
 
-	criarFuncionario(user: User){
-		return this.http.post<any>(`${this.baseUrl}/funcionarios`, user);
-	}
-
-	criarTecnico(user: User){
-		return this.http.post<any>(`${this.baseUrl}/tecnicos`, user);
-	}
-
 	login(login: Login){
 		return this.http.post<any>(`${this.baseUrl}/login`, login, {observe: 'response'}).pipe(
 			map(res => {
@@ -41,7 +33,7 @@ export class AuthenticationService {
 
 				this.currentUser.setUserValues(user);
 				this.setToken(token);
-
+				
 				return null;
 			})
 		);

@@ -1,0 +1,130 @@
+.container {
+    margin-top: 3vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding-bottom: 3vh;
+}
+
+.header{
+    width: 90%;
+
+    display: flex;
+    justify-content: flex-end;
+
+    margin-bottom: 3vh;
+}
+
+.card {
+    width: 90%;
+    background-color: var(--white-color);
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.row{
+    width: 100%;
+}
+
+
+.card .title{
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    font-size: 23px;
+    color: var(--primary-color);
+}
+
+
+.search-card {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+}
+
+.search-card .search {
+    width: 100%;
+}
+
+
+::ng-deep .mat-mdc-table{
+    border-radius: 4px;
+    overflow:hidden !important;
+}
+
+::ng-deep .mat-mdc-table thead{
+    background-color: var(--primary-color) !important;
+
+}
+
+::ng-deep .mdc-data-table__header-cell{
+    color: var(--white-color) !important;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.mat-mdc-paginator{
+    border-top: 1px solid rgb(223, 223, 223);
+}
+
+.mat-column-nome{
+    width:20%;
+}
+
+.mat-column-setor{
+    width:15%;
+}
+
+.mat-column-exame{
+    width:15%;
+}
+
+.mat-column-tipo{
+    width:15%;
+}
+
+.mat-column-data-hora{
+    width:15%;
+}
+
+.mat-column-status{
+    width:10%;
+}
+
+.mat-column-actions{
+    width:10%;
+}
+
+.table{
+    width: 100%;
+    border: 1px solid rgb(223, 223, 223);
+    border-radius: 4px;
+}
+
+.buttons {
+    width: 75%;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons button{
+    font-size: 12px;
+}
+
+.buttons button:first-of-type{
+    margin-right: 10px;
+    margin-left: 20px;
+}

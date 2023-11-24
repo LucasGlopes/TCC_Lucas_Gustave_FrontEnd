@@ -6,7 +6,8 @@ export enum Perfis {
 
 export enum Sexo {
     masculino = 'MASCULINO',
-    feminino = 'FEMININO'
+    feminino = 'FEMININO',
+    outro = 'OUTRO'
 }
 
 export interface User {
@@ -22,6 +23,7 @@ export interface User {
     confirmaSenha?: string;
     tipoUsuario?: Perfis;
     setor: string;
+    cargo: string;
     perfis?: Perfis[];
 }
 
@@ -37,4 +39,5 @@ export interface CurrentUser {
     sexoEnum: Sexo;
     cpf: string;
     setor: string;
+    cargo: string;
 }

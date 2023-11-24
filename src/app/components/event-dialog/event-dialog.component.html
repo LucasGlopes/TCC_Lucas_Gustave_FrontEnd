@@ -1,0 +1,18 @@
+<h1 class="title" mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content class="body">
+    <div class="content">
+        <p class="sub-title">{{data.dateTimeTitle}}:</p><p>{{data.dateTimeContent}}</p>
+    </div>
+    <div class="content">
+        <p class="sub-title">{{data.bodyTitle}}:</p><p>{{data.bodyContent}}</p>
+    </div>
+</div>
+<div mat-dialog-actions class="container">
+    <button 
+        mat-stroked-button 
+        class="cancel-button"
+        mat-dialog-close
+    >
+        Fechar
+    </button>
+</div>

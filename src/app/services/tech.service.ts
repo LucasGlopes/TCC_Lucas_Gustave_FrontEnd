@@ -17,6 +17,10 @@ export class TechService {
 		private currentUser: CurrentUserService
 	) { }
 
+	createTech(user: User){
+		return this.http.post<any>(`${this.baseUrl}/tecnicos`, user);
+	}
+
     getNonApprovedTechs(){
         return this.http.get<CurrentUser[]>(`${this.baseUrl}/tecnicos/naoAprovados`);
     }

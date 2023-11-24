@@ -1,0 +1,35 @@
+<h1 class="title" mat-dialog-title>Atualizar Status de Vacinação</h1>
+<div mat-dialog-content class="content">
+    <p>Status da vacinação de {{data.pessoa.primeiroNome + ' ' + data.pessoa.ultimoNome}} na campanha <br> {{data.campanha.nomeCampanha}} na data {{data.campanha.dataCampanha}}.</p>
+
+    <mat-form-field
+        appearance="outline" 
+        class="status"
+    >
+        <mat-label>Status</mat-label>
+        <mat-select
+            [formControl]="currentStatus"
+        >
+            <mat-option *ngFor="let status of statusOptions" [value]="status">
+                {{status}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions class="container">
+    <button 
+        mat-stroked-button 
+        class="cancel-button"
+        (click)="onCancel()"
+    >
+        Cancelar
+    </button>
+    <button 
+        mat-flat-button 
+        class="default-button" 
+        (click)="onConfirm()"
+    >
+        Confirmar
+    </button>
+    
+</div>
