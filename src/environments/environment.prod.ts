@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    restApiUrl: 'https://backend-teste-tcc2.com'
+    restApiUrl: 'https://backend-tcc-2.onrender.com'
 };
