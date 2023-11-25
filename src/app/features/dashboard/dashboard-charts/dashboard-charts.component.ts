@@ -190,7 +190,7 @@ export class DashboardChartsComponent implements OnInit, OnDestroy{
 		chartData.push(
 			{
 				name: 'Vacinações agendadas',
-				data: data.map(item => item.quantidadeVacinacoes),
+				data: data.map(item => (item.quantidadeVacinacoes - item.quantidadeVacinados)),
 				color: '#00e272'
 			} as SeriesOptionsType
 		)
