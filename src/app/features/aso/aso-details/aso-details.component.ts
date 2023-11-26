@@ -1,4 +1,5 @@
 import { DatePipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -292,8 +293,12 @@ export class AsoDetailsComponent implements OnInit, OnDestroy{
 	createAso(aso: AsoRequest){
 		const subscription = this.asoService.createAso(aso)
 		.pipe(
-			catchError(() => {
-                this.notification.openErrorSnackBar('Ocorreu um erro. Tente novamente mais tarde.');
+			catchError((error: HttpErrorResponse) => {
+				if(error.error.errors[0].fieldName === 'cnpj'){
+					this.notification.openErrorSnackBar('CNPJ inválido. Tente novamente');
+				} else {
+					this.notification.openErrorSnackBar('Ocorreu um erro. Tente novamente mais tarde.');
+				}
                 return EMPTY;
             })
 		)
@@ -308,8 +313,12 @@ export class AsoDetailsComponent implements OnInit, OnDestroy{
 	updateAso(aso: AsoRequest){
 		const subscription = this.asoService.updateAso(aso)
 		.pipe(
-			catchError(() => {
-                this.notification.openErrorSnackBar('Ocorreu um erro. Tente novamente mais tarde.');
+			catchError((error: HttpErrorResponse) => {
+				if(error.error.errors[0].fieldName === 'cnpj'){
+					this.notification.openErrorSnackBar('CNPJ inválido. Tente novamente');
+				} else {
+					this.notification.openErrorSnackBar('Ocorreu um erro. Tente novamente mais tarde.');
+				}
                 return EMPTY;
             })
 		)

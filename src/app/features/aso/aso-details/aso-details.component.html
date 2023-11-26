@@ -98,7 +98,7 @@
                             formControlName="crmMedicoPCMSO"
                         >
                         <mat-error *ngIf="asoForm.controls['crmMedicoPCMSO'].hasError('required')">Este campo é obrigatório</mat-error>
-                        <mat-error *ngIf="asoForm.controls['crmMedicoPCMSO'].hasError('pattern')">Não é um formato válido de CRM</mat-error>
+                        <mat-error *ngIf="asoForm.controls['crmMedicoPCMSO'].hasError('pattern')">O formato de um CRM é 000000/XX</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -252,7 +252,7 @@
                             formControlName="crmMedicoClinico"
                         >
                         <mat-error *ngIf="asoForm.controls['crmMedicoClinico'].hasError('required')">Este campo é obrigatório</mat-error>
-                        <mat-error *ngIf="asoForm.controls['crmMedicoClinico'].hasError('pattern')">Não é um formato válido de CRM</mat-error>
+                        <mat-error *ngIf="asoForm.controls['crmMedicoClinico'].hasError('pattern')">O formato de um CRM é 000000/XX</mat-error>
                     </mat-form-field>
                 </div>
             </div>

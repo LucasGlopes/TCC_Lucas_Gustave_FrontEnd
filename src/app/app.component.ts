@@ -12,7 +12,6 @@ export class AppComponent implements OnInit, AfterContentChecked {
   isLoggedIn$!: Observable<boolean>;
   isLoading$!: Observable<boolean>;
 
-  
   constructor(
 		private user: CurrentUserService,
     private loadingService: LoadingService,
