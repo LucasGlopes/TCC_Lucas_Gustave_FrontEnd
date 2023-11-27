@@ -26,7 +26,7 @@
                         appearance="outline" 
                     >
                         <mat-label>Data e Horário</mat-label>
-                        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Escolha uma data e hora" formControlName="dataExame">
+                        <input class="picker-input" readonly (click)="picker.open()" matInput [ngxMatDatetimePicker]="picker" placeholder="Escolha uma data e hora" formControlName="dataExame">
                         <ngx-mat-datepicker-toggle matSuffix [for]="picker"></ngx-mat-datepicker-toggle>
                         <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
                           [stepHour]="stepHour" [stepMinute]="stepMinute"

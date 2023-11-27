@@ -281,7 +281,7 @@
                         style="width:100% !important;"
                     >
                         <mat-label>Validade</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="validade">
+                        <input class="picker-input" readonly matInput [matDatepicker]="picker" formControlName="validade" (click)="picker.open()">
                         <mat-error *ngIf="asoForm.controls['validade'].invalid">Este campo é obrigatório</mat-error>
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>

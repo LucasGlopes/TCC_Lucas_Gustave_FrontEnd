@@ -155,7 +155,7 @@
                     style="width:31% !important;"
                 >
                     <mat-label>Data de nascimento</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="dataAniversario">
+                    <input class="picker-input" readonly matInput [matDatepicker]="picker" formControlName="dataAniversario" (click)="picker.open()">
                     <mat-error *ngIf="registrationForm.controls['dataAniversario'].invalid">Este campo é obrigatório</mat-error>
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>

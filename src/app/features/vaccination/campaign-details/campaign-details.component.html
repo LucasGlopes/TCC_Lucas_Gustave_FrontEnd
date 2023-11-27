@@ -40,7 +40,7 @@
                         appearance="outline"
                     >
                         <mat-label>Data da Campanha</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="dataCampanha">
+                        <input class="picker-input" readonly matInput [matDatepicker]="picker" formControlName="dataCampanha" (click)="picker.open()">
                         <mat-error *ngIf="campaignForm.controls['dataCampanha'].invalid">Este campo é obrigatório</mat-error>
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
