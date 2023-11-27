@@ -108,7 +108,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         )
         .pipe(
             catchError((error : HttpErrorResponse) => {
-                this.notification.openErrorSnackBar(error.error.message);
+                if(error.error.message.includes('CPF')){
+                    this.notification.openErrorSnackBar('CPF inválido. Tente novamente.');
+                } else if(error.error.message.includes('Email')){
+                    this.notification.openErrorSnackBar(error.error.message);
+                } else {
+                    this.notification.openErrorSnackBar('Ocorreu um erro. Tente novamente mais tarde.');
+                }
                 return EMPTY;
             })
         ).subscribe(
