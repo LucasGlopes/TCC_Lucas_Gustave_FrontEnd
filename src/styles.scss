@@ -53,3 +53,21 @@ body { margin: 0; font-family: 'Roboto', "Helvetica Neue", sans-serif; }
 .picker-input:hover{
     cursor: pointer;
 }
+
+.card-title {
+    font-weight: 500 !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 23px !important;
+    color: var(--primary-color);
+}
+
+.mb-3{
+    margin-bottom: 3px !important;
+}
+
+.card-subtitle{
+    font-weight: 400 !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 14px !important;
+    color: rgb(0 0 0 / 90%);
+}
