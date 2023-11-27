@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { PermissionGuard } from './guards/permission.guard';
 import { AuthActivateGuard } from './guards/auth-activate.guard';
+import { LoggedInGuard } from './guards/logged-in.guard';
 
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule),
+    canActivate: [LoggedInGuard]
   },
   {
     path: 'home',
