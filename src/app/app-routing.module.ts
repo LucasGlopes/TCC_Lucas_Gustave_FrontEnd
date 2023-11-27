@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { PermissionGuard } from './guards/permission.guard';
+import { AuthActivateGuard } from './guards/auth-activate.guard';
 
 const routes: Routes = [
   {
@@ -11,28 +12,32 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule),
-    canLoad: [AuthGuard]
+    canLoad: [AuthGuard],
+    canActivate: [AuthActivateGuard]
   },
   {
     path: 'vacinas',
     loadChildren: () => import('./features/vaccination/vaccination.module').then(m => m.VaccinationModule),
-    canLoad: [AuthGuard]
+    canLoad: [AuthGuard],
+    canActivate: [AuthActivateGuard]
   },
   {
     path: 'exames',
     loadChildren: () => import('./features/exams/exams.module').then(m => m.ExamsModule),
-    canLoad: [AuthGuard]
+    canLoad: [AuthGuard],
+    canActivate: [AuthActivateGuard]
   },
   {
     path: 'aso',
     loadChildren: () => import('./features/aso/aso.module').then(m => m.AsoModule),
-    canLoad: [AuthGuard]
+    canLoad: [AuthGuard],
+    canActivate: [AuthActivateGuard]
   },
   {
     path: 'dashboard',
     loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
     canLoad: [AuthGuard],
-    canActivate: [PermissionGuard]
+    canActivate: [PermissionGuard, AuthActivateGuard]
   },
   {
     path: '',
