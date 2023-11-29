@@ -120,4 +120,14 @@ describe('ExamsHistoryComponent', () => {
     let result = component.getExamTypeLabel(exam1);
     expect(result).toBe('Clínico');
   });
+
+  it('should setDatasource', () => {
+    const userService = TestBed.inject(CurrentUserService);
+    
+    spyOn(userService, 'getUserValues').and.returnValue(pessoa);
+    fixture.detectChanges();
+    component.setDatasource([]);
+
+    expect(component.dataSource.paginator).toEqual(component.paginator)
+  });
 });

@@ -15,6 +15,8 @@ import { CurrentUserService } from 'src/app/services/currentUser.service';
 describe('VaccinationHistoryComponent', () => {
   let component: VaccinationHistoryComponent;
   let fixture: ComponentFixture<VaccinationHistoryComponent>;
+  let pessoa: CurrentUser;
+
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -32,10 +34,8 @@ describe('VaccinationHistoryComponent', () => {
     });
     fixture = TestBed.createComponent(VaccinationHistoryComponent);
     component = fixture.componentInstance;
-  });
-  
-  it('should create', () => {
-    const pessoa: CurrentUser = {
+
+    pessoa = {
       primeiroNome: '',
       ultimoNome: '',
       email: '',
@@ -49,10 +49,24 @@ describe('VaccinationHistoryComponent', () => {
       setor: '',
       cargo: ''
     }
+  });
+  
+  it('should create', () => {
     const userService = TestBed.inject(CurrentUserService);
     
     spyOn(userService, 'getUserValues').and.returnValue(pessoa);
     fixture.detectChanges();
     expect(component).toBeTruthy();
+  });
+
+
+  it('should setDatasource', () => {
+    const userService = TestBed.inject(CurrentUserService);
+    
+    spyOn(userService, 'getUserValues').and.returnValue(pessoa);
+    fixture.detectChanges();
+    component.setDatasource([]);
+
+    expect(component.dataSource.paginator).toEqual(component.paginator)
   });
 });

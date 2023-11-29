@@ -129,4 +129,10 @@ describe('ExamsDetailsComponent', () => {
     
     expect(notificationSpy).toHaveBeenCalled();
   });
+
+  it('should format date', () => {
+    component.formatDate('10/10/2020', '10:00:00')
+    
+    expect(component.examForm.controls['dataExame'].value).toEqual(new Date('10/10/2020 10:00:00'))
+  });
 });

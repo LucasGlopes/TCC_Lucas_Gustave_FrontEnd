@@ -36,4 +36,11 @@ describe('VaccinationListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+  it('should setDatasource', () => {
+    component.setDatasource([]);
+
+    expect(component.dataSource.paginator).toEqual(component.paginator)
+  });
 });

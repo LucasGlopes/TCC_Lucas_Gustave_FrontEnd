@@ -78,4 +78,29 @@ describe('AsoDetailsComponent', () => {
 
     expect(component.asoForm.valid).toBe(false)
   });
+
+  it('should add and remove exam', () => {
+    component.addExam()
+
+    expect(component.examsArray.length).toBe(1);
+
+    expect(component.isExamChosen(0)).toBe(false);
+
+    component.removeExam(0)
+
+    expect(component.examsArray.length).toBe(0);
+  });
+
+  it('should add and remove risk', () => {
+    component.addRisk()
+
+    expect(component.risksArray.length).toBe(1);
+
+    expect(component.isRiskChosen('teste')).toBe(false);
+
+    component.removeRisk(0)
+
+    expect(component.risksArray.length).toBe(0);
+  });
+
 });
