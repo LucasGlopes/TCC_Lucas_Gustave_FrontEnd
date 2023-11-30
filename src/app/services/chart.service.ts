@@ -7,9 +7,6 @@ import { OptionsStackingValue, PointOptionsObject, SeriesOptionsType } from 'hig
 })
 export class ChartService {
 
-	constructor(
-	) { }
-
 	setPieChart(chartTitle: string, chartData: PointOptionsObject[] ){
         const newChart = new Chart({
             chart : {

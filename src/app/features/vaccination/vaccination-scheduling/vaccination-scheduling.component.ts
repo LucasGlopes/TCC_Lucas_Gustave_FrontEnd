@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EMPTY, Observable, Subscription, catchError} from 'rxjs';
 import { CurrentUser } from 'src/app/models/user.model';
-import { Campaign, Status, Vaccination, VaccinationScheduling } from 'src/app/models/vaccination.model';
+import { Campaign, Status, VaccinationScheduling } from 'src/app/models/vaccination.model';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { VaccinationService } from 'src/app/services/vaccination.service';

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import { EMPTY, Subscription, catchError, tap } from 'rxjs';
+import { EMPTY, Subscription, catchError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Login } from 'src/app/models/login.model';
 

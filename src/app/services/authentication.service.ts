@@ -24,7 +24,7 @@ export class AuthenticationService {
 	login(login: Login){
 		return this.http.post<any>(`${this.baseUrl}/login`, login, {observe: 'response'}).pipe(
 			map(res => {
-				var token = res?.headers?.get('Authorization')?.substring(7)!;
+				let token = res?.headers?.get('Authorization')?.substring(7)!;
 				const user: CurrentUser = (jwt_decode(token || ''));
 
 				if(!user.isApproved){
