@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { AsoDetailsComponent } from './aso-details.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -10,11 +10,13 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { By } from '@angular/platform-browser';
+import { NotificationService } from 'src/app/services/notification.service';
+import { AsoService } from 'src/app/services/aso.service';
 
 describe('AsoDetailsComponent', () => {
   let component: AsoDetailsComponent;
@@ -102,5 +104,106 @@ describe('AsoDetailsComponent', () => {
 
     expect(component.risksArray.length).toBe(0);
   });
+
+  it('should handle CNPJ validation error when update', fakeAsync(() => {
+    const errorResponse = {
+      error: {
+        errors: [
+          {
+            fieldName: 'cnpj'
+          }
+        ]
+      }
+    };
+
+    const notification = TestBed.inject(NotificationService);
+    const notificationSpy = spyOn(notification, 'openErrorSnackBar');
+
+    const aso = TestBed.inject(AsoService);
+    const asoSpy = spyOn(aso, 'updateAso').and.returnValue(throwError(errorResponse));
+
+    const form = {
+      "idPessoa": 15,
+      "exameClinico": 3,
+      "examesComplementares": [
+          29
+      ],
+      "cnpj": "52.242.948/0001-57",
+      "crmMedicoPCMSO": "123456/DF",
+      "crmMedicoClinico": "123321/SP",
+      "nomeEmpresa": "GreenAnt",
+      "nomeMedicoClinico": "Luiza Paulo",
+      "nomeMedicoPCMSO": "Luiz lula",
+      "resultadoASO": "APTO",
+      "risco": [
+          "Bacilos"
+      ],
+      "tipoASO": "DEMISSIONAL",
+      "validade": "2025-06-03T03:00:00.000Z",
+      "dataASO": "18/05/2023",
+      "idASO": ""
+  }
+
+    component.asoForm.patchValue(form)
+
+    component.onSubmit();
+    expect(component.asoForm.valid).toBe(true)
+    tick();
+
+
+    // Check if the error message is displayed
+    expect(notificationSpy).toHaveBeenCalledWith('CNPJ inválido. Tente novamente');
+  }));
+
+  it('should handle CNPJ validation error when create', fakeAsync(() => {
+    const errorResponse = {
+      error: {
+        errors: [
+          {
+            fieldName: 'cnpj'
+          }
+        ]
+      }
+    };
+
+    const notification = TestBed.inject(NotificationService);
+    const notificationSpy = spyOn(notification, 'openErrorSnackBar');
+
+    const aso = TestBed.inject(AsoService);
+    const asoSpy = spyOn(aso, 'createAso').and.returnValue(throwError(errorResponse));
+
+    const form = {
+      "idPessoa": 15,
+      "exameClinico": 3,
+      "examesComplementares": [
+          29
+      ],
+      "cnpj": "52.242.948/0001-57",
+      "crmMedicoPCMSO": "123456/DF",
+      "crmMedicoClinico": "123321/SP",
+      "nomeEmpresa": "GreenAnt",
+      "nomeMedicoClinico": "Luiza Paulo",
+      "nomeMedicoPCMSO": "Luiz lula",
+      "resultadoASO": "APTO",
+      "risco": [
+          "Bacilos"
+      ],
+      "tipoASO": "DEMISSIONAL",
+      "validade": "2025-06-03T03:00:00.000Z",
+      "dataASO": "18/05/2023",
+      "idASO": ""
+  }
+
+    component.asoForm.patchValue(form)
+    component.asoId = undefined
+
+    component.onSubmit();
+    expect(component.asoForm.valid).toBe(true)
+    tick();
+
+
+    // Check if the error message is displayed
+    expect(notificationSpy).toHaveBeenCalledWith('CNPJ inválido. Tente novamente');
+  }));
 
 });

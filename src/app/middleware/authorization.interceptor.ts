@@ -3,8 +3,7 @@ import {
 	HttpRequest,
 	HttpHandler,
 	HttpEvent,
-	HttpInterceptor,
-	HttpResponse
+	HttpInterceptor
 } from '@angular/common/http';
 import { Observable, finalize, tap } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
