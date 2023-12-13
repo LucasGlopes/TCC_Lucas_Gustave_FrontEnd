@@ -47,7 +47,7 @@ export class VaccinationListComponent implements OnInit, OnDestroy {
 			})
 		)
 		.subscribe((vaccinations) => {
-			this.setDatasource(vaccinations);
+			this.setDatasource(vaccinations.reverse());
 		});
 
 		this.subscriptions.push(subscription);
