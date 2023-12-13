@@ -47,7 +47,7 @@ export class ExamsListComponent implements OnInit, OnDestroy {
 			})
 		)
 		.subscribe((exams) => {
-			this.setDatasource(exams);
+			this.setDatasource(exams.reverse());
 		});
 
 		this.subscriptions.push(subscription);
